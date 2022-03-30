@@ -10,6 +10,12 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
+#Target Directory
+target/
+
+#Ignore Database
+src/db.properties
+
 # Package Files #
 *.jar
 *.war
