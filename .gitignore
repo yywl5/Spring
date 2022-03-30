@@ -14,7 +14,7 @@
 target/
 
 #Ignore Database
-src/db.properties
+src/main/java/db.properties
 
 # Package Files #
 *.jar
