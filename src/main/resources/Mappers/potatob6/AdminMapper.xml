@@ -11,4 +11,8 @@
     <select id="getAdmin" resultType="Administrator">
         select * from Administrators where adminLogin=#{loginName} and adminPassword=#{password}
     </select>
+
+    <update id="updatePassword">
+        update Administrators set adminPassword=#{password} where adminId=#{adminId}
+    </update>
 </mapper>

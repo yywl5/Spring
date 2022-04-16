@@ -13,4 +13,6 @@ public interface AdminiMapper {
     //获取特定的管理员
     Administrator getAdmin(@Param("loginName") String loginName,@Param("password") String password);
 
+    //管理员修改密码
+    Integer updatePassword(@Param("adminId") String adminId, @Param("password") String password);
 }
