@@ -13,6 +13,9 @@
 #Target Directory
 target/
 
+#Out Directory
+out/
+
 #Ignore Database
 src/main/resources/db.properties
 
