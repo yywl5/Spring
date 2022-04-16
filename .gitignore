@@ -16,6 +16,9 @@ target/
 #Out Directory
 out/
 
+#idea configuration
+.idea/
+
 #Ignore Database
 src/main/resources/db.properties
 
