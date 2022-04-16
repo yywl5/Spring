@@ -1,4 +1,6 @@
-### 项目框架和部署计划 
+# 图书管理系统
+
+### 一、项目框架和部署计划 
   - Spring 
   - SpringMVC 
   - MyBatis 
@@ -9,5 +11,5 @@
   - Vue 
   - BootStrap
 ---
-### 项目编写IDE
+### 二、项目编写IDE
 - IntelliJ IDEA 
