@@ -1,0 +1,22 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="Mappers.potatob6.AdminBookMapper">
+    <select id="updateBook" resultType="Book">
+        select * from Books;
+    </select>
+
+    <update id="adminUpdateBook" parameterType="Book">
+        update Books set bookName=#{bookName},author=#{author},publisher=#{publisher},storageCount=#{storageCount},price=#{price}
+        where bookId=#{bookId}
+    </update>
+
+    <delete id="deleteBook" parameterType="Integer">
+        delete from Books where bookId=#{bookId}
+    </delete>
+
+    <insert id="addBook" parameterType="Book" useGeneratedKeys="true" keyProperty="bookId" keyColumn="bookId">
+        insert into Books(bookName,author,publisher,storageCount,price)
+        values(#{bookName}, #{author}, #{publisher}, #{storageCount}, #{price})
+    </insert>
+</mapper>

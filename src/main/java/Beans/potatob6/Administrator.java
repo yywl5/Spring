@@ -1,11 +1,11 @@
 package Beans.potatob6;
 
 public class Administrator {
-    public String getAdminId() {
+    public Integer getAdminId() {
         return adminId;
     }
 
-    public void setAdminId(String adminId) {
+    public void setAdminId(Integer adminId) {
         this.adminId = adminId;
     }
 
@@ -33,7 +33,7 @@ public class Administrator {
         this.adminPassword = adminPassword;
     }
 
-    private String adminId;
+    private Integer adminId;
 
     @Override
     public String toString() {

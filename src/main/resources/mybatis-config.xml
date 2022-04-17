@@ -6,6 +6,7 @@
     <properties resource="db.properties" />
     <typeAliases>
         <typeAlias type="Beans.potatob6.Administrator" alias="Administrator" />
+        <typeAlias type="Beans.potatob6.Book" alias="Book" />
     </typeAliases>
     <environments default="development">
         <environment id="development">

@@ -1,13 +1,12 @@
 package Controllers.potatob6.Logistic;
 
 import Beans.potatob6.Administrator;
-import Mappers.potatob6.AdminiMapper;
+import Mappers.potatob6.AdminMapper;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ import java.util.List;
 public class AdminHandler {
 
     @Autowired
-    private AdminiMapper administratorDAO;
+    private AdminMapper administratorDAO;
 
     /**
      * 获取所有管理员的信息
@@ -52,7 +51,8 @@ public class AdminHandler {
 
     @RequestMapping(value = "/adminPasswordChange",
             method = RequestMethod.GET,
-            params = {"adminID", "newPassword"})
+            params = {"adminID", "newPassword"}
+    )
     @ResponseBody
     public String adminPasswordChange(String adminID, String newPassword) {
         Integer i = administratorDAO.updatePassword(adminID, newPassword);

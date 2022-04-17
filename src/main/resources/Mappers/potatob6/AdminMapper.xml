@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.apache.org//DTD Mapper 3.0//EN"
         "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="Mappers.potatob6.AdminiMapper">
+<mapper namespace="Mappers.potatob6.AdminMapper">
     <select id="getAllAdmins" resultType="Administrator">
         select * from Administrators;
     </select>

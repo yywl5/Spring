@@ -5,7 +5,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface AdminiMapper {
+public interface AdminMapper {
 
     //获取所有的管理员
     List<Administrator> getAllAdmins();
