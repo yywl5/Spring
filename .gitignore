@@ -19,6 +19,9 @@ out/
 #idea configuration
 .idea/
 
+#.iml file
+*.iml
+
 #Ignore Database
 src/main/resources/db.properties
 
