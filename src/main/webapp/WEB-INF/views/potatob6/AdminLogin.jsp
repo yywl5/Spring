@@ -57,6 +57,8 @@
             border-bottom: 2px solid #778DE3;
             height: 30px;
             background: transparent;
+            outline: none;
+            text-indent: 10px;
         }
         
         .it {
@@ -91,6 +93,8 @@
 </head>
 <body>
     <div id="loginContainer">
+        <h3>管理员登录</h3>
+        <div style="height: 30px;font-weight: lighter"></div>
         <div class="it">
             <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminAccount.svg" style="transform: scale(0.8);" alt="" width="25" height="25" />
             <input type="text" id="loginName" />
