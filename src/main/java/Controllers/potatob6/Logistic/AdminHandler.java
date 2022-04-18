@@ -37,8 +37,7 @@ public class AdminHandler {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public String adminLogin(@RequestBody Map map, @CookieValue("JSESSIONID") String sessionId) {
-        System.out.println(sessionId);
+    public String adminLogin(@RequestBody Map map) {
         String loginName = (String)map.get("loginName");
         String password = (String)map.get("password");
         if(loginName == null || password == null) {

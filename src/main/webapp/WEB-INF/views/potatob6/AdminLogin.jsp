@@ -110,9 +110,14 @@
 
     <!-- axios登录 -->
     <script>
+        let empty = /[ ]*/g;
         function login() {
             var loginName = document.getElementById("loginName").value;
             var password  = document.getElementById("password").value;
+            if(empty.test(loginName) || empty.test(password)) {
+                alert("用户名和密码不能为空");
+                return;
+            }
             axios({
                 method: 'POST',
                 url: '${pageContext.request.contextPath}/adminLogin',
