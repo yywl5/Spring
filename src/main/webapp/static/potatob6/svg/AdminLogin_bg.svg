@@ -1,0 +1,48 @@
+<svg xml:space="preserve" style="enable-background:new 0 0 1500 1500;" viewBox="0 0 1500 1500" y="0px" x="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" id="图层_1" version="1.1">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:url(#SVGID_1_);}
+	.st2{fill:#D6DFFD;}
+	.st3{fill:url(#SVGID_2_);}
+	.st4{fill:url(#SVGID_3_);}
+	.st5{fill:#F0F6FF;}
+	.st6{fill:url(#SVGID_4_);}
+</style>
+<rect height="1500" width="1500" class="st0" y="2.8" x="-2"></rect>
+<g>
+	<linearGradient y2="352.8949" x2="740.0818" y1="1451.2972" x1="757.9711" gradientUnits="userSpaceOnUse" id="SVGID_1_">
+		<stop style="stop-color:#FFFFFF;stop-opacity:0" offset="0"></stop>
+		<stop style="stop-color:#D9E2FF" offset="1"></stop>
+	</linearGradient>
+	<polygon points="196.8,1310.2 196.8,430.4 298.7,430.4 298.7,351.3 430.5,351.3 430.5,514 496.4,514 496.4,640.6 
+		598.2,640.6 598.2,221.3 622.2,221.3 622.2,152.8 834.9,152.8 834.9,221.3 873.8,221.3 873.8,809.3 936.7,809.3 936.7,337.9 
+		1014.6,463.3 1014.6,668.5 1080.5,668.5 1080.5,502.4 1116.4,502.4 1116.4,367.9 1299.2,367.9 1299.2,1310.2" class="st1"></polygon>
+	<ellipse ry="56.6" rx="376.4" cy="1296.2" cx="748" class="st2"></ellipse>
+	<g>
+		<linearGradient y2="1293.6925" x2="748.5933" y1="476.224" x1="748.5933" gradientUnits="userSpaceOnUse" id="SVGID_2_">
+			<stop style="stop-color:#A4C4FD" offset="0.3391"></stop>
+			<stop style="stop-color:#5D6ED5" offset="0.5612"></stop>
+		</linearGradient>
+		<path d="M956,845.1H799.6c-8.2,0-15.7-4.4-19.7-11.6l-17.9-32.5c-3.4-6.2-10-10.1-17.1-10.2l-0.5,0l-203.3,0.2
+			c-14.6,0-26.4,14.4-26.4,32.2v340c0,17.8,11.8,32.2,26.4,32.2H956c14.6,0,26.4-14.4,26.4-32.2V877.4
+			C982.4,859.6,970.6,845.1,956,845.1z" class="st3"></path>
+		<linearGradient y2="1542.1221" x2="748" y1="648.1632" x1="748" gradientUnits="userSpaceOnUse" id="SVGID_3_">
+			<stop style="stop-color:#A4C4FD" offset="0"></stop>
+			<stop style="stop-color:#5D6ED5" offset="1"></stop>
+		</linearGradient>
+		<path d="M974.8,892.3h-171c-8.9,0-17.2-4.9-21.5-12.7l-19.6-35.5c-3.8-6.8-10.9-11.1-18.7-11.1l-0.5,0l-222.3,0.2
+			c-16,0-28.9,15.8-28.9,35.2v371.8c0,19.5,12.9,35.2,28.9,35.2h453.6c16,0,28.9-15.8,28.9-35.2V927.6
+			C1003.7,908.1,990.8,892.3,974.8,892.3z" class="st4"></path>
+		<path d="M826.9,1006.8h-4.2c-12-33.4-40.9-57-74.7-57c-33.8,0-62.7,23.6-74.7,57h-4.2c-17.8,0-32.3,14.5-32.3,32.3
+			v116.3c0,17.8,14.5,32.3,32.3,32.3h157.8c17.8,0,32.3-14.5,32.3-32.3v-116.3C859.2,1021.3,844.7,1006.8,826.9,1006.8z M748,973.6
+			c20.8,0,39,13.4,48.9,33.2h-97.9C709,987,727.2,973.6,748,973.6z" class="st5"></path>
+		<linearGradient y2="1098.7834" x2="778.527" y1="1098.7834" x1="719.1534" gradientUnits="userSpaceOnUse" id="SVGID_4_">
+			<stop style="stop-color:#A4C4FD" offset="0"></stop>
+			<stop style="stop-color:#5D6ED5" offset="1"></stop>
+		</linearGradient>
+		<path d="M778.5,1073.3c0-16.4-13.3-29.7-29.7-29.7c-16.4,0-29.7,13.3-29.7,29.7c0,13.4,8.9,24.5,21,28.2v43.7
+			c0,4.8,3.9,8.7,8.7,8.7c4.8,0,8.7-3.9,8.7-8.7v-26.6h2.9c1.4,0,2.5-1.1,2.5-2.5v-1.7c0-1.4-1.1-2.5-2.5-2.5h-2.9v-10.4
+			C769.7,1097.8,778.5,1086.7,778.5,1073.3z" class="st6"></path>
+	</g>
+</g>
+</svg>

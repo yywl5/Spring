@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminHandler {
@@ -29,17 +31,20 @@ public class AdminHandler {
 
     /**
      * 管理员登录API
-     * @param loginName 管理员登录名
-     * @param password  管理员密码
      * @return          管理员Bean的JSON
      */
     @RequestMapping(value = "/adminLogin",
-            method = RequestMethod.GET,
-            params = {"loginName", "password"}
+            method = RequestMethod.POST
     )
     @ResponseBody
-    public String adminLogin(String loginName, String password) {
-        Administrator administrator = administratorDAO.getAdmin(loginName, password);
+    public String adminLogin(@RequestBody Map map, @CookieValue("JSESSIONID") String sessionId) {
+        System.out.println(sessionId);
+        String loginName = (String)map.get("loginName");
+        String password = (String)map.get("password");
+        if(loginName == null || password == null) {
+            return "{\"status\":\"error\"}";
+        }
+        Administrator administrator = administratorDAO.getAdmin((String) map.get("loginName"), (String) map.get("password"));
         if(administrator == null)
         {
             return "{\"status\":\"Not Found\"}";
