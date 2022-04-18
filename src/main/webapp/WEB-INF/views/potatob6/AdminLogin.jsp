@@ -110,7 +110,7 @@
 
     <!-- axios登录 -->
     <script>
-        let empty = /[ ]*/g;
+        let empty = /^[ ]*$/;
         function login() {
             var loginName = document.getElementById("loginName").value;
             var password  = document.getElementById("password").value;
@@ -127,11 +127,11 @@
                 }
             }).then(response => {
                 let resp = JSON.parse(response.data);
-                if(resp.status == "error")
+                if(resp.status === "error")
                     alert("参数不合法");
-                if(resp.status == "Not Found")
+                if(resp.status === "Not Found")
                     alert("用户不存在或密码错误");
-                if(resp.status == "Founded")
+                if(resp.status === "Founded")
                     document.location.href="${pageContext.request.contextPath}/AdminPage";
             }).catch(err => {
                 console.log("登录失败");
