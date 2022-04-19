@@ -120,7 +120,7 @@
             }
             axios({
                 method: 'POST',
-                url: '${pageContext.request.contextPath}/adminLogin',
+                url: '${pageContext.request.contextPath}/admin/login',
                 data: {
                     loginName: loginName,
                     password: password
@@ -132,7 +132,7 @@
                 if(resp.status === "Not Found")
                     alert("用户不存在或密码错误");
                 if(resp.status === "Founded")
-                    document.location.href="${pageContext.request.contextPath}/AdminPage";
+                    document.location.href="${pageContext.request.contextPath}/Admin/Page";
             }).catch(err => {
                 console.log("登录失败");
             });

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminHandler {
 
     @Autowired
@@ -33,7 +34,7 @@ public class AdminHandler {
      * 管理员登录API
      * @return          管理员Bean的JSON
      */
-    @RequestMapping(value = "/adminLogin",
+    @RequestMapping(value = "/login",
             method = RequestMethod.POST
     )
     @ResponseBody
@@ -53,7 +54,7 @@ public class AdminHandler {
                 +"}";
     }
 
-    @RequestMapping(value = "/adminPasswordChange",
+    @RequestMapping(value = "/passwordChange",
             method = RequestMethod.GET,
             params = {"adminID", "newPassword"}
     )
