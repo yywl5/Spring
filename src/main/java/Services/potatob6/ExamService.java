@@ -33,7 +33,7 @@ public class ExamService {
         return examDAO.getAllNotHandledExams();
     }
 
-    // 获取全部已经完成的一页待处理清单
+    // 获取全部已经完成的一页清单
     public List<Exam> getAllPageOfHandledExams(Integer page) {
         return examDAO.getAllPageOfHandledExams(100*(page-1)+1, numberOfPages);
     }
