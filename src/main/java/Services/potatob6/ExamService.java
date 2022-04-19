@@ -42,4 +42,9 @@ public class ExamService {
     public List<Exam> getAllHandledPageOfExamsBySelf(Integer page, Integer adminId) {
         return examDAO.getAllHandledPageOfExamsBySelf(100*(page-1)+1, numberOfPages, adminId);
     }
+
+    // 获取全部的一页清单
+    public List<Exam> getAllPageExam(Integer page) {
+        return examDAO.getAllPageExam(100*(page-1)+1, numberOfPages);
+    }
 }

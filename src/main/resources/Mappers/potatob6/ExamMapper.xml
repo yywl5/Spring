@@ -21,6 +21,10 @@
     </select>
 
     <select id="getAllHandledPageOfExamsBySelf" resultType="Exam" parameterType="Integer">
-        select * from Exams where examHandleAdminId=#{adminId} limit ${startIndex},${pageCount}
+        select * from Exams where examHandleAdminId=#{adminId} and examHandleStatus='已处理' limit ${startIndex},${pageCount}
+    </select>
+
+    <select id="getAllPageExam" resultType="Exam" parameterType="Integer">
+        select * from Exams limit ${startIndex},${pageCount}
     </select>
 </mapper>

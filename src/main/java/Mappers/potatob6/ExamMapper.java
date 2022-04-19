@@ -16,10 +16,13 @@ public interface ExamMapper {
     // 获取全部的待处理清单
     List<Exam> getAllNotHandledExams();
 
-    // 获取全部已经完成的一页待处理清单
+    // 获取全部已经完成的一页清单
     List<Exam> getAllPageOfHandledExams(@Param("startIndex") Integer startIndex, @Param("pageCount") Integer pageCount);
 
     // 获取全部由自己处理的一页清单
     List<Exam> getAllHandledPageOfExamsBySelf(@Param("startIndex") Integer startIndex, @Param("pageCount") Integer pageCount, @Param("adminId") Integer adminId);
+
+    // 获取全部的一页清单
+    List<Exam> getAllPageExam(@Param("startIndex") Integer startIndex, @Param("pageCount") Integer pageCount);
 
 }
