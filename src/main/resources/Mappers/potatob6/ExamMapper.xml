@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Mappers.potatob6.ExamMapper">
+
+    <select id="getNumberOfAllNotHandledExams" resultType="Integer">
+        select count(*) from Exams where examHandleStatus='未处理'
+    </select>
+
+    <select id="getAPageOfNotHandledExams" resultType="Exam" parameterType="Integer">
+        select * from Exams where examHandleStatus='未处理' limit ${startIndex},${pageCount}
+    </select>
+
+    <select id="getAllNotHandledExams" resultType="Exam">
+        select * from Exams where examHandleStatus='未处理'
+    </select>
+
+    <select id="getAllPageOfHandledExams" resultType="Exam" parameterType="Integer">
+        select * from Exams where examHandleStatus='已处理' limit ${startIndex},${pageCount}
+    </select>
+
+    <select id="getAllHandledPageOfExamsBySelf" resultType="Exam" parameterType="Integer">
+        select * from Exams where examHandleAdminId=#{adminId} limit ${startIndex},${pageCount}
+    </select>
+</mapper>
