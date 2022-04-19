@@ -7,6 +7,7 @@
     <typeAliases>
         <typeAlias type="Beans.potatob6.Administrator" alias="Administrator" />
         <typeAlias type="Beans.potatob6.Book" alias="Book" />
+        <typeAlias type="Beans.potatob6.Exam" alias="Exam" />
     </typeAliases>
     <environments default="development">
         <environment id="development">
