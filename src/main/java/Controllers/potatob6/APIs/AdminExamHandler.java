@@ -54,7 +54,7 @@ public class AdminExamHandler {
     }
 
     /**
-     * 未测试 ×
+     * 已测试 √
      * 获取全部的待处理清单
      * @return JSON
      */
@@ -65,7 +65,7 @@ public class AdminExamHandler {
     }
 
     /**
-     * 未测试 ×
+     * 已测试 √
      * @param map JSON，包含page
      * @return    JSON，包含status和list
      */
@@ -88,7 +88,7 @@ public class AdminExamHandler {
     }
 
     /**
-     * 未测试 ×
+     * 已测试 √
      * @param map JSON，包含page和adminId
      * @return    JSON，包含status和list
      */
@@ -114,7 +114,7 @@ public class AdminExamHandler {
     }
 
     /**
-     * 未测试 ×
+     * 已测试 √
      * @param map JSON，包含page
      * @return    JSON，包含status和list
      */
@@ -123,11 +123,9 @@ public class AdminExamHandler {
     public String getAllPageExam(@RequestBody Map map) {
         JSONObject json = new JSONObject();
         Integer page;
-        Integer adminId;
         try {
             page = (Integer) map.get("page");
-            adminId = (Integer) map.get("adminId");
-            if ( page == null || adminId == null)
+            if ( page == null )
                 throw new NullPointerException("不存在Page参数或adminId参数");
         } catch (Exception e) {
             json.put("status", "error");
