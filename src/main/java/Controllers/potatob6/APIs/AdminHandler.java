@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,7 @@ public class AdminHandler {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public String adminLogin(@RequestBody Map map) {
+    public String adminLogin(@RequestBody Map map, HttpServletRequest request) {
         String loginName = (String)map.get("loginName");
         String password = (String)map.get("password");
         if(loginName == null || password == null) {
@@ -48,6 +49,7 @@ public class AdminHandler {
         {
             return "{\"status\":\"Not Found\"}";
         }
+        request.getSession().setAttribute("admin", administrator);
         return "{\"status\":\"Founded\",\"admin\":"+
                 JSON.toJSONString(administrator)
                 +"}";

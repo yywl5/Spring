@@ -24,7 +24,6 @@
                 flex-direction: row;
                 justify-content: center;
                 align-content: center;
-                overflow: hidden;
             }
 
             #selfCenter {
@@ -39,6 +38,10 @@
                 border: 1px solid #dbe2ef;
                 border-radius: 10px;
                 flex-shrink: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
             }
 
             #items {
@@ -104,12 +107,36 @@
                 justify-content: center;
                 align-items: center;
             }
+
+            #avatar {
+                width: 100px;
+                height: 100px;
+                border-radius: 50px;
+            }
+
+            hr {
+                width: 60%;
+                height: 4px;
+                background-color: rgba(70,70,70,0.3);
+                border-radius: 2px;
+                border: none;
+                margin: 40px 0;
+            }
+
+            p {
+                margin: 20px 0;
+            }
         </style>
     </head>
 
     <body>
         <div id="selfCenter">
-
+            <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
+            <hr>
+            <p>欢迎，${admin.adminName}</p>
+            <p>管理员编号:${admin.adminId}</p>
+            <p>图书管理后台系统</p>
+            <hr>
         </div>
         <div id="items">
             <div class="item">

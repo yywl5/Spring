@@ -35,16 +35,26 @@ public class Administrator {
 
     private Integer adminId;
 
+    public String getAvatarPath() {
+        return avatarPath;
+    }
+
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
     @Override
     public String toString() {
         return "Administrator{" +
-                "adminId='" + adminId + '\'' +
+                "adminId=" + adminId +
+                ", avatarPath='" + avatarPath + '\'' +
                 ", adminLogin='" + adminLogin + '\'' +
                 ", adminName='" + adminName + '\'' +
                 ", adminPassword='" + adminPassword + '\'' +
                 '}';
     }
 
+    private String avatarPath;
     private String adminLogin;
     private String adminName;
     private String adminPassword;
