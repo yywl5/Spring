@@ -50,12 +50,11 @@
                 margin-left: 0;
                 min-width: 700px;
                 flex-shrink: 1;
-                display: grid;
-                grid-template-columns: repeat(auto-fit, 202px);
-                grid-template-rows: repeat(auto-fit, 202px);
-                grid-gap: 30px;
-                justify-items: center;
-                align-items: center;
+                backdrop-filter: blur(1.5rem);
+                -webkit-backdrop-filter: blur(1.5rem);
+                border: 1px solid #dbe2ef;
+                border-radius: 10px;
+                box-shadow: 0 0 18px rgba(70,70,70,0.2);
             }
 
             .item {
@@ -126,6 +125,18 @@
             p {
                 margin: 20px 0;
             }
+            
+            img:hover {
+                cursor: pointer;
+            }
+
+            #items_top {
+                margin: 20px 0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+            }
         </style>
     </head>
 
@@ -139,7 +150,12 @@
             <hr>
         </div>
         <div id="items">
-
+            <div id="items_top">
+                <div style="width: 20px; flex-shrink: 0"></div>
+                <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
+                <p style="flex-shrink: 1; margin: 0;margin-left: 20px;width: 100%;text-align: center">所有审核</p>
+                <div style="width: 20px; flex-shrink: 0"></div>
+            </div>
         </div>
     </body>
 </html>

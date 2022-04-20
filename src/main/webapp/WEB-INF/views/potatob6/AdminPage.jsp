@@ -163,8 +163,17 @@
                 <p>管理用户</p>
             </div>
             <div class="item">
+                <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminBooks.svg" />
+                <p>管理图书</p>
+            </div>
+            <div class="item">
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage3.svg" />
                 <p>设置中心</p>
+            </div>
+            <div class="item">
+                <img onclick="window.location.href='${pageContext.request.contextPath}/admin/logout'"
+                src="${pageContext.request.contextPath}/static/potatob6/svg/AdminLogout.svg" />
+                <p>登出</p>
             </div>
         </div>
     </body>

@@ -55,6 +55,12 @@ public class AdminHandler {
                 +"}";
     }
 
+    /**
+     * 密码修改
+     * @param adminID     管理员的Id
+     * @param newPassword 管理员新密码
+     * @return
+     */
     @RequestMapping(value = "/passwordChange",
             method = RequestMethod.GET,
             params = {"adminID", "newPassword"}
@@ -71,4 +77,14 @@ public class AdminHandler {
         return json.toJSONString();
     }
 
+    /**
+     * 管理员登出
+     * @param request ServletRequest
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "potatob6/AdminLogin";
+    }
 }
