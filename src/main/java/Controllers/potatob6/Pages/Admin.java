@@ -17,6 +17,7 @@ public class Admin {
 
     @Autowired
     private ExamService examService;
+
     /**
      * 管理员登录页面
      * @return
@@ -26,16 +27,42 @@ public class Admin {
         return "potatob6/AdminLogin";
     }
 
-    @GetMapping("/Page")
-    public ModelAndView adminPage(HttpServletRequest request) {
+    /**
+     * 管理员个人页面
+     * @return
+     */
+    @GetMapping(value = {"/Page", "/", ""})
+    public ModelAndView adminPage() {
         ModelAndView modelAndView = new ModelAndView("potatob6/AdminPage");
         Integer n1 = examService.getNumberOfAllNotHandledExams();
         modelAndView.addObject("n1", n1);
         return modelAndView;
     }
 
+    /**
+     * 管理员处理待办请求页面
+     * @return
+     */
+    @GetMapping("/NotHandled")
+    public String notHandled() {
+        return "potatob6/AdminNotHandledExams";
+    }
+
+    /**
+     * 管理员查看所有请求页面
+     * @return
+     */
     @GetMapping("/Exams")
-    public ModelAndView adminExams(HttpServletRequest request) {
-        return adminPage(request);
+    public String adminExams() {
+        return "potatob6/AdminExams";
+    }
+
+    /**
+     * 管理员管理所有管理员
+     * @return
+     */
+    @GetMapping("/Admins")
+    public String admins() {
+        return "potatob6/AdminAdmins";
     }
 }
