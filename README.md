@@ -2,8 +2,8 @@
 
 ### 一、项目框架和部署计划 
   - Spring 
-  - SpringMVC 
-  - MyBatis 
+  - **SpringMVC** 
+  - **MyBatis** 
   - MySQL 
   - K8s 
   - Maven 
