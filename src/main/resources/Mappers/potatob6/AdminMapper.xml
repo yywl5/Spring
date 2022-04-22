@@ -15,4 +15,16 @@
     <update id="updatePassword">
         update Administrators set adminPassword=#{password} where adminId=#{adminId}
     </update>
+
+    <select id="getAdminById" resultMap="queryAdminById">
+        select * from Administrators where adminId=#{adminId}
+    </select>
+
+    <resultMap id="queryAdminById" type="Administrator">
+        <id property="adminId" column="adminId" />
+        <result property="adminLogin" column="adminLogin" />
+        <result property="adminName" column="adminName" />
+        <result property="adminPassword" column="adminPassword" />
+    </resultMap>
+
 </mapper>

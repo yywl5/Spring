@@ -44,7 +44,9 @@ public class Admin {
      * @return
      */
     @GetMapping("/NotHandled")
-    public String notHandled() {
+    public String notHandled(Model model) {
+        model.addAttribute("list", examService.getAPageOfNotHandledExams(1));
+        model.addAttribute("page", 1);
         return "potatob6/AdminNotHandledExams";
     }
 

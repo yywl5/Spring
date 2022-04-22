@@ -75,6 +75,30 @@ public class Exam {
         this.examComment = examComment;
     }
 
+    public User getExamUser() {
+        return examUser;
+    }
+
+    public void setExamUser(User examUser) {
+        this.examUser = examUser;
+    }
+
+    public Administrator getExamAdmin() {
+        return examAdmin;
+    }
+
+    public void setExamAdmin(Administrator examAdmin) {
+        this.examAdmin = examAdmin;
+    }
+
+    public String getExamExtra1() {
+        return examExtra1;
+    }
+
+    public void setExamExtra1(String examExtra1) {
+        this.examExtra1 = examExtra1;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +
@@ -83,10 +107,13 @@ public class Exam {
                 ", examUserId='" + examUserId + '\'' +
                 ", examCreateTime=" + examCreateTime +
                 ", examExtra='" + examExtra + '\'' +
+                ", examExtra1='" + examExtra1 + '\'' +
                 ", examHandleTime='" + examHandleTime + '\'' +
                 ", examHandleStatus='" + examHandleStatus + '\'' +
                 ", examHandleAdminId=" + examHandleAdminId +
                 ", examComment='" + examComment + '\'' +
+                ", examUser=" + examUser +
+                ", examAdmin=" + examAdmin +
                 '}';
     }
 
@@ -95,8 +122,11 @@ public class Exam {
     private String examUserId;
     private Timestamp examCreateTime;
     private String examExtra;
+    private String examExtra1;
     private String examHandleTime;
     private String examHandleStatus;
     private Integer examHandleAdminId;
     private String examComment;
+    private User examUser;
+    private Administrator examAdmin;
 }
