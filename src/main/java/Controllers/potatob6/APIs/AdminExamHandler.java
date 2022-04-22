@@ -22,7 +22,7 @@ public class AdminExamHandler {
      */
     @GetMapping("/nums")
     @ResponseBody
-    public String getNums() {
+    public String getNums() throws NullPointerException {
         JSONObject json = new JSONObject();
         json.put("nums", examService.getNumberOfAllNotHandledExams());
         return json.toJSONString();
@@ -36,18 +36,12 @@ public class AdminExamHandler {
      */
     @GetMapping("/pageNotHandled")
     @ResponseBody
-    public String pageNotHandled(@RequestBody Map map) {
+    public String pageNotHandled(@RequestBody Map map) throws NullPointerException{
         JSONObject json = new JSONObject();
         Integer page;
-        try {
-            page = (Integer) map.get("page");
-            if ( page == null )
-                throw new NullPointerException("不存在Page参数");
-        } catch (Exception e) {
-            json.put("status", "error");
-            return json.toJSONString();
-        }
-
+        page = (Integer) map.get("page");
+        if ( page == null )
+            throw new NullPointerException("不存在Page参数");
         json.put("status", "success");
         json.put("list", examService.getAPageOfNotHandledExams(page));
         return json.toJSONString();
@@ -71,17 +65,12 @@ public class AdminExamHandler {
      */
     @GetMapping("/pageHandled")
     @ResponseBody
-    public String getAllPageOfHandledExams(@RequestBody Map map) {
+    public String getAllPageOfHandledExams(@RequestBody Map map) throws NullPointerException {
         JSONObject json = new JSONObject();
         Integer page;
-        try {
-            page = (Integer) map.get("page");
-            if ( page == null )
-                throw new NullPointerException("不存在Page参数");
-        } catch (Exception e) {
-            json.put("status", "error");
-            return json.toJSONString();
-        }
+        page = (Integer) map.get("page");
+        if ( page == null )
+            throw new NullPointerException("不存在Page参数");
         json.put("status", "success");
         json.put("list", examService.getAllPageOfHandledExams(page));
         return json.toJSONString();
@@ -94,20 +83,17 @@ public class AdminExamHandler {
      */
     @GetMapping("/pageHandledAdminId")
     @ResponseBody
-    public String getAllHandledPageOfExamsBySelf(@RequestBody Map map) {
+    public String getAllHandledPageOfExamsBySelf(@RequestBody Map map) throws NullPointerException {
 
         JSONObject json = new JSONObject();
         Integer page;
         Integer adminId;
-        try {
-            page = (Integer) map.get("page");
-            adminId = (Integer) map.get("adminId");
-            if ( page == null || adminId == null)
-                throw new NullPointerException("不存在Page参数或adminId参数");
-        } catch (Exception e) {
-            json.put("status", "error");
-            return json.toJSONString();
-        }
+
+        page = (Integer) map.get("page");
+        adminId = (Integer) map.get("adminId");
+        if ( page == null || adminId == null)
+            throw new NullPointerException("不存在Page参数或adminId参数");
+
         json.put("status", "success");
         json.put("list", examService.getAllHandledPageOfExamsBySelf(page, adminId));
         return json.toJSONString();
@@ -120,7 +106,7 @@ public class AdminExamHandler {
      */
     @GetMapping("/pageAll")
     @ResponseBody
-    public String getAllPageExam(@RequestBody Map map) {
+    public String getAllPageExam(@RequestBody Map map) throws NullPointerException {
         JSONObject json = new JSONObject();
         Integer page;
         try {
