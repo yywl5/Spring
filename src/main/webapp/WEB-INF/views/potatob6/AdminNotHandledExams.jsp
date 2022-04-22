@@ -38,12 +38,14 @@
             -webkit-backdrop-filter: blur(2rem);
             box-shadow: 0 0 18px rgba(70,70,70,0.2);
             border: 1px solid #dbe2ef;
-            border-radius: 10px;
             flex-shrink: 0;
+            border-radius: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            transition: all 0.3s;
+            overflow: hidden;
         }
 
         #items {
@@ -136,12 +138,18 @@
         }
 
         #items_top {
-            margin: 20px 0;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             flex-shrink: 0;
+            background-color: #005691;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #items_top > * {
+            margin: 16px 0;
+            color: white;
         }
 
         tr, tbody {
@@ -151,6 +159,7 @@
         td, th {
             text-align: center;
             margin-bottom: 20px;
+            word-break: keep-all;
         }
 
         table {
@@ -213,11 +222,26 @@
             flex-shrink: 1;
             overflow-y: scroll;
         }
+
+        #fold {
+            position: absolute;
+            width: 100%;
+            height: 54px;
+            background-color: #005691;
+            top: 0; left: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            border-radius: 10px 10px 0 0;
+        }
     </style>
 </head>
 
 <body>
     <div id="selfCenter">
+        <div id="fold">
+            <img src="${pageContext.request.contextPath}/static/potatob6/svg/fold.svg" onclick="fold()" style="margin: 12px 20px; width: 30px; height: 30px" />
+        </div>
         <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
         <hr>
         <p>欢迎，${admin.adminName}</p>
@@ -229,7 +253,7 @@
         <div id="items_top">
             <div style="width: 20px; flex-shrink: 0"></div>
             <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
-            <p style="flex-shrink: 1; margin: 0;margin-left: 20px;width: 100%;text-align: center">待处理审核</p>
+            <p style="flex-shrink: 1; margin: 0;margin-left: 20px;margin-top: 16px;width: 100%;text-align: center">待处理审核</p>
             <div style="width: 20px; flex-shrink: 0"></div>
         </div>
 
@@ -277,6 +301,26 @@
     </div>
 
     <script lang="JavaScript">
+        var folded = false;
+        function fold() {
+            if(folded) {
+                $("#selfCenter").css("width", "400px")
+                let chs = document.getElementById("selfCenter").children
+                for (var i = 1; i < chs.length; i++) {
+                    chs[i].style.opacity = "1";
+                }
+            } else {
+                $("#selfCenter").css("width", "70px")
+                let chs = document.getElementById("selfCenter").children
+                for (var i = 1; i < chs.length; i++) {
+                    chs[i].style.opacity = "0";
+                }
+            }
+            folded = !folded
+        }
+    </script>
+
+    <script lang="JavaScript">
         var page = ${page}
         function loadPage() {
             axios({
@@ -320,6 +364,9 @@
                         }
 
                         page ++;
+                    }
+                    else {
+                        alert("没有更多内容了")
                     }
                 }
             })
