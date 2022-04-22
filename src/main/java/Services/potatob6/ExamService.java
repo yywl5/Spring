@@ -16,7 +16,7 @@ public class ExamService {
     private ExamMapper examDAO;
 
     // 一页的条目数量
-    public static Integer numberOfPages = 100;
+    public static Integer numberOfPages = 10;
 
     // 获取待处理清单的数量
     public Integer getNumberOfAllNotHandledExams() {

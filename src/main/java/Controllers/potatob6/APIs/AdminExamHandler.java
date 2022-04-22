@@ -34,17 +34,24 @@ public class AdminExamHandler {
      * @param map JSON，包含page
      * @return    JSON，包含status和list
      */
-    @GetMapping("/pageNotHandled")
+    @PostMapping("/pageNotHandled")
     @ResponseBody
-    public String pageNotHandled(@RequestBody Map map) throws NullPointerException{
-        JSONObject json = new JSONObject();
+    public String pageNotHandled(@RequestBody Map map) {
+        org.json.JSONObject jsonObject = new org.json.JSONObject();
         Integer page;
-        page = (Integer) map.get("page");
-        if ( page == null )
-            throw new NullPointerException("不存在Page参数");
-        json.put("status", "success");
-        json.put("list", examService.getAPageOfNotHandledExams(page));
-        return json.toJSONString();
+        try {
+            page = (Integer) map.get("page");
+        } catch (NumberFormatException e) {
+            jsonObject.put("status", "error");
+            return jsonObject.toString();
+        }
+        if ( page == null ) {
+            jsonObject.put("status", "error");
+            return jsonObject.toString();
+        }
+        jsonObject.put("status", "success");
+        jsonObject.put("list", examService.getAPageOfNotHandledExams(page));
+        return jsonObject.toString();
     }
 
     /**
