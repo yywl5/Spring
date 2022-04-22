@@ -1,5 +1,6 @@
 package Mappers.potatob6;
 
+import Beans.potatob6.Administrator;
 import Beans.potatob6.Exam;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,4 +26,6 @@ public interface ExamMapper {
     // 获取全部的一页清单
     List<Exam> getAllPageExam(@Param("startIndex") Integer startIndex, @Param("pageCount") Integer pageCount);
 
+    //从特定Id获取管理员
+    Administrator getAdminById(@Param("adminId") Integer adminId);
 }

@@ -12,7 +12,7 @@
         select * from Exams where examHandleStatus='未处理' limit ${startIndex},${pageCount}
     </select>
 
-    <select id="getAllNotHandledExams" resultType="Exam">
+    <select id="getAllNotHandledExams" resultType="Exam" resultMap="ExamResMap">
         select * from Exams where examHandleStatus='未处理'
     </select>
 
@@ -27,4 +27,24 @@
     <select id="getAllPageExam" resultType="Exam" parameterType="Integer">
         select * from Exams limit ${startIndex},${pageCount}
     </select>
+
+    <resultMap id="queryUserById" type="User">
+        <id property="userId" column="userId" />
+        <result property="userLogin" column="userLogin" />
+        <result property="userName" column="userName" />
+        <result property="userPassword" column="userPassword" />
+    </resultMap>
+
+    <resultMap id="ExamResMap" type="Exam">
+        <result property="examId" column="examId" />
+        <result property="examType" column="examType" />
+        <result property="examUserId" column="examUserId" />
+        <result property="examExtra" column="examExtra" />
+        <result property="examHandleTime" column="examHandleTime" />
+        <result property="examHandleStatus" column="examHandleStatus" />
+        <result property="examHandleAdminId" column="examHandleAdminId" />
+        <result property="examComment" column="examComment" />
+        <association property="examUser" column="examUserId" select="Mappers.potatob6.UserMapper.getUserById" />
+        <association property="examAdmin" column="examHandleAdminId" select="Mappers.potatob6.AdminMapper.getAdminById" />
+    </resultMap>
 </mapper>

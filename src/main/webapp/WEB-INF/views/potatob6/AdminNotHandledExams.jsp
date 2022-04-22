@@ -137,6 +137,19 @@
             justify-content: center;
             align-items: flex-start;
         }
+
+        tr, tbody {
+            width: 100%;
+        }
+
+        td, th {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -155,6 +168,30 @@
         <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
         <p style="flex-shrink: 1; margin: 0;margin-left: 20px;width: 100%;text-align: center">待办清单</p>
         <div style="width: 20px; flex-shrink: 0"></div>
+    </div>
+
+    <div style="width: 100%;">
+        <table>
+            <tr>
+                <th>审核序号</th>
+                <th>类型</th>
+                <th>申请的用户</th>
+                <th>创建时间</th>
+                <th>处理状态</th>
+                <th>附加信息</th>
+            </tr>
+
+            <c:forEach var="item" items="${list}">
+                <tr>
+                    <td>${item.examId}</td>
+                    <td>${item.examType}</td>
+                    <td>${item.examUser.userName}</td>
+                    <td>${item.examCreateTime}</td>
+                    <td>${item.examHandleStatus}</td>
+                    <td>${item.examComment}</td>
+                </tr>
+            </c:forEach>
+        </table>
     </div>
 </div>
 </body>

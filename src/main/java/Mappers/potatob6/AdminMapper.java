@@ -15,4 +15,7 @@ public interface AdminMapper {
 
     //管理员修改密码
     Integer updatePassword(@Param("adminId") String adminId, @Param("password") String password);
+
+    //从特定Id获取管理员
+    Administrator getAdminById(@Param("adminId") Integer adminId);
 }
