@@ -25,7 +25,7 @@ public class ExamService {
 
     // 获取一页的待处理清单
     public List<Exam> getAPageOfNotHandledExams(Integer page) {
-        return examDAO.getAPageOfNotHandledExams(100*(page-1)+1, numberOfPages);
+        return examDAO.getAPageOfNotHandledExams(100*(page-1), numberOfPages);
     }
 
     // 获取全部的待处理清单
@@ -35,16 +35,16 @@ public class ExamService {
 
     // 获取全部已经完成的一页清单
     public List<Exam> getAllPageOfHandledExams(Integer page) {
-        return examDAO.getAllPageOfHandledExams(100*(page-1)+1, numberOfPages);
+        return examDAO.getAllPageOfHandledExams(100*(page-1), numberOfPages);
     }
 
     // 获取全部由自己处理的一页清单
     public List<Exam> getAllHandledPageOfExamsBySelf(Integer page, Integer adminId) {
-        return examDAO.getAllHandledPageOfExamsBySelf(100*(page-1)+1, numberOfPages, adminId);
+        return examDAO.getAllHandledPageOfExamsBySelf(100*(page-1), numberOfPages, adminId);
     }
 
     // 获取全部的一页清单
     public List<Exam> getAllPageExam(Integer page) {
-        return examDAO.getAllPageExam(100*(page-1)+1, numberOfPages);
+        return examDAO.getAllPageExam(100*(page-1), numberOfPages);
     }
 }

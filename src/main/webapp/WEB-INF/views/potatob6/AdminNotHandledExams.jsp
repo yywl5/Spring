@@ -7,6 +7,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <script src="${pageContext.request.contextPath}/static/potatob6/js/axios.min.js"></script>
     <title>审核</title>
     <style>
         * {
@@ -150,49 +151,146 @@
         table {
             width: 100%;
         }
+
+        button {
+            width: 80px;
+            height: 40px;
+            border-radius: 7px;
+            background-color: #17b978;
+            outline: none;
+            border: none;
+            transition: all 0.3s;
+            color: white;
+            font-size: small;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        .accept:hover {
+            background-color: #086972;
+        }
+
+        .reject {
+            background-color: #fa4659;
+        }
+
+        .reject:hover {
+            background-color: #b80d57;
+        }
+
+        #page_bar {
+            width: 100%;
+            height: 50px;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
 <body>
-<div id="selfCenter">
-    <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
-    <hr>
-    <p>欢迎，${admin.adminName}</p>
-    <p>管理员编号:${admin.adminId}</p>
-    <p>图书管理后台系统</p>
-    <hr>
-</div>
-<div id="items">
-    <div id="items_top">
-        <div style="width: 20px; flex-shrink: 0"></div>
-        <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
-        <p style="flex-shrink: 1; margin: 0;margin-left: 20px;width: 100%;text-align: center">待办清单</p>
-        <div style="width: 20px; flex-shrink: 0"></div>
+    <div id="selfCenter">
+        <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
+        <hr>
+        <p>欢迎，${admin.adminName}</p>
+        <p>管理员编号:${admin.adminId}</p>
+        <p>图书管理后台系统</p>
+        <hr>
     </div>
+    <div id="items">
+        <div id="items_top">
+            <div style="width: 20px; flex-shrink: 0"></div>
+            <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
+            <p style="flex-shrink: 1; margin: 0;margin-left: 20px;width: 100%;text-align: center">待办清单</p>
+            <div style="width: 20px; flex-shrink: 0"></div>
+        </div>
 
-    <div style="width: 100%;">
-        <table>
-            <tr>
-                <th>审核序号</th>
-                <th>类型</th>
-                <th>申请的用户</th>
-                <th>创建时间</th>
-                <th>处理状态</th>
-                <th>附加信息</th>
-            </tr>
-
-            <c:forEach var="item" items="${list}">
+        <div style="width: 100%;">
+            <table>
                 <tr>
-                    <td>${item.examId}</td>
-                    <td>${item.examType}</td>
-                    <td>${item.examUser.userName}</td>
-                    <td>${item.examCreateTime}</td>
-                    <td>${item.examHandleStatus}</td>
-                    <td>${item.examComment}</td>
+                    <th>审核序号</th>
+                    <th>类型</th>
+                    <th>申请的用户</th>
+                    <th>创建时间</th>
+                    <th>延期时间</th>
+                    <th>处理状态</th>
+                    <th>附加信息</th>
+                    <th>操作</th>
                 </tr>
-            </c:forEach>
-        </table>
+
+                <c:forEach var="item" items="${list}">
+                    <tr>
+                        <td>${item.examId} </td>
+                        <td>${item.examType} </td>
+                        <td>${item.examUser.userName} </td>
+                        <td>${item.examCreateTime} </td>
+                        <c:if test="${item.examType.equals(\"申请延期\")}">
+                            <td>${item.examExtra1} 天</td>
+                        </c:if>
+                        <c:if test="${!item.examType.equals(\"申请延期\")}">
+                            <td></td>
+                        </c:if>
+                        <td>${item.examHandleStatus} </td>
+                        <td>${item.examComment} </td>
+                        <td>
+                            <button class="reject" onclick="reject(${item.examId})">拒绝</button>
+                            <button class="accept" onclick="accept(${item.examId})">同意</button>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
+
+        <div id="page_bar">
+            <img src="${pageContext.request.contextPath}/static/potatob6/svg/loadmore.svg" style="width: 30px; height: 30px" />
+        </div>
     </div>
-</div>
+
+    <script lang="JavaScript">
+        var page = ${page}
+        function loadpage() {
+            page++;
+            axios({
+                //TODO 新页
+            })
+        }
+    </script>
+
+    <script lang="JavaScript">
+        // 同意
+        function accept(n) {
+            axios({
+                url: '${pageContext.request.contextPath}/admin/exams/accept',
+                method: 'GET',
+                data: {
+                    "Id": n
+                }
+            }).then(response => {
+
+            }).throw(error => {
+                alert("错误:"+error)
+            })
+        }
+
+        // 拒绝
+        function reject(n) {
+            axios({
+                url: '${pageContext.request.contextPath}/admin/exams/reject',
+                method: 'GET',
+                data: {
+                    "Id": n
+                }
+            }).then(response => {
+
+            }).throw(error => {
+                alert("错误:"+error)
+            })
+        }
+    </script>
 </body>
 </html>
