@@ -183,7 +183,7 @@
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage4.png" />
                 <p>管理用户</p>
             </div>
-            <div class="item">
+            <div class="item" onclick="window.location.href='${pageContext.request.contextPath}/Admin/Books'">
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminBooks.svg" />
                 <p>管理图书</p>
             </div>

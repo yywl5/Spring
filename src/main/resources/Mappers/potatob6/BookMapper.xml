@@ -6,4 +6,15 @@
     <select id="getBookById" resultType="Book">
         select * from Books where bookId=#{bookId}
     </select>
+
+    <select id="getPageOfBook" resultType="Book" parameterType="Integer">
+        select * from Books limit ${startIndex},${pageCount}
+    </select>
+
+    <update id="editBook" parameterType="Book">
+        update Books set bookName=#{bookName}, author=#{author},
+        publisher=#{publisher}, storageCount=#{storageCount},
+        price=#{price}
+        where bookId=#{bookId}
+    </update>
 </mapper>

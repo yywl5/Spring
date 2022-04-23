@@ -158,7 +158,7 @@
 
         td, th {
             text-align: center;
-            margin-bottom: 20px;
+            margin: 10px 0;
             word-break: keep-all;
         }
 
@@ -323,7 +323,7 @@
     </script>
 
     <script lang="JavaScript">
-        var page = ${page}
+        var page = ${page};
         function loadPage() {
             console.log(page)
             axios({
