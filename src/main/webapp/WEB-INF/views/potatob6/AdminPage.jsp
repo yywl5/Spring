@@ -7,7 +7,6 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-        <script src="${pageContext.request.contextPath}/static/potatob6/js/jquery-3.6.0.min.js"></script>
         <title>管理员个人页面</title>
         <style>
             * {
@@ -43,7 +42,6 @@
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
-                transition: all 0.3s;
             }
 
             #items {
@@ -82,16 +80,12 @@
                 backdrop-filter: blur(0.3rem);
                 -webkit-backdrop-filter: blur(0.3rem);
                 cursor: pointer;
-                transform: scale(0.97);
+                transform: scale(1.03);
             }
 
             img {
                 width: auto;
                 height: 50%;
-            }
-
-            img:hover {
-                cursor: pointer;
             }
 
             p {
@@ -132,26 +126,11 @@
             p {
                 margin: 20px 0;
             }
-
-            #fold {
-                position: absolute;
-                width: 100%;
-                height: 54px;
-                background-color: #005691;
-                top: 0; left: 0;
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                border-radius: 10px 10px 0 0;
-            }
         </style>
     </head>
 
     <body>
         <div id="selfCenter">
-            <div id="fold">
-                <img src="${pageContext.request.contextPath}/static/potatob6/svg/fold.svg" onclick="fold()" style="margin: 12px ; margin-left: 20px;width: 30px; height: 30px" />
-            </div>
             <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
             <hr>
             <p>欢迎，${admin.adminName}</p>
@@ -197,25 +176,5 @@
                 <p>登出</p>
             </div>
         </div>
-
-        <script lang="JavaScript">
-            var folded = false;
-            function fold() {
-                if(folded) {
-                    $("#selfCenter").css("width", "400px")
-                    let chs = document.getElementById("selfCenter").children
-                    for (var i = 1; i < chs.length; i++) {
-                        chs[i].style.opacity = "1";
-                    }
-                } else {
-                    $("#selfCenter").css("width", "70px")
-                    let chs = document.getElementById("selfCenter").children
-                    for (var i = 1; i < chs.length; i++) {
-                        chs[i].style.opacity = "0";
-                    }
-                }
-                folded = !folded
-            }
-        </script>
     </body>
 </html>
