@@ -491,18 +491,29 @@
             Reflect.deleteProperty(prevstatus, n.toString());
         }
 
+        // 删除Tr条目
+        function deleteTr(n) {
+            let tr = document.getElementById("trbook"+n);
+            tr.remove();
+        }
+
         // 删除
         function deleteBook(n) {
+            let t = confirm("确定要删除图书吗?");
+            if(!t) {
+                return ;
+            }
             axios({
-                url: '${pageContext.request.contextPath}/admin/book/delete',
-                method: 'GET',
+                url: '${pageContext.request.contextPath}/admin/books/delete',
+                method: 'POST',
                 data: {
-                    "Id": n
+                    "bookId": n
                 }
             }).then(response => {
-
-            }).throw(error => {
-                alert("错误:"+error)
+                let resp = JSON.parse(response.data);
+                if(resp.status !== undefined && resp.status === 'success') {
+                    deleteTr(n);
+                }
             })
         }
     </script>

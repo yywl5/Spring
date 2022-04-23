@@ -2,6 +2,7 @@ package Controllers.potatob6.APIs;
 
 import Beans.potatob6.Book;
 import Services.potatob6.BookService;
+import com.alibaba.fastjson.JSON;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 @Controller
 @RequestMapping("/admin/books")
@@ -47,15 +49,43 @@ public class AdminBooksHandler {
     public String editBook(@RequestBody Map map) {
         JSONObject jsonObject = new JSONObject();
         try {
-            Integer ret = bookService.editBook((String) map.get("bookId"), (String) map.get("bookName"),
+            Integer ret = bookService.editBook(String.valueOf(map.get("bookId")), (String) map.get("bookName"),
                     (String) map.get("author"), (String) map.get("publisher"),
-                    (String) map.get("storageCount"), (String) map.get("price"));
+                    String.valueOf(map.get("storageCount")), (String) map.get("price"));
             if(ret != 0) {
                 jsonObject.put("status", "success");
                 return jsonObject.toString();
             }
             jsonObject.put("status", "error");
             jsonObject.put("message", "参数异常");
+            return jsonObject.toString();
+        } catch (Exception e) {
+            jsonObject.put("status", "error");
+            jsonObject.put("message", e.toString());
+            return jsonObject.toString();
+        }
+    }
+
+    /**
+     * 管理员删除图书API
+     * @param map JSON，包含bookId
+     * @return    JSON，包含status
+     */
+    @PostMapping("/delete")
+    @ResponseBody
+    public String deleteBook(@RequestBody Map map) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            Integer bookId = (Integer) map.get("bookId");
+            Integer ret = bookService.deleteBook(bookId);
+
+            if(ret != 0) {
+                jsonObject.put("status", "success");
+                return jsonObject.toString();
+            }
+
+            jsonObject.put("status", "error");
+            jsonObject.put("message", "参数错误");
             return jsonObject.toString();
         } catch (Exception e) {
             jsonObject.put("status", "error");

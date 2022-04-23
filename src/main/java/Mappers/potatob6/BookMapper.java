@@ -15,4 +15,7 @@ public interface BookMapper {
 
     // 编辑图书
     Integer editBook(Book book);
+
+    // 删除图书
+    Integer deleteBook(@Param("bookId") Integer bookId);
 }

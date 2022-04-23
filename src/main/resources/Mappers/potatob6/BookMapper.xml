@@ -17,4 +17,8 @@
         price=#{price}
         where bookId=#{bookId}
     </update>
+
+    <delete id="deleteBook" parameterType="Integer">
+        delete from Books where bookId=#{bookId}
+    </delete>
 </mapper>

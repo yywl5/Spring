@@ -31,4 +31,9 @@ public class BookService {
         Book book = new Book(bookId, _bookName, _author, _publisher, storageCount, price);
         return bookMapper.editBook(book);
     }
+
+    // 删除图书
+    public Integer deleteBook(Integer bookId) {
+        return bookMapper.deleteBook(bookId);
+    }
 }
