@@ -266,6 +266,7 @@
                         <th>申请的用户</th>
                         <th>创建时间</th>
                         <th>延期时间</th>
+                        <th>书名</th>
                         <th>处理状态</th>
                         <th>附加信息</th>
                         <th>操作</th>
@@ -283,6 +284,7 @@
                             <c:if test="${!item.examType.equals(\"申请延期\")}">
                                 <td></td>
                             </c:if>
+                            <td>${item.examBook.bookName} </td>
                             <td>${item.examHandleStatus} </td>
                             <td>${item.examComment} </td>
                             <td class="opera">
@@ -323,6 +325,7 @@
     <script lang="JavaScript">
         var page = ${page}
         function loadPage() {
+            console.log(page)
             axios({
                 url: '${pageContext.request.contextPath}/admin/exams/pageNotHandled',
                 method: 'POST',
@@ -330,7 +333,6 @@
                     page: page + 1
                 }
             }).then(response=>{
-                console.log(response)
                 const json = JSON.parse(response.data)
                 if(json.status === 'success') {
                     console.log(json)
@@ -344,7 +346,13 @@
                             varNew.append($("<td>"+l.examUser.userName+"</td>"))
                             varNew.append($("<td>"+l.examCreateTime+"</td>"))
                             if (l.examType === '申请延期') {
-                                varNew.append($("<td>" + l.examExtra1 + "天</td>"))
+                                varNew.append($("<td>" + l.examExtra1 + " 天</td>"))
+                            } else {
+                                varNew.append($("<td></td>"))
+                            }
+
+                            if (l.examBook !== undefined && l.examBook.bookName !== undefined ) {
+                                varNew.append($("<td>"+l.examBook.bookName+"</td>"))
                             } else {
                                 varNew.append($("<td></td>"))
                             }
