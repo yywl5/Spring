@@ -59,6 +59,15 @@ public class Book {
     private Integer storageCount;
     private BigDecimal price;
 
+    public Book(Integer bookId, String bookName, String author, String publisher, Integer storageCount, BigDecimal price) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.author = author;
+        this.publisher = publisher;
+        this.storageCount = storageCount;
+        this.price = price;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
