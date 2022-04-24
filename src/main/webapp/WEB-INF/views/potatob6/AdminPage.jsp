@@ -188,6 +188,12 @@
                 <p>管理图书</p>
             </div>
             <div class="item">
+<%--                TODO 新闻连接--%>
+                <img onclick="window.location.href='${pageContext.request.contextPath}'"
+                     src="${pageContext.request.contextPath}/static/potatob6/svg/news.svg" />
+                <p>管理新闻</p>
+            </div>
+            <div class="item">
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage3.svg" />
                 <p>设置中心</p>
             </div>
