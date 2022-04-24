@@ -59,15 +59,6 @@
                 color: #A13F0B;
             }
 
-            .news_2 {
-                float: left;
-                width: 90%;
-                padding: 20px;
-                border-bottom: 5px #005b30 solid;
-                height: 25px;
-                line-height: 25px;
-                color: #005b30;
-            }
 
             .news_2 h3 {
                 float: left;
@@ -91,7 +82,6 @@
 
             .news_list ul {
                 float: left;
-
                 width: 100%;
                 padding: 15px 0 40px 0;
             }
@@ -106,12 +96,17 @@
 
             .news_list ul li a {
                 float: left;
-                font-size: 13px;
-
+                font-size: 8px;
+                width: 80%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
             }
 
             .news_list ul li span {
                 float: right;
+                font-size: 8px;
+                width: 20%;
             }
 
             ul {
@@ -177,7 +172,7 @@
                 </div>
                 <div class="main_right">
                     <div class="news_1">
-                        <h3>媒体关注</h3>
+                        <h3>信息公开</h3>
                         <span><a href="${pageContext.request.contextPath}/showAllNewsByTypeId?TypeId=3" target="showNews">More</a></span>
                     </div>
                     <div class="news_list">

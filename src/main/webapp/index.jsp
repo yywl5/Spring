@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -212,9 +213,10 @@
     <div id="navigator">
         <!--navigation section-->
         <div style="margin-left: 2rem;" class="nagivator_item" onclick="window.location.href='index.jsp'">首页</div>
-        <div class="nagivator_item" ><a href="./login.jsp">登录</a></div>
+        <div class="nagivator_item" ><a href="${pageContext.request.contextPath}/toLogin">登录</a></div>
         <div class="nagivator_item"><a href="./book.jsp">图书浏览</a></div>
         <div class="nagivator_item"><a href="./forum.jsp">留言</a></div>
+        <div class="nagivator_item"><a href="${pageContext.request.contextPath}/toNews">查看新闻</a></div>
         <div class="nagivator_item" onclick="aboutDis()">关于</div>
         <div class="nagivator_item"><a href="./AdminMainPage.jsp">管理员入口</a></div>
         <div class="nagivator_item"><a href="./index2.jsp">星星云</a></div>
