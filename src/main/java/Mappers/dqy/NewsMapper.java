@@ -1,6 +1,7 @@
 package Mappers.dqy;
 
 import Beans.dqy.News;
+import Beans.dqy.NewsAndType;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -16,11 +17,14 @@ public interface NewsMapper {
     @Select("select * from news where Nno=#{Nno}")
     public News getNewsById(int Nno);
 
-    @Select("select * from news where Ntype=#{Ntype}")
-    public List<News> getNewsByType(int Ntype);
+    @Select("select * from news,newstype where Nno=#{Nno} and news.Ntype=newstype.Tno")
+    public NewsAndType getNewsAndTypeById(int Nno);
 
-    @Select("select * from news")
-    public List<News> getAllNews();
+    @Select("select * from news,newstype where news.Ntype=#{Ntype} and news.Ntype=newstype.Tno")
+    public List<NewsAndType> getNewsByType(int Ntype);
+
+    @Select("select * from news,newstype where news.Ntype=newstype.Tno order by NcreateTime desc limit 6")
+    public List<NewsAndType> getNewsLimitAndOrder();
 
     @Delete("delete from news where Nno=#{Nno}")
     public Boolean deleteNews(int Nno);

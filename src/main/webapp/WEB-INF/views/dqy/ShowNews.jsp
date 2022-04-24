@@ -7,27 +7,23 @@
     <body>
         <table>
             <c:if test="${!empty(news)}">
+                <thead>
+                    <td style="text-align: center;font-weight: bolder" colspan="3"><h2>${news.getNtitle()}</h2></td>
+                </thead>
                 <tr>
-                    <td>标题：</td><td>${news.getNtitle()}</td>
+                    <td style="text-align: center">作者：${news.getNeditor()}</td><td style="text-align: center">发布者：${news.getNpublisher()}</td><td style="text-align: center">时间：${news.getNcreateTime()}</td>
                 </tr>
                 <tr>
-                    <td>作者：</td><td>${news.getNeditor()}</td>
                 </tr>
                 <tr>
-                    <td>发布者：</td><td>${news.getNpublisher()}</td>
-                </tr>
-                <tr>
-                    <td>时间：</td><td>${news.getNcreateTime()}</td>
-                </tr>
-                <tr>
-                    <td>内容：</td><td>${news.getNcontent()}</td>
+                    <td style="text-align: left;text-indent: 2em" colspan="3">${news.getNcontent()}</td>
                 </tr>
             </c:if>
             <c:if test="${!empty(list)}">
                 <c:forEach var="list" items="${list}">
                     <tr>
                         <td>
-                            <a href="${pageContext.request.contextPath}/showNewsDetail?newsId=${list.getNno()}" title="${list.getNtitle()}" target="showNews">${list.getNtitle()}</a>
+                            <a style="text-decoration: none" href="${pageContext.request.contextPath}/showNewsDetail?newsId=${list.getNno()}" title="${list.getNtitle()}" target="showNews">${list.getNtitle()}</a>
                         </td>
                     </tr>
                 </c:forEach>
