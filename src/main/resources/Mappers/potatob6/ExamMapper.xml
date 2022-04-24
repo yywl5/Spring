@@ -47,5 +47,6 @@
         <result property="examComment" column="examComment" />
         <association property="examUser" column="examUserId" select="Mappers.potatob6.UserMapper.getUserById" />
         <association property="examAdmin" column="examHandleAdminId" select="Mappers.potatob6.AdminMapper.getAdminById" />
+        <association property="examBook" column="examExtra1" select="Mappers.potatob6.BookMapper.getBookById" />
     </resultMap>
 </mapper>

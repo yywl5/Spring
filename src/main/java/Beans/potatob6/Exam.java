@@ -99,6 +99,14 @@ public class Exam {
         this.examExtra1 = examExtra1;
     }
 
+    public Book getExamBook() {
+        return examBook;
+    }
+
+    public void setExamBook(Book examBook) {
+        this.examBook = examBook;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +
@@ -114,6 +122,7 @@ public class Exam {
                 ", examComment='" + examComment + '\'' +
                 ", examUser=" + examUser +
                 ", examAdmin=" + examAdmin +
+                ", examBook=" + examBook +
                 '}';
     }
 
@@ -129,4 +138,5 @@ public class Exam {
     private String examComment;
     private User examUser;
     private Administrator examAdmin;
+    private Book examBook;
 }
