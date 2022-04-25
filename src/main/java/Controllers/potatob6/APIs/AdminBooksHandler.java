@@ -69,7 +69,7 @@ public class AdminBooksHandler {
     /**
      * 管理员删除图书API
      * @param map JSON，包含bookId
-     * @return    JSON，包含status
+     * @return    JSON，包含status和bookId
      */
     @PostMapping("/delete")
     @ResponseBody
@@ -92,5 +92,29 @@ public class AdminBooksHandler {
             jsonObject.put("message", e.toString());
             return jsonObject.toString();
         }
+    }
+
+    /**
+     *  管理员添加图书API
+     * @param book 图书JSON
+     * @return     JSON，包含status
+     */
+    @PostMapping("/add")
+    @ResponseBody
+    public String addBook(@RequestBody Book book) {
+        JSONObject jsonObject = new JSONObject();
+        if(book.getBookName().equals("")) {
+            jsonObject.put("status", "error");
+            return jsonObject.toString();
+        }
+        Integer ret = bookService.addBook(book);
+        if(ret > 0) {
+            jsonObject.put("status", "success");
+            jsonObject.put("bookId", book.getBookId());
+            return jsonObject.toString();
+        }
+
+        jsonObject.put("status", "error");
+        return jsonObject.toString();
     }
 }

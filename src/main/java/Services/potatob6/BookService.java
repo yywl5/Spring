@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -35,5 +36,15 @@ public class BookService {
     // 删除图书
     public Integer deleteBook(Integer bookId) {
         return bookMapper.deleteBook(bookId);
+    }
+
+    // 添加图书
+    public Integer addBook(Book book) {
+        try {
+            return bookMapper.addBook(book);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }

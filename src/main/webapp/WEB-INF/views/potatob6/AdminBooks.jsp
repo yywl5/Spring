@@ -244,6 +244,27 @@
                 text-align: center;
                 background: transparent;
             }
+
+            #toolbar {
+                padding: 10px 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+            }
+
+            #addbook_btn {
+                height: 30px;
+                border: 1px solid #52616b;
+                background: transparent;
+                color: black;
+                transition: all 0.3s;
+            }
+
+            #addbook_btn:hover {
+                color: white;
+                background: #07689f;
+            }
         </style>
     </head>
 
@@ -265,6 +286,12 @@
             <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
             <p style="flex-shrink: 1; margin: 0;margin-left: 20px;margin-top: 16px;width: 100%;text-align: center">图书</p>
             <div style="width: 20px; flex-shrink: 0"></div>
+        </div>
+
+        <div id="toolbar">
+            <input style="height: 30px; min-width: 30%; max-width: 50%" placeholder="搜索书名 / 出版社 / 作者">
+            <img src="${pageContext.request.contextPath}/static/potatob6/svg/search.svg" style="margin: 0 10px;width: 24px; height: 24px; padding: 2px; border-radius: 7px; border: 1px solid #52616b" />
+            <button id="addbook_btn" onclick="addBook()">添加书籍</button>
         </div>
 
         <div class="lists" style="width: 100%;">
@@ -513,6 +540,91 @@
                 let resp = JSON.parse(response.data);
                 if(resp.status !== undefined && resp.status === 'success') {
                     deleteTr(n);
+                }
+            })
+        }
+
+        var newBook = 1;
+
+        // 添加图书
+        function addBook() {
+            let tb = document.getElementById("tbody1");
+            let tr = document.createElement("tr");
+            tr.id = "trnew" + newBook;
+            tr.innerHTML += "<td><div /></td>";
+
+            tr.innerHTML += "<td><input placeholder='图书名称'></td>";
+            tr.innerHTML += "<td><input placeholder='作者'></td>";
+            tr.innerHTML += "<td><input placeholder='出版社'></td>";
+            tr.innerHTML += "<td><input placeholder='在库数量'></td>";
+            tr.innerHTML += "<td><input placeholder='价格'></td>";
+            tr.innerHTML += "<td class='opera'><button class='accept' onclick='commitAdd("+newBook+")'>提交</button><button class='reject' onclick='cancelAdd("+newBook+")'>取消</button>";
+
+            tb.append(tr);
+
+            newBook ++;
+        }
+
+        function cancelAdd(n) {
+            let tr = document.getElementById("trnew"+n);
+            tr.remove();
+        }
+
+        function commitAdd(n) {
+            let tr = document.getElementById("trnew"+n);
+            console.log(tr);
+            let trChildren = tr.children;
+            console.log(trChildren);
+            let bookName = trChildren[1].children[0].value;
+            let author = trChildren[2].children[0].value;
+            let publisher = trChildren[3].children[0].value;
+            let storageCount = trChildren[4].children[0].value;
+            let price = trChildren[5].children[0].value;
+
+            // 检查
+            if (/^[ ]*$/.test(bookName)) {
+                alert("图书名称不能为空");
+                return;
+            }
+
+            let myData = {
+                bookName: bookName,
+                author: author,
+                publisher: publisher,
+                storageCount: storageCount,
+                price: price
+            };
+
+            axios({
+                url: '${pageContext.request.contextPath}/admin/books/add',
+                method: 'POST',
+                data: myData
+            }).then(response => {
+                let resp = JSON.parse(response.data);
+                if(resp.status === 'success') {
+                    tr.className = 'trbook' + resp.bookId;
+
+                    // bookId
+                    tr.children[0].innerHTML = resp.bookId;
+                    // bookName
+                    tr.children[1].innerHTML = bookName;
+                    // bookName
+                    tr.children[2].innerHTML = author;
+                    // bookName
+                    tr.children[3].innerHTML = publisher;
+                    // bookName
+                    tr.children[4].innerHTML = storageCount;
+                    // bookName
+                    tr.children[5].innerHTML = price;
+                    // buttons
+                    tr.children[6].children[0].className = "reject"
+                    tr.children[6].children[0].innerHTML = "删除"
+                    tr.children[6].children[0].onclick = (e) => { deleteBook(resp.bookId) }
+                    tr.children[6].children[1].className = "accept"
+                    tr.children[6].children[1].innerHTML = "编辑"
+                    tr.children[6].children[1].onclick = (e) => { editBook(resp.bookId) }
+                } else {
+                    alert("错误")
                 }
             })
         }
