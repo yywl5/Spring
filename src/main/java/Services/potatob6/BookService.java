@@ -47,4 +47,9 @@ public class BookService {
             return -1;
         }
     }
+
+    // 查询图书
+    public List<Book> searchBook(String words) {
+        return bookMapper.searchBook(words);
+    }
 }

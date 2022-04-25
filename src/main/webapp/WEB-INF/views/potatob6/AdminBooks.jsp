@@ -289,8 +289,13 @@
         </div>
 
         <div id="toolbar">
-            <input style="height: 30px; min-width: 30%; max-width: 50%" placeholder="搜索书名 / 出版社 / 作者">
-            <img src="${pageContext.request.contextPath}/static/potatob6/svg/search.svg" style="margin: 0 10px;width: 24px; height: 24px; padding: 2px; border-radius: 7px; border: 1px solid #52616b" />
+            <c:if test="${searchWord == null}">
+                <input id="searchInput" style="height: 30px; min-width: 30%; max-width: 50%" placeholder="搜索书名 / 出版社 / 作者">
+            </c:if>
+            <c:if test="${searchWord != null}">
+                <input id="searchInput" style="height: 30px; min-width: 30%; max-width: 50%" placeholder="搜索书名 / 出版社 / 作者" value="${searchWord}">
+            </c:if>
+            <img onclick="search()" src="${pageContext.request.contextPath}/static/potatob6/svg/search.svg" style="margin: 0 10px;width: 24px; height: 24px; padding: 2px; border-radius: 7px; border: 1px solid #52616b" />
             <button id="addbook_btn" onclick="addBook()">添加书籍</button>
         </div>
 
@@ -347,6 +352,18 @@
                 }
             }
             folded = !folded
+        }
+    </script>
+
+    <script lang="JavaScript">
+        // 搜索图书
+        function search() {
+            let words = document.getElementById("searchInput").value;
+            if(words !== '') {
+                document.location.href='${pageContext.request.contextPath}/Admin/Books?words='+words;
+            } else {
+                document.location.href='${pageContext.request.contextPath}/Admin/Books';
+            }
         }
     </script>
 

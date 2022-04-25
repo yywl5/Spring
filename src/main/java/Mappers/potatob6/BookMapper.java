@@ -21,4 +21,7 @@ public interface BookMapper {
 
     // 添加图书
     Integer addBook(Book book) throws Exception;
+
+    // 查询图书
+    List<Book> searchBook(@Param("words") String words);
 }

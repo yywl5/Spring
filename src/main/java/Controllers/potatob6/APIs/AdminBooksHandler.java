@@ -117,4 +117,17 @@ public class AdminBooksHandler {
         jsonObject.put("status", "error");
         return jsonObject.toString();
     }
+
+    /**
+     * 查询图书
+     * @param words 关键字
+     * @return      JSON,包含list
+     */
+    @GetMapping("/search/{words}")
+    @ResponseBody
+    public String searchBook(@PathVariable(value = "words", required = true) String words) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list", bookService.searchBook(words));
+        return jsonObject.toString();
+    }
 }

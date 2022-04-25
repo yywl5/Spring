@@ -26,4 +26,8 @@
         insert into Books(bookName, author, publisher, storageCount, price)
         values(#{bookName}, #{author}, #{publisher}, #{storageCount}, #{price})
     </insert>
+
+    <select id="searchBook" parameterType="String" resultType="Book">
+        select * from Books where bookName like '%${words}%' or publisher like '%${words}%' or author like '%${words}%'
+    </select>
 </mapper>
