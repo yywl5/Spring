@@ -273,7 +273,13 @@
     <div id="fold">
         <img src="${pageContext.request.contextPath}/static/potatob6/svg/fold.svg" onclick="fold()" style="margin: 12px 20px; width: 30px; height: 30px" />
     </div>
-    <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
+    <c:if test="${admin.avatarPath == null || admin.avatarPath.equals(\"\")}">
+        <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/static/avatars/default.svg" />
+    </c:if>
+
+    <c:if test="${!(admin.avatarPath == null || admin.avatarPath.equals(\"\"))}">
+        <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
+    </c:if>
     <hr>
     <p>欢迎，${admin.adminName}</p>
     <p>管理员编号:${admin.adminId}</p>
