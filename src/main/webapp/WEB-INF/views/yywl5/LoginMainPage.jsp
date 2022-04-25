@@ -11,6 +11,9 @@
     <h2>欢迎 <span>${user.getUserName()}</span> 来到星星图书主页</h2>
     <a href="#" id="update" onclick="updateUserName()">点击修改用户名</a>
     <a href="#" id="logout" onclick="logoutUser()">点击注销用户</a>
+    <a href="${pageContext.request.contextPath}/toBorrows">借阅信息</a>
+    <a href="${pageContext.request.contextPath}/toBooks">图书信息</a>
+    <a href="${pageContext.request.contextPath}/toAdminNews">新闻后台</a>
 </div>
 
 <script src="${pageContext.request.contextPath}/static/yywl5/js/LoginMainPage.js"></script>
