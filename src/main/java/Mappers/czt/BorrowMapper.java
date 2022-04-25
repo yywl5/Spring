@@ -2,9 +2,11 @@ package Mappers.czt;
 
 import Beans.czt.Borrow;
 import Beans.czt.BorrowWithBook;
+import Beans.potatob6.Book;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -31,25 +33,39 @@ public interface BorrowMapper {
      * @param userId
      * @return
      */
-    @Select("select * from borrow where userId=#{userId} and returnDate is not null")
-    public List<Borrow> getBorrowUserIsReturn(int userId);
+    @Select("select * from borrow,books where userId=#{userId} and returnDate is not null and borrow.bookId=books.bookId")
+    public List<BorrowWithBook> getBorrowUserIsReturn(int userId);
 
     /**
      * 查询用户所有未归还的借阅信息
      * @param userId
      * @return
      */
-    @Select("select * from borrow where userId=#{userId} and returnDate is null")
-    public List<Borrow> getBorrowUserNotReturn(int userId);
+    @Select("select * from borrow,books where userId=#{userId} and returnDate is null and borrow.bookId=books.bookId")
+    public List<BorrowWithBook> getBorrowUserNotReturn(int userId);
 
     /**
      * 查询用户即将到期的借阅信息
      * @param userId
      * @return
      */
-    @Select("select * from borrow where userId=#{userId} and returnDate is null order by timeLimit asc")
-    public List<Borrow> getBorrowWillOverTime(int userId);
+    @Select("select * from borrow,books where userId=#{userId} and borrow.bookId=books.bookId and returnDate is null order by timeLimit asc")
+    public List<BorrowWithBook> getBorrowWillOverTime(int userId);
 
-    @Select("select * from borrow where userId=#{userId} and bookId=#{bookId}" )
+    /**
+     * 查询借阅记录是否已归还
+     * @param userId
+     * @param bookId
+     * @return
+     */
+    @Select("select * from borrow where userId=#{userId} and bookId=#{bookId} and returnDate is null" )
     public Borrow getBorrowByBookId(@Param("userId") int userId, @Param("bookId") int bookId);
+
+    /**
+     * 归还图书
+     * @param borrow
+     * @return
+     */
+    @Update("update borrow set returnDate=#{returnDate}, timeLimit=0 where borrowId=#{borrowId} and userId=#{userId} and bookId=#{bookId}")
+    public boolean returnBook(Borrow borrow);
 }

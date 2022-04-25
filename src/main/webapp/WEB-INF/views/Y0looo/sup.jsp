@@ -5,8 +5,14 @@
         <title>辅助界面</title>
     </head>
     <body>
-        <h2>提示</h2>
-        <h4 style="color: red">${sup}</h4>
-        <a href="${pageContext.request.contextPath}/toBorrows">返回借阅信息</a>
+        <h1>提示</h1>
+        <c:if test="${!empty(sup)}">
+            <h3 style="color: red">${sup}</h3>
+            <a href="${pageContext.request.contextPath}/toBooks">返回图书列表</a>
+        </c:if>
+        <c:if test="${!empty(sup1)}">
+            <h3 style="color: red">${sup1}</h3>
+            <a href="${pageContext.request.contextPath}/toBorrows">返回借阅列表</a>
+        </c:if>
     </body>
 </html>
