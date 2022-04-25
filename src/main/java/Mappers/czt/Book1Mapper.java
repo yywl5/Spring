@@ -14,7 +14,7 @@ public interface Book1Mapper {
     @Select("select * from books where bookName like '%${bookName}%'")
     public List<Book> getBooksByBookName(String bookName);
 
-    @Update("update books set storageCount=#{storageCount}-1 WHERE bookId=#{bookId}")
+    @Update("update books set storageCount=#{storageCount} where bookId=#{bookId}")
     public boolean updateBookStorageCount(Book book);
 
     @Select("select * from books where bookId=#{bookId}")
