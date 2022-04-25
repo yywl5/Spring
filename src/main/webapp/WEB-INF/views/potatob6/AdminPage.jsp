@@ -179,7 +179,7 @@
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage2.svg" />
                 <p>管理用户借阅</p>
             </div>
-            <div class="item">
+            <div class="item" onclick="window.location.href='${pageContext.request.contextPath}/Admin/Users'">
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage4.png" />
                 <p>管理用户</p>
             </div>
