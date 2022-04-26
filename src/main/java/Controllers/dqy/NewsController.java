@@ -15,6 +15,11 @@ public class NewsController {
     @Autowired
     private NewsServiceImpl newsService;
 
+    /**
+     * 跳转到新闻前台页面，并显示三个种类的新闻
+     * @param model
+     * @return
+     */
     @RequestMapping("toNews")
     public String News(Model model){
         List list1 = newsService.getNewsByTypeOrderByTime(1);
@@ -32,6 +37,12 @@ public class NewsController {
 
     }
 
+    /**
+     * 显示新闻具体内容
+     * @param newsId
+     * @param model
+     * @return
+     */
     @RequestMapping("showNewsDetail")
     public String showNews(int newsId,Model model){
         News news = newsService.getNewsById(newsId);
@@ -45,6 +56,12 @@ public class NewsController {
 
     }
 
+    /**
+     * 显示某个类别的全部新闻
+     * @param TypeId
+     * @param model
+     * @return
+     */
     @RequestMapping("showAllNewsByTypeId")
     public String showAllNews(int TypeId,Model model){
         List list = newsService.getNewsByType(TypeId);
@@ -55,7 +72,6 @@ public class NewsController {
             model.addAttribute("errorMsg","无法获取新闻");
             return "dqy/Error";
         }
-
     }
 
 }

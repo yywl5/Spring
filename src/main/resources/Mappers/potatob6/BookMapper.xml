@@ -21,4 +21,13 @@
     <delete id="deleteBook" parameterType="Integer">
         delete from Books where bookId=#{bookId}
     </delete>
+
+    <insert id="addBook" useGeneratedKeys="true" keyColumn="bookId" keyProperty="bookId" parameterType="Book">
+        insert into Books(bookName, author, publisher, storageCount, price)
+        values(#{bookName}, #{author}, #{publisher}, #{storageCount}, #{price})
+    </insert>
+
+    <select id="searchBook" parameterType="String" resultType="Book">
+        select * from Books where bookName like '%${words}%' or publisher like '%${words}%' or author like '%${words}%'
+    </select>
 </mapper>

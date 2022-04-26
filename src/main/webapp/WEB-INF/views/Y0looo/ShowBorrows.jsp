@@ -2,32 +2,84 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>借阅表</title>
+        <link href="${pageContext.request.contextPath}/static/Y0looo/bootstrap-3.4.1-dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="${pageContext.request.contextPath}/static/potatob6/js/jquery-3.6.0.min.js"></script>
+        <script src="${pageContext.request.contextPath}/static/Y0looo/bootstrap-3.4.1-dist/js/bootstrap.min.js" ></script>
+        <title>借阅信息</title>
+        <style type="text/css">
+            body {
+                width: 80%;
+                margin: 0 auto;
+                height: auto;
+            }
+
+        </style>
     </head>
     <body>
-        <h3>借阅信息</h3>
-        <table>
-            <thead>
-                <td colspan="2" style="text-align: center">借阅编号</td>
-                <td colspan="2" style="text-align: center">图书名称</td>
-                <td colspan="2" style="text-align: center">借阅日期</td>
-                <td colspan="2" style="text-align: center">归还期限</td>
-                <td colspan="2" style="text-align: center">归还日期</td>
-
-                <td colspan="2" style="text-align: center">操作</td>
-            </thead>
-            <c:if test="${!empty(borrow)}">
-                <c:forEach var="borrow" items="#{borrow}">
-                    <tr>
-                        <td colspan="2" style="text-align: center">${borrow.getBorrowId()}</td>
-                        <td colspan="2" style="text-align: center">${borrow.getBookName()}</td>
-                        <td colspan="2" style="text-align: center">${borrow.getBorrowDate()}</td>
-                        <td colspan="2" style="text-align: center">${borrow.getTimeLimit()}</td>
-                        <td colspan="2" style="text-align: center">${borrow.getReturnDate()}</td>
-                        <td colspan="2" style="text-align: center"><a href="${pageContext.request.contextPath}/return?bookId=${book.getBookId()}">归还</a></td>
-                    </tr>
-                </c:forEach>
-            </c:if>
-        </table>
+        <div id="nav">
+            <nav class="navbar navbar-default" role="navigation" style="background-color:#fff">
+                <div class="container-fluid">
+                    <div class="navbar-header" style="margin-left: 8%;margin-right: 1%">
+                        <a class="navbar-brand " href="#"><p class="text-primary">图书管理系统——用户</p></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="${pageContext.request.contextPath}/toAllBorrows" >
+                                    所有借阅
+                                </a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/toNotReturnBorrows" >
+                                    未归还借阅
+                                </a>
+                            </li>
+                            <li >
+                                <a href="${pageContext.request.contextPath}/toIsReturnBorrows" >
+                                    已归还借阅
+                                </a>
+                            </li>
+                            <li >
+                                <a href="${pageContext.request.contextPath}/toWillOverTimeBorrows" >
+                                    即将到期
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="${pageContext.request.contextPath}/toLastPage">返回上一页<span class="glyphicon glyphicon-log-in"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <h2>借阅信息</h2>
+        <div>
+            <table class="table table-hover">
+                <tr>
+                    <th>借阅编号</th>
+                    <th>图书名称</th>
+                    <th>借阅日期</th>
+                    <th>归还期限</th>
+                    <th>归还日期</th>
+                    <th>操作</th>
+                </tr>
+        <c:if test="${!empty(borrow)}">
+            <c:forEach var="borrow" items="${borrow}">
+                <tr>
+                    <td>${borrow.getBorrowId()}</td>
+                    <td>${borrow.getBookName()}</td>
+                    <td>${borrow.getBorrowDate()}</td>
+                    <td>${borrow.getTimeLimit()}天</td>
+                    <td>${borrow.getReturnDate()}</td>
+                <c:if test="${empty(borrow.getReturnDate())}">
+                    <td>
+                        <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href='${pageContext.request.contextPath}/return?bookId=${borrow.getBookId()}&borrowId=${borrow.getBorrowId()}'">归还</button>
+                    </td>
+                </c:if>
+                </tr>
+            </c:forEach>
+        </c:if>
+            </table>
+        </div>
     </body>
 </html>

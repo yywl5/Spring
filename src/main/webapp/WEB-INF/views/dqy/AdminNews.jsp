@@ -12,9 +12,8 @@
             <h1 id="site-name">星星图书馆新闻后台系统</h1>
           </div>
           <div id="user-tools">
-            <a href="add.html">发布新通知</a>
-            <a href="#">个人信息</a> /
-            <a href="${pageContext.request.contextPath}/Page">返回主页</a>
+            <a href="${pageContext.request.contextPath}/toAddNews">发布新闻</a>
+            <a href="${pageContext.request.contextPath}/Admin">返回主页</a>
           </div>
         </div>
         <div id="content" class="colMS">
@@ -24,7 +23,7 @@
             <input id="tab2" type="radio" name="tabs">
             <label for="tab2" style="text-align: center"><a style="text-decoration: none" href="${pageContext.request.contextPath}/toAdminNewsByType?typeId=2">通知公告</a></label>
             <input id="tab3" type="radio" name="tabs">
-            <label for="tab3" style="text-align: center"><a style="text-decoration: none" href="${pageContext.request.contextPath}/toAdminNewsByType?typeId=3">具体公开</a></label>
+            <label for="tab3" style="text-align: center"><a style="text-decoration: none" href="${pageContext.request.contextPath}/toAdminNewsByType?typeId=3">媒体关注</a></label>
             <section id="content1">
               <div>
                 <table>
@@ -42,7 +41,7 @@
                         <td colspan="3">${news.getTtypeName ()}</td>
                         <td colspan="3">
                           <button style="background-color: #79aec8; color: #fff" onclick="window.location.href='${pageContext.request.contextPath}/toEditNews?newsId=${news.getNno()}'">编辑</button>
-                          <button style="background-color: #f5dd5d; color: #fff" onclick="window.location.href='${pageContext.request.contextPath}/toDeleteNews?newsId=${news.getNno()}'">删除</button>
+                          <button style="background-color: #f5dd5d; color: #fff" onclick="window.location.href='${pageContext.request.contextPath}/deleteNews?newsId=${news.getNno()}'">删除</button>
                         </td>
                       </tr>
                       </c:forEach>

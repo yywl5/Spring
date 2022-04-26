@@ -11,11 +11,13 @@ public interface BorrowService {
 
     public Boolean borrowBook(Borrow borrow);
 
-    public List<Borrow> getBorrowUserIsReturn(int userId);
+    public List<BorrowWithBook> getBorrowUserIsReturn(int userId);
 
-    public List<Borrow> getBorrowUserNotReturn(int userId);
+    public List<BorrowWithBook> getBorrowUserNotReturn(int userId);
 
-    public List<Borrow> getBorrowWillOverTime(int userId);
+    public List<BorrowWithBook> getBorrowWillOverTime(int userId);
 
     public Borrow getBorrowByBookId(int userId,int bookId);
+
+    public boolean returnBook(Borrow borrow);
 }

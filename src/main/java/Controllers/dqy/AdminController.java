@@ -1,8 +1,10 @@
 package Controllers.dqy;
 
+import Beans.dqy.News;
 import Beans.dqy.NewsAndType;
 import Services.dqy.impl.NewsServiceImpl;
 
+import Services.dqy.impl.NewsTypeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,14 @@ public class AdminController {
     @Autowired
     private NewsServiceImpl newsService;
 
+    @Autowired
+    private NewsTypeServiceImpl newsTypeService;
+
+    /**
+     * 跳转新闻后台界面，显示不分类别的时间最新的新闻
+     * @param model
+     * @return
+     */
     @RequestMapping("toAdminNews")
     public String toAdminNews(Model model){
         List list = newsService.getNewsLimitAndOrder();
@@ -29,6 +39,12 @@ public class AdminController {
         }
     }
 
+    /**
+     * 按类别显示所有新闻
+     * @param model
+     * @param typeId
+     * @return
+     */
     @RequestMapping("toAdminNewsByType")
     public String toAdminNewsByType(Model model, int typeId){
         List list = newsService.getNewsByType(typeId);
@@ -41,14 +57,92 @@ public class AdminController {
         }
     }
 
+    /**
+     * 跳转编辑新闻界面
+     * @param model
+     * @param newsId
+     * @return
+     */
     @RequestMapping("toEditNews")
     public String toEditNews(Model model, int newsId){
+        List list = newsTypeService.getAllNewsType();
         NewsAndType news = newsService.getNewsAndTypeById(newsId);
-        if(news != null){
+        if(news != null && list != null ){
             model.addAttribute("news", news);
+            model.addAttribute("list", list);
             return "dqy/EditNews";
         } else {
-            model.addAttribute("errorMsg", "查询不到新闻");
+            model.addAttribute("errorMsg", "查询不到新闻或新闻类别");
+            return "dqy/Error";
+        }
+    }
+
+    /**
+     * 跳转管理员主页
+     * @return
+     */
+    @RequestMapping("toAdminPage")
+    public String toAdminPage() {
+        return "potatob6/AdminPage";
+    }
+
+    /**
+     * 跳转发布新闻界面
+     * @return
+     */
+    @RequestMapping("toAddNews")
+    public String toAddNews(Model model) {
+        List list = newsTypeService.getAllNewsType();
+        model.addAttribute("list", list);
+        return "dqy/AddNews";
+    }
+
+    /**
+     * 发布新闻
+     * @param news
+     * @param model
+     * @return
+     */
+    @RequestMapping("addNews")
+    public String addNews(News news, Model model) {
+        boolean result = newsService.addNews(news);
+        if( result) {
+            List list = newsService.getNewsLimitAndOrder();
+            model.addAttribute("news", list);
+            return "dqy/AdminNews";
+        } else {
+            model.addAttribute("errorMsg", "发布新闻失败");
+            return "dqy/Error";
+        }
+    }
+
+    /**
+     * 修改新闻
+     * @param news
+     * @param model
+     * @return
+     */
+    @RequestMapping("editNews")
+    public String editNews(News news, Model model) {
+        boolean result = newsService.modifyNews(news);
+        if( result ) {
+            List list = newsService.getNewsLimitAndOrder();
+            model.addAttribute("news", list);
+            return "dqy/AdminNews";
+        } else {
+            model.addAttribute("errorMsg", "修改新闻失败");
+            return "dqy/Error";
+        }
+    }
+
+    @RequestMapping("deleteNews")
+    public String deleteNews(Model model, int newsId) {
+        boolean result = newsService.deleteNews(newsId);
+        if( result ) {
+            List list = newsService.getNewsLimitAndOrder();model.addAttribute("news", list);
+            return "dqy/AdminNews";
+        } else {
+            model.addAttribute("errorMsg", "删除新闻失败");
             return "dqy/Error";
         }
     }

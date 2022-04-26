@@ -30,7 +30,7 @@
         <div class="content">
             <h3>Design</h3>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita suscipit in modi quibusdam, veritatis assumenda.</p>
-            <a href="#">Read More</a>
+            <a href="${pageContext.request.contextPath}/toBooks">借阅图书</a>
         </div>
     </div>
     <div class="card">
@@ -40,7 +40,7 @@
         <div class="content">
             <h3>Design</h3>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Expedita suscipit in modi quibusdam, veritatis assumenda.</p>
-            <a href="#">Read More</a>
+            <a href="${pageContext.request.contextPath}/toBorrows">归还图书</a>
         </div>
     </div>
     <div class="card">

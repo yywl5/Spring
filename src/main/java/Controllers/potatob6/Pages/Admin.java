@@ -58,13 +58,4 @@ public class Admin {
     public String adminExams() {
         return "potatob6/AdminExams";
     }
-
-    /**
-     * 管理员管理所有管理员
-     * @return
-     */
-    @GetMapping("/Admins")
-    public String admins() {
-        return "potatob6/AdminAdmins";
-    }
 }

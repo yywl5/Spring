@@ -43,6 +43,18 @@ public class Administrator {
         this.avatarPath = avatarPath;
     }
 
+    public Administrator() {
+
+    }
+
+    public Administrator(Integer adminId, String adminLogin, String adminName, String adminPassword, String avatarPath) {
+        this.adminId = adminId;
+        this.avatarPath = avatarPath;
+        this.adminLogin = adminLogin;
+        this.adminName = adminName;
+        this.adminPassword = adminPassword;
+    }
+
     @Override
     public String toString() {
         return "Administrator{" +
