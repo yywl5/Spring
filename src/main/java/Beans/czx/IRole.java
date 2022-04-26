@@ -6,10 +6,10 @@ import java.util.List;
 /**
  * @author 星包客
  */
-public class Role {
+public class IRole {
     private Integer roleId;
     private String roleName;
-    private List<User> userList;
+    private List<IUser> userList;
 
     public Integer getRoleId() {
         return roleId;
@@ -27,11 +27,11 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public List<User> getUserList() {
+    public List<IUser> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(List<IUser> userList) {
         this.userList = userList;
     }
 
