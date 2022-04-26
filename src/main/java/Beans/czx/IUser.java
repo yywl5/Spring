@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * @author 星包客
  */
-public class User {
+public class IUser {
     private Integer userId;
     private String userName;
     private String loginName;
