@@ -52,4 +52,14 @@ public class BookServiceImpl implements BookService {
     public Book queryBookByBookId (int bookId) {
         return bookDao.queryBookByBookId(bookId);
     }
+
+    /**
+     * 根据作者查询图书
+     * @param author
+     * @return
+     */
+    @Override
+    public List<Book> queryBookByAuthor (String author) {
+        return bookDao.queryBookByAuthor(author);
+    }
 }
