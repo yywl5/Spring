@@ -13,4 +13,6 @@ public interface BookService {
     public boolean updateBookStorageCount(Book book);
 
     public Book queryBookByBookId(int bookId);
+
+    public List<Book> queryBookByAuthor(String author);
 }

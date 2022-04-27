@@ -12,8 +12,23 @@
                 margin: 0 auto;
                 height: auto;
             }
-
         </style>
+        <script>
+            function form1Submit(){
+                if(form1.bookName.value == null || form1.bookName.value == ""){
+                    alert("请填写图书名称!");
+                    return false;
+                }
+                return true;
+            }
+            function form2Submit(){
+                if(form2.author.value == null || form2.author.value == ""){
+                    alert("请填写作者名称!");
+                    return false;
+                }
+                return true;
+            }
+        </script>
     </head>
     <body>
         <div id="nav">
@@ -32,6 +47,26 @@
         </div>
         <h2>图书信息</h2>
         <div>
+            <form class="form-inline" action="${pageContext.request.contextPath}/queryBookByBookName" method="post" name="form1">
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputAmount1"></label>
+                    <div class="input-group">
+                        <div class="input-group-addon">图书名称</div>
+                        <input type="text" class="form-control" id="exampleInputAmount1" name="bookName">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="return form1Submit();">查询图书</button>
+            </form>
+            <form class="form-inline" action="${pageContext.request.contextPath}/queryBookByAuthor" method="post" name="form1">
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputAmount2"></label>
+                    <div class="input-group">
+                        <div class="input-group-addon">作者名称</div>
+                        <input type="text" class="form-control" id="exampleInputAmount2" name="author">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="return form2Submit();">查询图书</button>
+            </form>
             <table class="table table-hover">
                 <tr>
                     <th>图书编号</th>

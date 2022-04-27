@@ -33,7 +33,7 @@ public class BookController {
             return "Y0looo/ShowBooks";
         } else {
             model.addAttribute("errorMsg", "查询不到图书信息");
-            return "Y0looo/error";
+            return "Y0looo/sup";
         }
     }
 
@@ -105,6 +105,31 @@ public class BookController {
             return "Y0looo/sup";
         } else {
             model.addAttribute("sup1", "归还失败");
+            return "Y0looo/sup";
+        }
+    }
+
+    @RequestMapping("queryBookByBookName")
+    public String queryBookByBookName(Model model, String bookName) {
+        List list = bookService.getBooksByBookName(bookName);
+        if(list != null){
+            model.addAttribute("books", list);
+            return "Y0looo/ShowBooks";
+        } else {
+            model.addAttribute("errorMsg", "查询不到图书信息");
+            return "Y0looo/sup";
+        }
+
+    }
+
+    @RequestMapping("queryBookByAuthor")
+    public String queryBookByAuthor(Model model, String author) {
+        List list = bookService.queryBookByAuthor(author);
+        if(list != null){
+            model.addAttribute("books", list);
+            return "Y0looo/ShowBooks";
+        } else {
+            model.addAttribute("errorMsg", "查询不到图书信息");
             return "Y0looo/sup";
         }
     }

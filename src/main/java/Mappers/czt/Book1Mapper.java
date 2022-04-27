@@ -19,4 +19,7 @@ public interface Book1Mapper {
 
     @Select("select * from books where bookId=#{bookId}")
     public Book queryBookByBookId(int bookId);
+
+    @Select("select * from books where author like '%${author}%'")
+    public List<Book> queryBookByAuthor(String author);
 }
