@@ -68,6 +68,10 @@ public class Book {
         this.price = price;
     }
 
+    public Book() {
+
+    }
+
     @Override
     public String toString() {
         return "Book{" +

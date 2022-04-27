@@ -18,4 +18,10 @@ public interface BookMapper {
 
     // 删除图书
     Integer deleteBook(@Param("bookId") Integer bookId);
+
+    // 添加图书
+    Integer addBook(Book book) throws Exception;
+
+    // 查询图书
+    List<Book> searchBook(@Param("words") String words);
 }

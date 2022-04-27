@@ -6,4 +6,26 @@
     <select id="getUserById" parameterType="Integer" resultType="User">
         select * from Users where userId=#{userId}
     </select>
+
+    <select id="getPageOfUser" resultType="User" parameterType="Integer">
+        select * from Users limit ${startIndex},${pageCount}
+    </select>
+
+    <update id="editUser" parameterType="User">
+        update Users set userLogin=#{userLogin}, userName=#{userName}, userPassword=#{userPassword}
+        where userId=#{userId}
+    </update>
+
+    <delete id="deleteUser" parameterType="Integer">
+        delete from Users where userId=#{userId}
+    </delete>
+
+    <insert id="addUser" useGeneratedKeys="true" keyColumn="userId" keyProperty="userId" parameterType="User">
+        insert into Users(userLogin, userName, userPassword)
+        values(#{userLogin}, #{userName}, #{userPassword})
+    </insert>
+
+    <select id="searchUser" parameterType="String" resultType="User">
+        select * from Users where userName like '%${words}%' or userLogin like '%${words}%';
+    </select>
 </mapper>

@@ -1,32 +1,29 @@
 package Controllers.potatob6.APIs;
 
-import Beans.potatob6.Book;
-import Services.potatob6.BookService;
-import com.alibaba.fastjson.JSON;
+import Beans.potatob6.User;
+import Services.potatob6.UsersService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 @Controller
-@RequestMapping("/admin/books")
+@RequestMapping("/admin/users")
 @ResponseBody
-public class AdminBooksHandler {
+public class AdminUserHandler {
 
     @Autowired
-    private BookService bookService;
+    private UsersService userService;
 
     /**
      * 获取一页图书
      * @param map JSON，包含page
      * @return    JSON，包含list和status
      */
-    @PostMapping("/pageBooks")
-    public String pageBooks(@RequestBody Map map) {
+    @PostMapping("/pageUsers")
+    public String pageUsers(@RequestBody Map map) {
         JSONObject jsonObject = new JSONObject();
         Integer page = (Integer) map.get("page");
         if(page == null) {
@@ -35,23 +32,22 @@ public class AdminBooksHandler {
         }
 
         jsonObject.put("status", "success");
-        jsonObject.put("list", bookService.getPageOfBook(page));
+        jsonObject.put("list", userService.getPageOfUser(page));
         return jsonObject.toString();
     }
 
     /**
-     * 修改图书信息
-     * @param map JSON,包含bookId, bookName, author, publisher, storageCount, price
+     * 修改用户信息
+     * @param map JSON,包含userId, userName, userLogin, userPassword
      * @return    JSON,包含status
      */
     @PostMapping("/edit")
     @ResponseBody
-    public String editBook(@RequestBody Map map) {
+    public String editUser(@RequestBody Map map) {
         JSONObject jsonObject = new JSONObject();
         try {
-            Integer ret = bookService.editBook(String.valueOf(map.get("bookId")), (String) map.get("bookName"),
-                    (String) map.get("author"), (String) map.get("publisher"),
-                    String.valueOf(map.get("storageCount")), (String) map.get("price"));
+            Integer ret = userService.editUser(String.valueOf(map.get("userId")), (String) map.get("userLogin"),
+                    (String) map.get("userName"), (String) map.get("userPassword"));
             if(ret != 0) {
                 jsonObject.put("status", "success");
                 return jsonObject.toString();
@@ -67,17 +63,17 @@ public class AdminBooksHandler {
     }
 
     /**
-     * 管理员删除图书API
-     * @param map JSON，包含bookId
-     * @return    JSON，包含status和bookId
+     * 管理员删除用户API
+     * @param map JSON，包含userId
+     * @return    JSON，包含status
      */
     @PostMapping("/delete")
     @ResponseBody
-    public String deleteBook(@RequestBody Map map) {
+    public String deleteUser(@RequestBody Map map) {
         JSONObject jsonObject = new JSONObject();
         try {
-            Integer bookId = (Integer) map.get("bookId");
-            Integer ret = bookService.deleteBook(bookId);
+            Integer userId = (Integer) map.get("userId");
+            Integer ret = userService.deleteUser(userId);
 
             if(ret != 0) {
                 jsonObject.put("status", "success");
@@ -95,39 +91,39 @@ public class AdminBooksHandler {
     }
 
     /**
-     *  管理员添加图书API
-     * @param book 图书JSON
+     *  管理员添加用户API
+     * @param user 用户JSON
      * @return     JSON，包含status
      */
     @PostMapping("/add")
     @ResponseBody
-    public String addBook(@RequestBody Book book) {
+    public String addUser(@RequestBody User user) {
         JSONObject jsonObject = new JSONObject();
-        if(book.getBookName().equals("")) {
+        try {
+            Integer ret = userService.addUser(user);
+            if(ret > 0) {
+                jsonObject.put("status", "success");
+                jsonObject.put("userId", user.getUserId());
+                return jsonObject.toString();
+            }
+        } catch (Exception e) {
             jsonObject.put("status", "error");
             return jsonObject.toString();
         }
-        Integer ret = bookService.addBook(book);
-        if(ret > 0) {
-            jsonObject.put("status", "success");
-            jsonObject.put("bookId", book.getBookId());
-            return jsonObject.toString();
-        }
-
         jsonObject.put("status", "error");
         return jsonObject.toString();
     }
 
     /**
-     * 查询图书
+     * 查询用户
      * @param words 关键字
      * @return      JSON,包含list
      */
     @GetMapping("/search/{words}")
     @ResponseBody
-    public String searchBook(@PathVariable(value = "words", required = true) String words) {
+    public String searchUser(@PathVariable(value = "words", required = true) String words) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("list", bookService.searchBook(words));
+        jsonObject.put("list", userService.searchUser(words));
         return jsonObject.toString();
     }
 }

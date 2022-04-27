@@ -1,32 +1,29 @@
 package Controllers.potatob6.APIs;
 
-import Beans.potatob6.Book;
-import Services.potatob6.BookService;
-import com.alibaba.fastjson.JSON;
+import Beans.potatob6.Administrator;
+import Services.potatob6.AdminsService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 @Controller
-@RequestMapping("/admin/books")
 @ResponseBody
-public class AdminBooksHandler {
+@RequestMapping("/admin/admins")
+public class AdminAdminsHandler {
 
     @Autowired
-    private BookService bookService;
+    private AdminsService adminsService;
 
     /**
-     * 获取一页图书
+     * 获取一页管理员
      * @param map JSON，包含page
      * @return    JSON，包含list和status
      */
-    @PostMapping("/pageBooks")
-    public String pageBooks(@RequestBody Map map) {
+    @PostMapping("/pageAdmins")
+    public String pageAdmins(@RequestBody Map map) {
         JSONObject jsonObject = new JSONObject();
         Integer page = (Integer) map.get("page");
         if(page == null) {
@@ -35,23 +32,22 @@ public class AdminBooksHandler {
         }
 
         jsonObject.put("status", "success");
-        jsonObject.put("list", bookService.getPageOfBook(page));
+        jsonObject.put("list", adminsService.getPageOfAdmin(page));
         return jsonObject.toString();
     }
 
     /**
-     * 修改图书信息
-     * @param map JSON,包含bookId, bookName, author, publisher, storageCount, price
+     * 修改管理员信息
+     * @param map JSON,包含adminId, adminLogin, adminName, adminPassword, avatarPath
      * @return    JSON,包含status
      */
     @PostMapping("/edit")
     @ResponseBody
-    public String editBook(@RequestBody Map map) {
+    public String editAdmin(@RequestBody Map map) {
         JSONObject jsonObject = new JSONObject();
         try {
-            Integer ret = bookService.editBook(String.valueOf(map.get("bookId")), (String) map.get("bookName"),
-                    (String) map.get("author"), (String) map.get("publisher"),
-                    String.valueOf(map.get("storageCount")), (String) map.get("price"));
+            Integer ret = adminsService.editAdmin(String.valueOf(map.get("adminId")), (String) map.get("adminLogin"),
+                    (String) map.get("adminName"), (String) map.get("adminPassword"), (String) map.get("avatarPath"));
             if(ret != 0) {
                 jsonObject.put("status", "success");
                 return jsonObject.toString();
@@ -67,17 +63,17 @@ public class AdminBooksHandler {
     }
 
     /**
-     * 管理员删除图书API
-     * @param map JSON，包含bookId
-     * @return    JSON，包含status和bookId
+     * 管理员删除管理员API
+     * @param map JSON，包含adminId
+     * @return    JSON，包含status
      */
     @PostMapping("/delete")
     @ResponseBody
-    public String deleteBook(@RequestBody Map map) {
+    public String deleteAdmin(@RequestBody Map map) {
         JSONObject jsonObject = new JSONObject();
         try {
-            Integer bookId = (Integer) map.get("bookId");
-            Integer ret = bookService.deleteBook(bookId);
+            Integer adminId = (Integer) map.get("adminId");
+            Integer ret = adminsService.deleteAdmin(adminId);
 
             if(ret != 0) {
                 jsonObject.put("status", "success");
@@ -95,22 +91,22 @@ public class AdminBooksHandler {
     }
 
     /**
-     *  管理员添加图书API
-     * @param book 图书JSON
+     *  管理员添加管理员API
+     * @param admin 管理员JSON
      * @return     JSON，包含status
      */
     @PostMapping("/add")
     @ResponseBody
-    public String addBook(@RequestBody Book book) {
+    public String addAdmin(@RequestBody Administrator admin) {
         JSONObject jsonObject = new JSONObject();
-        if(book.getBookName().equals("")) {
+        if(admin.getAdminName().equals("") || admin.getAdminLogin().equals("") || admin.getAdminPassword().equals("")) {
             jsonObject.put("status", "error");
             return jsonObject.toString();
         }
-        Integer ret = bookService.addBook(book);
+        Integer ret = adminsService.addAdmin(admin);
         if(ret > 0) {
             jsonObject.put("status", "success");
-            jsonObject.put("bookId", book.getBookId());
+            jsonObject.put("adminId", admin.getAdminId());
             return jsonObject.toString();
         }
 
@@ -125,9 +121,11 @@ public class AdminBooksHandler {
      */
     @GetMapping("/search/{words}")
     @ResponseBody
-    public String searchBook(@PathVariable(value = "words", required = true) String words) {
+    public String searchAdmin(@PathVariable(value = "words", required = true) String words) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("list", bookService.searchBook(words));
+        jsonObject.put("list", adminsService.searchAdmin(words));
         return jsonObject.toString();
     }
+
+    // TODO 处理管理员上传头像
 }

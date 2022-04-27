@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Mappers.potatob6.AdminAdminsMapper">
+    <select id="getAdminById" parameterType="Integer" resultType="Administrator">
+        select * from Administrators where adminId=#{adminId}
+    </select>
+
+    <select id="getPageOfAdmin" resultType="Administrator" parameterType="Integer">
+        select * from Administrators limit ${startIndex},${pageCount}
+    </select>
+
+    <update id="editAdmin" parameterType="Administrator">
+        update Administrators set adminLogin=#{adminLogin}, adminName=#{adminName}, adminPassword=#{adminPassword}, avatarPath=#{avatarPath}
+        where adminId=#{adminId}
+    </update>
+
+    <delete id="deleteAdmin" parameterType="Integer">
+        delete from Administrators where adminId=#{adminId}
+    </delete>
+
+    <insert id="addAdmin" useGeneratedKeys="true" keyColumn="adminId" keyProperty="adminId" parameterType="Administrator">
+        insert into Administrators(adminLogin, adminName, adminPassword, avatarPath)
+        values(#{adminLogin}, #{adminName}, #{adminPassword}, #{avatarPath})
+    </insert>
+
+    <select id="searchAdmin" parameterType="String" resultType="Administrator">
+        select * from Administrators where adminName like '%${words}%' or adminLogin like '%${words}%';
+    </select>
+</mapper>
