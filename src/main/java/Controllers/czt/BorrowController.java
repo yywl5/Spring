@@ -54,11 +54,11 @@ public class BorrowController {
                 return "Y0looo/ShowBorrows";
             } else {
                 model.addAttribute("errorMsg","无法查询到借阅信息");
-                return "Y0looo/error";
+                return "Y0looo/sup";
             }
         } else {
             model.addAttribute("errorMsg","无法获取用户id");
-            return "Y0looo/error";
+            return "Y0looo/sup";
         }
     }
 
@@ -73,11 +73,11 @@ public class BorrowController {
                 return "Y0looo/ShowBorrows";
             } else {
                 model.addAttribute("errorMsg","无法查询到借阅信息");
-                return "Y0looo/error";
+                return "Y0looo/sup";
             }
         } else {
             model.addAttribute("errorMsg","无法获取用户id");
-            return "Y0looo/error";
+            return "Y0looo/sup";
         }
     }
 
@@ -92,11 +92,11 @@ public class BorrowController {
                 return "Y0looo/ShowBorrows";
             } else {
                 model.addAttribute("errorMsg","无法查询到借阅信息");
-                return "Y0looo/error";
+                return "Y0looo/sup";
             }
         } else {
             model.addAttribute("errorMsg","无法获取用户id");
-            return "Y0looo/error";
+            return "Y0looo/sup";
         }
     }
 
@@ -111,11 +111,11 @@ public class BorrowController {
                 return "Y0looo/ShowBorrows";
             } else {
                 model.addAttribute("errorMsg","无法查询到借阅信息");
-                return "Y0looo/error";
+                return "Y0looo/sup";
             }
         } else {
             model.addAttribute("errorMsg","无法获取用户id");
-            return "Y0looo/error";
+            return "Y0looo/sup";
         }
     }
 

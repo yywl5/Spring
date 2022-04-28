@@ -194,7 +194,6 @@
                 <p>管理图书</p>
             </div>
             <div class="item">
-<%--                TODO 新闻连接--%>
                 <img onclick="window.location.href='${pageContext.request.contextPath}/toAdminNews'"
                      src="${pageContext.request.contextPath}/static/potatob6/svg/news.svg" />
                 <p>管理新闻</p>

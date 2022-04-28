@@ -130,7 +130,7 @@
     </head>
     <body>
         <div id="header">
-            <h1>图书管理系统————新闻频道</h1>
+            <h1>图书管理系统——新闻频道</h1>
         </div>
         <div class="container">
             <div class="main">
@@ -172,7 +172,7 @@
                 </div>
                 <div class="main_right">
                     <div class="news_1">
-                        <h3>信息公开</h3>
+                        <h3>媒体关注</h3>
                         <span><a href="${pageContext.request.contextPath}/showAllNewsByTypeId?TypeId=3" target="showNews">More</a></span>
                     </div>
                     <div class="news_list">
@@ -193,36 +193,5 @@
         <div id="foot">
             <iframe name="showNews" frameborder="0" width="1300px" height="400px" marginheight="0" marginwidth="0" scrolling="no"></iframe>
         </div>
-<%--        <c:if test="${!empty(list1)}" >--%>
-<%--            <ul>--%>
-<%--                <c:forEach var="news1" items="${list1}">--%>
-<%--                    <li>--%>
-<%--                        <a href="showNewsDetail?newsId=${news1.getNno()}">${news1.getNtitle()}</a>--%>
-<%--                        <span>${news1.getNcreateTime()}</span>--%>
-<%--                    </li>--%>
-<%--                </c:forEach>--%>
-<%--            </ul>--%>
-<%--        </c:if>--%>
-<%--        <c:if test="${!empty(list2)}" >--%>
-<%--            <ul>--%>
-<%--                <c:forEach var="news2" items="${list2}">--%>
-<%--                    <li>--%>
-<%--                        <a href="showNewsDetail?newsId=${news2.getNno()}">${news2.getNtitle()}</a>--%>
-<%--                        <span>${news2.getNcreateTime()}</span>--%>
-<%--                    </li>--%>
-<%--                </c:forEach>--%>
-<%--            </ul>--%>
-<%--        </c:if>--%>
-<%--        <c:if test="${!empty(list3)}" >--%>
-<%--            <ul>--%>
-<%--                <c:forEach var="news3" items="${list3}">--%>
-<%--                    <li>--%>
-<%--                        <a href="showNewsDetail?newsId=${news3.getNno()}">${news3.getNtitle()}</a>--%>
-<%--                        <span>${news3.getNcreateTime()}</span>--%>
-<%--                    </li>--%>
-<%--                </c:forEach>--%>
-<%--            </ul>--%>
-<%--        </c:if>--%>
-
     </body>
 </html>

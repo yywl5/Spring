@@ -78,15 +78,6 @@ public class AdminController {
     }
 
     /**
-     * 跳转管理员主页
-     * @return
-     */
-    @RequestMapping("toAdminPage")
-    public String toAdminPage() {
-        return "potatob6/AdminPage";
-    }
-
-    /**
      * 跳转发布新闻界面
      * @return
      */
@@ -106,10 +97,9 @@ public class AdminController {
     @RequestMapping("addNews")
     public String addNews(News news, Model model) {
         boolean result = newsService.addNews(news);
-        if( result) {
-            List list = newsService.getNewsLimitAndOrder();
-            model.addAttribute("news", list);
-            return "dqy/AdminNews";
+        if(result) {
+            model.addAttribute("message", "发布新闻成功");
+            return "dqy/Other";
         } else {
             model.addAttribute("errorMsg", "发布新闻失败");
             return "dqy/Error";
@@ -126,9 +116,8 @@ public class AdminController {
     public String editNews(News news, Model model) {
         boolean result = newsService.modifyNews(news);
         if( result ) {
-            List list = newsService.getNewsLimitAndOrder();
-            model.addAttribute("news", list);
-            return "dqy/AdminNews";
+            model.addAttribute("message", "修改新闻成功");
+            return "dqy/Other";
         } else {
             model.addAttribute("errorMsg", "修改新闻失败");
             return "dqy/Error";
@@ -139,8 +128,8 @@ public class AdminController {
     public String deleteNews(Model model, int newsId) {
         boolean result = newsService.deleteNews(newsId);
         if( result ) {
-            List list = newsService.getNewsLimitAndOrder();model.addAttribute("news", list);
-            return "dqy/AdminNews";
+            model.addAttribute("message", "删除新闻成功");
+            return "dqy/Other";
         } else {
             model.addAttribute("errorMsg", "删除新闻失败");
             return "dqy/Error";
