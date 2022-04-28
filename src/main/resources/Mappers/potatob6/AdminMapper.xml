@@ -27,4 +27,8 @@
         <result property="adminPassword" column="adminPassword" />
     </resultMap>
 
+    <update id="updateInfo" parameterType="Administrator">
+        update Administrators set adminName=#{adminName}, adminPassword=#{adminPassword}, avatarPath=#{avatarPath} where adminId=#{adminId}
+    </update>
+
 </mapper>
