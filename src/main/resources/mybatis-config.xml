@@ -10,6 +10,9 @@
         <typeAlias type="Beans.potatob6.Exam" alias="Exam" />
         <typeAlias type="Beans.potatob6.User" alias="User" />
         <typeAlias type="Beans.potatob6.Book" alias="Book" />
+        <typeAlias type="Beans.czx.IUser"     alias="IUser"/>
+        <typeAlias type="Beans.czx.IRole"     alias="IRole"/>
+
     </typeAliases>
     <environments default="development">
         <environment id="development">
