@@ -18,4 +18,7 @@ public interface AdminMapper {
 
     //从特定Id获取管理员
     Administrator getAdminById(@Param("adminId") Integer adminId);
+
+    //修改管理员
+    Integer updateInfo(Administrator administrator);
 }
