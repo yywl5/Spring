@@ -193,12 +193,11 @@
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminBooks.svg" />
                 <p>管理图书</p>
             </div>
-            <div class="item">
-                <img onclick="window.location.href='${pageContext.request.contextPath}/toAdminNews'"
-                     src="${pageContext.request.contextPath}/static/potatob6/svg/news.svg" />
+            <div class="item" onclick="window.location.href='${pageContext.request.contextPath}/toAdminNews'">
+                <img src="${pageContext.request.contextPath}/static/potatob6/svg/news.svg" />
                 <p>管理新闻</p>
             </div>
-            <div class="item">
+            <div class="item" onclick="window.location.href='${pageContext.request.contextPath}/Admin/Options'">
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage3.svg" />
                 <p>设置中心</p>
             </div>
