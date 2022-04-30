@@ -23,7 +23,7 @@ public interface NewsMapper {
     @Select("select * from news,newstype where news.Ntype=#{Ntype} and news.Ntype=newstype.Tno")
     public List<NewsAndType> getNewsByType(int Ntype);
 
-    @Select("select * from news,newstype where news.Ntype=newstype.Tno order by NcreateTime desc limit 6")
+    @Select("select * from news,newstype where news.Ntype=newstype.Tno order by NcreateTime desc limit 8")
     public List<NewsAndType> getNewsLimitAndOrder();
 
     @Delete("delete from news where Nno=#{Nno}")

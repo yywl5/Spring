@@ -23,7 +23,7 @@ public class AdminController {
     private NewsTypeServiceImpl newsTypeService;
 
     /**
-     * 跳转新闻后台界面，显示不分类别的时间最新的新闻
+     * 跳转新闻后台界面，不分类别显示最新的8条新闻
      * @param model
      * @return
      */
