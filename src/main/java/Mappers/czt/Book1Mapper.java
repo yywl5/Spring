@@ -8,18 +8,18 @@ import java.util.List;
 
 public interface Book1Mapper {
 
-    @Select("select * from books")
+    @Select("select * from Books")
     public List<Book> getAllBooks();
 
-    @Select("select * from books where bookName like '%${bookName}%'")
+    @Select("select * from Books where bookName like '%${bookName}%'")
     public List<Book> getBooksByBookName(String bookName);
 
-    @Update("update books set storageCount=#{storageCount} where bookId=#{bookId}")
+    @Update("update Books set storageCount=#{storageCount} where bookId=#{bookId}")
     public boolean updateBookStorageCount(Book book);
 
-    @Select("select * from books where bookId=#{bookId}")
+    @Select("select * from Books where bookId=#{bookId}")
     public Book queryBookByBookId(int bookId);
 
-    @Select("select * from books where author like '%${author}%'")
+    @Select("select * from Books where author like '%${author}%'")
     public List<Book> queryBookByAuthor(String author);
 }

@@ -15,15 +15,27 @@
         </style>
         <script>
             function form1Submit(){
-                if(form1.bookName.value == null || form1.bookName.value == ""){
+                var bookName = form1.bookName.value;
+                if(bookName == null || bookName == ""){
                     alert("请填写图书名称!");
+                    return false;
+                }
+                var reg = new RegExp("^[A-Za-z0-9\u4e00-\u9fa5]+$");
+                if(!reg.test(bookName)){
+                    alert("请输入中午、数字或英文");
                     return false;
                 }
                 return true;
             }
             function form2Submit(){
-                if(form2.author.value == null || form2.author.value == ""){
+                var author = form2.author.value;
+                if(author == null || author == ""){
                     alert("请填写作者名称!");
+                    return false;
+                }
+                var reg = new RegExp("^[A-Za-z0-9\u4e00-\u9fa5]+$");
+                if(!reg.test(author)){
+                    alert("请输入中午、数字或英文");
                     return false;
                 }
                 return true;
@@ -38,6 +50,13 @@
                         <a class="navbar-brand " href="#"><p class="text-primary">图书管理系统——用户</p></a>
                     </div>
                     <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="${pageContext.request.contextPath}/toBooks" >
+                                    所有图书
+                                </a>
+                            </li>
+                        </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="${pageContext.request.contextPath}/toLastPage">返回上一页<span class="glyphicon glyphicon-log-in"></span></a></li>
                         </ul>
@@ -57,7 +76,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary" onclick="return form1Submit();">查询图书</button>
             </form>
-            <form class="form-inline" action="${pageContext.request.contextPath}/queryBookByAuthor" method="post" name="form1">
+            <form class="form-inline" action="${pageContext.request.contextPath}/queryBookByAuthor" method="post" name="form2">
                 <div class="form-group">
                     <label class="sr-only" for="exampleInputAmount2"></label>
                     <div class="input-group">
