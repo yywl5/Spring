@@ -1,11 +1,17 @@
 package Controllers.potatob6.APIs;
 
+import Beans.potatob6.Administrator;
+import Beans.potatob6.Exam;
+import Services.potatob6.BorrowService;
 import Services.potatob6.ExamService;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
@@ -14,6 +20,10 @@ public class AdminExamHandler {
 
     @Autowired
     private ExamService examService;
+
+    @Autowired
+    @Qualifier("PBBorrowService")
+    private BorrowService borrowService;
 
     /**
      * 已测试 √
@@ -128,4 +138,65 @@ public class AdminExamHandler {
         json.put("list", examService.getAllPageExam(page));
         return json.toJSONString();
     }
+
+    /**
+     * 同意审核
+     * @param map
+     * @return
+     */
+    @GetMapping("/accept")
+    @ResponseBody
+    public String accept(@RequestBody Map map, HttpServletRequest request) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            Integer examId = (Integer) map.get("Id");
+            if (examId == null)
+                throw new Exception();
+
+            Exam exam = examService.getExamById(examId);
+            if(exam == null)
+                throw new Exception();
+            if(exam.getExamType().equals("申请延期")) {
+                // Get Borrow Id
+                Integer borrowId = Integer.valueOf(exam.getExamExtra());
+                // Get Days
+                Integer days = Integer.valueOf(exam.getExamExtra1());
+                // Get AdminId
+                Integer adminId = ((Administrator)(request.getSession().getAttribute("admin"))).getAdminId();
+                examService.setAccept(examId, adminId);
+                borrowService.addTimelimits(borrowId, days);
+            } else if(exam.getExamType().equals("申请还书")) {
+                // TODO 还书
+                // Get Borrow Id
+                Integer borrowId = Integer.valueOf(exam.getExamExtra());
+                // Get Days
+                Integer days = Integer.valueOf(exam.getExamExtra1());
+                // Get AdminId
+                Integer adminId = ((Administrator)(request.getSession().getAttribute("admin"))).getAdminId();
+                examService.setAccept(examId, adminId);
+                borrowService.addTimelimits(borrowId, days);
+
+            } else if(exam.getExamType().equals("申请借书")) {
+                // TODO 借书
+            }
+
+            jsonObject.put("status", "success");
+        } catch (Exception e) {
+            jsonObject.put("status", "error");
+        }
+        return jsonObject.toJSONString();
+    }
+
+    /**
+     * 同意审核
+     * @param map
+     * @return
+     */
+    @GetMapping("/reject")
+    @ResponseBody
+    public String reject(@RequestBody Map map) {
+        //TODO 拒绝
+        return "1";
+    }
+
 }

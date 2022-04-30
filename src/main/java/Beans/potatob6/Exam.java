@@ -1,5 +1,7 @@
 package Beans.potatob6;
 
+import Beans.czt.BorrowWithBook;
+
 import java.sql.Timestamp;
 
 public class Exam {
@@ -107,6 +109,14 @@ public class Exam {
         this.examBook = examBook;
     }
 
+    public BorrowWithBook getExamBorrowWithBook() {
+        return examBorrowWithBook;
+    }
+
+    public void setExamBorrowWithBook(BorrowWithBook examBorrowWithBook) {
+        this.examBorrowWithBook = examBorrowWithBook;
+    }
+
     @Override
     public String toString() {
         return "Exam{" +
@@ -123,6 +133,7 @@ public class Exam {
                 ", examUser=" + examUser +
                 ", examAdmin=" + examAdmin +
                 ", examBook=" + examBook +
+                ", examBorrowWithBook=" + examBorrowWithBook +
                 '}';
     }
 
@@ -139,4 +150,5 @@ public class Exam {
     private User examUser;
     private Administrator examAdmin;
     private Book examBook;
+    private BorrowWithBook examBorrowWithBook;
 }
