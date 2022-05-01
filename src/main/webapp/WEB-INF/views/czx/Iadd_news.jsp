@@ -9,6 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>发布文章</title>
 		<link href="${pageContext.request.contextPath}/static/czx/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${pageContext.request.contextPath}/static/czx/css/pagination.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="place">
