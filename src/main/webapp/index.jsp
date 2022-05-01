@@ -110,7 +110,7 @@
                 <br />
                 如果有天堂,天堂应该是图书馆的模样。”我想在这喧嚣的城市,如果能经常在某个上午或者下午,独自一人走进图书馆,静静地消磨那美好的翻动书页的幸福时光。
             </p>
-            <input type="text" value="点击查看详情" /><a href="">了解更多</a>
+            <input type="text" value="点击查看详情" /><a href="${pageContext.request.contextPath}/index.action">了解更多</a>
             <div class="coffeeDiscount"></div>
         </div>
         <div class="container5">
@@ -215,7 +215,7 @@
         <div style="margin-left: 2rem;" class="nagivator_item" onclick="window.location.href='index.jsp'">首页</div>
         <div class="nagivator_item" ><a href="${pageContext.request.contextPath}/toLogin">登录</a></div>
         <div class="nagivator_item"><a href="./book.jsp">图书浏览</a></div>
-        <div class="nagivator_item"><a href="./forum.jsp">留言</a></div>
+        <div class="nagivator_item"><a href="${pageContext.request.contextPath}/loginpage.action">留言</a></div>
         <div class="nagivator_item"><a href="${pageContext.request.contextPath}/toNews">查看新闻</a></div>
         <div class="nagivator_item" onclick="aboutDis()">关于</div>
         <div class="nagivator_item"><a href="./AdminMainPage.jsp">管理员入口</a></div>
@@ -231,9 +231,8 @@
             星星图书管理系统(Study of Technology with Star one by one, Star)创办于2004年，以星星作为办学法人，是办学理念和办学资源的延伸和扩展，是图书管理发展战略的重要组成部分。至2011年9月本系统收录总藏量达224.6余万册（件），其中书生电子图书包库180余万册，本地镜像110余万册、国数图电子图书1万余种，声像资料4000多件（册）；纸质图书文献35万余册；报刊资源藏量17143种，其中电子期刊16387种；中文电子期刊数据库本地镜像的共收录有89年至今的全国各类期刊出版物，有重庆维普科技期刊全库、中国知网CNKI期刊库、万方资源期刊数据库等等；外文期刊Emerald数据库收录有外文期刊217种，包括经济类数据库、管理科学数据库、计算机科学数据库、建筑图书工程数据库、材料科学与工程等5个数据库；本馆还有多媒体光盘数据库及多媒体教学视频数据库；有涵盖多种领域的考试类数据库、讲座类数据库、法律类数据库、动漫教学数据库、就业培训数据库等大小数据库29多个；本系统参考咨询远程传递工作有联接北理工本部100多种数字资源的用户终端，为用户提供全方位的教学科研参考咨询信息检索服务工作。
         </div>
         <button style="margin-top: 70px;" onclick="bigWhiteFinal('./login.jsp')">进入登录&gt;</button>
-        <button style="margin-top: 30px;" onclick="bigWhiteFinal('./forum.jsp')">留言&gt;</button>
+        <button style="margin-top: 30px;" onclick="bigWhiteFinal('')">&gt;留言</button>
         <button style="margin-top: 30px;" onclick="bigWhiteFinal('./book.jsp')">查看图书&gt;</button>
-        <button style="margin-top: 30px;" onclick="bigWhiteFinal('./index2.jsp')">星星云&gt;</button>
 
     </div>
 
