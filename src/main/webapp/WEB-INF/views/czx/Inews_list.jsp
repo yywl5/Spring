@@ -9,6 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
+	<link href="${pageContext.request.contextPath}/static/czx/css/style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/static/Y0looo/bootstrap-3.4.1-dist/css/bootstrap.min.css" type="text/css"/>
 	<!--引入JQuery的JS文件：JQuery的JS文件要在BootStrap的js的文件的前面引入-->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/static/potatob6/js/jquery-3.6.0.min.js" ></script>
