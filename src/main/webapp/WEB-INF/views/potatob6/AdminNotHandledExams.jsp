@@ -279,7 +279,7 @@
                     </tr>
 
                     <c:forEach var="item" items="${list}">
-                        <tr>
+                        <tr id="trexam${item.examId}">
                             <td>${item.examId} </td>
                             <td>${item.examType} </td>
                             <td>${item.examUser.userName} </td>
@@ -290,7 +290,14 @@
                             <c:if test="${!item.examType.equals(\"申请延期\")}">
                                 <td></td>
                             </c:if>
-                            <td>${item.examBook.bookName} </td>
+
+                            <c:if test="${item.examType.equals(\"申请借书\")}">
+                                <td>${item.examBook.bookName} </td>
+                            </c:if>
+                            <c:if test="${item.examType.equals(\"申请还书\") || item.examType.equals(\"申请延期\")}">
+                                <td>${item.examBorrowWithBook.bookName} </td>
+                            </c:if>
+
                             <td>${item.examHandleStatus} </td>
                             <td>${item.examComment} </td>
                             <td class="opera">
@@ -358,10 +365,19 @@
                             }
 
                             if (l.examBook !== undefined && l.examBook.bookName !== undefined ) {
-                                varNew.append($("<td>"+l.examBook.bookName+"</td>"))
+                                if(l.examType === '申请延期' || l.examType === '申请还书') {
+                                    varNew.append($("<td>"+l.examBorrowWithBook.bookName+"</td>"))
+                                } else {
+                                    varNew.append($("<td>"+l.examBook.bookName+"</td>"))
+                                }
                             } else {
-                                varNew.append($("<td></td>"))
+                                if(l.examType === '申请延期' || l.examType === '申请还书') {
+                                    varNew.append($("<td>"+l.examBorrowWithBook.bookName+"</td>"))
+                                } else {
+                                    varNew.append($("<td>"+l.examBook.bookName+"</td>"))
+                                }
                             }
+
                             varNew.append($("<td>"+l.examHandleStatus+"</td>"))
 
                             if (l.examComment !== undefined) {
@@ -390,6 +406,9 @@
     <script lang="JavaScript">
         // 同意
         function accept(n) {
+            if(confirm("是否同意?")===false) {
+                return;
+            }
             axios({
                 url: '${pageContext.request.contextPath}/admin/exams/accept',
                 method: 'GET',
@@ -397,7 +416,10 @@
                     "Id": n
                 }
             }).then(response => {
-
+                let resp = JSON.parse(response.data);
+                if(resp.status !== undefined && resp.status === 'success') {
+                    $("trexam"+n).remove();
+                }
             }).throw(error => {
                 alert("错误:"+error)
             })
@@ -405,6 +427,9 @@
 
         // 拒绝
         function reject(n) {
+            if(confirm("是否拒绝?")===false) {
+                return;
+            }
             axios({
                 url: '${pageContext.request.contextPath}/admin/exams/reject',
                 method: 'GET',
@@ -412,7 +437,10 @@
                     "Id": n
                 }
             }).then(response => {
-
+                let resp = JSON.parse(response.data);
+                if(resp.status !== undefined && resp.status === 'success') {
+                    $("trexam"+n).remove();
+                }
             }).throw(error => {
                 alert("错误:"+error)
             })

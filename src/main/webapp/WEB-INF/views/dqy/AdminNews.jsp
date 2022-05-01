@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>Title</title>
+        <title>星星图书馆新闻后台系统</title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/dqy/css/base.css"/>
     </head>
     <body class="dashboard">
@@ -18,13 +18,14 @@
         </div>
         <div id="content" class="colMS">
           <div class="tab-main mx-auto">
-            <input id="tab1" type="radio" name="tabs" checked>
+            <input id="tab1" type="radio" name="tabs">
             <label for="tab1" style="text-align: center"><a style="text-decoration: none" href="${pageContext.request.contextPath}/toAdminNewsByType?typeId=1">综合新闻</a></label>
             <input id="tab2" type="radio" name="tabs">
             <label for="tab2" style="text-align: center"><a style="text-decoration: none" href="${pageContext.request.contextPath}/toAdminNewsByType?typeId=2">通知公告</a></label>
             <input id="tab3" type="radio" name="tabs">
             <label for="tab3" style="text-align: center"><a style="text-decoration: none" href="${pageContext.request.contextPath}/toAdminNewsByType?typeId=3">媒体关注</a></label>
-            <section id="content1">
+            <hr>
+<%--            <section id="content1">--%>
               <div>
                 <table>
                     <c:if test="${!empty(news)}">
@@ -48,7 +49,7 @@
                     </c:if>
                 </table>
               </div>
-            </section>
+<%--            </section>--%>
           </div>
           <br class="clear">
           </div>
