@@ -9,7 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <script src="${pageContext.request.contextPath}/static/potatob6/js/axios.min.js"></script>
     <script src="${pageContext.request.contextPath}/static/potatob6/js/jquery-3.6.0.min.js"></script>
-    <title>所有审核</title>
+    <title>审核</title>
     <style>
         * {
             margin: 0;
@@ -267,42 +267,26 @@
         <table>
             <tbody id="tbody1">
             <tr>
-                <th>审核序号</th>
-                <th>类型</th>
-                <th>申请的用户</th>
-                <th>创建时间</th>
-                <th>延期时间</th>
-                <th>书名</th>
-                <th>处理状态</th>
-                <th>处理管理员</th>
-                <th>处理时间</th>
-                <th>附加信息</th>
+                <th>借阅Id</th>
+                <th>图书</th>
+                <th>用户</th>
+                <th>借阅时间</th>
+                <th>期限</th>
+                <th>归还时间</th>
+                <th>操作</th>
             </tr>
 
             <c:forEach var="item" items="${list}">
-                <tr id="trexam${item.examId}">
-                    <td>${item.examId} </td>
-                    <td>${item.examType} </td>
-                    <td>${item.examUser.userName} </td>
-                    <td>${item.examCreateTime} </td>
-                    <c:if test="${item.examType.equals(\"申请延期\")}">
-                        <td>${item.examExtra1} 天</td>
-                    </c:if>
-                    <c:if test="${!item.examType.equals(\"申请延期\")}">
-                        <td></td>
-                    </c:if>
-
-                    <c:if test="${item.examType.equals(\"申请借书\")}">
-                        <td>${item.examBook.bookName} </td>
-                    </c:if>
-                    <c:if test="${item.examType.equals(\"申请还书\") || item.examType.equals(\"申请延期\")}">
-                        <td>${item.examBorrowWithBook.bookName} </td>
-                    </c:if>
-
-                    <td>${item.examHandleStatus} </td>
-                    <td>${item.examAdmin.adminName}</td>
-                    <td>${item.examHandleTime}</td>
-                    <td>${item.examComment} </td>
+                <tr id="trexam${item.borrowId}">
+                    <td>${item.borrowId} </td>
+                    <td>${item.bookId} </td>
+                    <td>${item.userId} </td>
+                    <td>${item.borrowDate} </td>
+                    <td>${item.timeLimit} </td>
+                    <td>${item.returnDate}</td>
+                    <td class="opera">
+                        <button class="reject" onclick="forceReturn(${item.borrowId})">强制归还</button>
+                    </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -334,72 +318,25 @@
     }
 </script>
 
-<script lang="JavaScript">
-    var page = ${page};
-    function loadPage() {
-        console.log(page)
+<script>
+    function forceReturn(n) {
+        if (confirm("确认归还？") === false) {
+            return;
+        }
         axios({
-            url: '${pageContext.request.contextPath}/admin/exams/pageExams',
-            method: 'POST',
+            url: '${pageContext.request.contextPath}/admin/borrow/forceReturn',
             data: {
-                page: page + 1
+                Id: n
+            },
+            method: 'POST'
+        }).then(response => {
+            let resp = JSON.parse(response.data);
+            if(resp.status !== undefined && resp.status === 'success') {
+                document.getElementById("trexam"+n).remove();
+                return;
             }
-        }).then(response=>{
-            const json = JSON.parse(response.data)
-            if(json.status === 'success') {
-                console.log(json)
-                if(json.list.length !== 0) {
-                    for(let i = 0; i < json.list.length; i++) {
-                        let l = json.list[i]
-                        let varNew = $("<tr></tr>")
-                        varNew.append($("<td>"+l.examId+"</td>"))
-                        varNew.append($("<td>"+l.examType+"</td>"))
-                        varNew.append($("<td>"+l.examUser.userName+"</td>"))
-                        varNew.append($("<td>"+l.examCreateTime+"</td>"))
-                        if (l.examType === '申请延期') {
-                            varNew.append($("<td>" + l.examExtra1 + " 天</td>"))
-                        } else {
-                            varNew.append($("<td></td>"))
-                        }
 
-                        if (l.examBook !== undefined && l.examBook.bookName !== undefined ) {
-                            if(l.examType === '申请延期' || l.examType === '申请还书') {
-                                varNew.append($("<td>"+l.examBorrowWithBook.bookName+"</td>"))
-                            } else {
-                                varNew.append($("<td>"+l.examBook.bookName+"</td>"))
-                            }
-                        } else {
-                            if(l.examType === '申请延期' || l.examType === '申请还书') {
-                                varNew.append($("<td>"+l.examBorrowWithBook.bookName+"</td>"))
-                            } else {
-                                varNew.append($("<td>"+l.examBook.bookName+"</td>"))
-                            }
-                        }
-
-                        varNew.append($("<td>"+l.examHandleStatus+"</td>"))
-
-                        if(l.examAdmin !== undefined) {
-                            varNew.append($("<td>" + l.examAdmin.adminName + "</td>"));
-                            varNew.append($("<td>" + l.examHandleTime + "</td>"));
-                        } else {
-                            varNew.append($("<td></td>"));
-                            varNew.append($("<td></td>"));
-                        }
-
-                        if (l.examComment !== undefined) {
-                            varNew.append($("<td>"+l.examComment+"</td>"))
-                        } else {
-                            varNew.append($("<td></td>"))
-                        }
-                        $("#tbody1").append(varNew)
-                    }
-
-                    page ++;
-                }
-                else {
-                    alert("没有更多内容了")
-                }
-            }
+            alert("错误");
         })
     }
 </script>

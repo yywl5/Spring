@@ -29,11 +29,11 @@
         }
 
         h2 {
-            font-size: 8rem;
+            font-size: 2rem;
         }
 
         h3 {
-            font-size: 6rem;
+            font-size: 1rem;
         }
     </style>
 </head>

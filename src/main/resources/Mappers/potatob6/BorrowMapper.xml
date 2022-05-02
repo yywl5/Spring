@@ -15,4 +15,11 @@
         delete from borrow where borrowId=#{borrowId}
     </delete>
 
+    <select id="getAllBorrow" resultType="BorrowWithBook">
+        select * from borrow;
+    </select>
+
+    <select id="getBorrow" parameterType="Integer" resultType="Borrow">
+        select * from borrow where borrowId=#{id}
+    </select>
 </mapper>
