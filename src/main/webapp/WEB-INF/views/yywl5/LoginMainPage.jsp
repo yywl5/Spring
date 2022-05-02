@@ -70,6 +70,7 @@
     <li><a href="${pageContext.request.contextPath}/toBorrows">借阅信息</a></li>
     <li><a href="${pageContext.request.contextPath}/toBooks">图书信息</a></li>
     <li><a href="${pageContext.request.contextPath}/toAdminNews">新闻后台</a></li>
+    <li><a href="#" id="updateuserPassword" onclick="updatePassword()">更改密码</a></li>
 </ul>
 </body>
 <script src="${pageContext.request.contextPath}/static/yywl5/js/LoginMainPage.js"></script>
