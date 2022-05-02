@@ -11,20 +11,42 @@ import java.util.List;
 public interface UserDao {
     /**
      *
-     *
+     *使用userId查询用户信息
      * @param userId
      * @return
-     * 使用userId查询用户信息
+     *
      */
     @Select("select * from Users where userId = #{userId}")
     User queryByuserId(Integer userId);
 
     /**
-     *
+     *使用userName查询用户信息
      * @param userName
      * @return
-     * 使用userName查询用户信息
+     *
      */
     @Select("select * from Users where userName = #{userName}")
     User queryByuserName(String userName);
+    /***
+     *
+     * 更新账户
+     * @param user
+     */
+
+    @Update("update Users set userName = #{userName}, userPassword = #{userPassword} where userId = #{userId}")
+    void update(User user);
+
+    /****
+     *
+     * @param userName
+     */
+    @Delete("delete from Users where userName = #{userName}")
+    void deleteByuserName(String userName);
+
+    /***
+     * 用户userId删除
+     * @param userId
+     */
+    @Delete("delete from Users where userId = #{userId}")
+    void deleteById(Integer userId);
 }
