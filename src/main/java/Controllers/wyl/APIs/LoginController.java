@@ -104,4 +104,60 @@ public class LoginController {
         }
         return "yywl5/login";
     }
+    /***
+     * 修改名称
+     */
+    @ResponseBody
+    @RequestMapping(value = "/toLogin/updateUserName",produces = "text/html; charset=utf-8")
+    public String updateUserName(HttpServletRequest request,HttpServletResponse response){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+
+        String username = request.getParameter("username");
+        if(username==null){
+            request.setAttribute("check",this.createCheck());
+            return "yywl5/login";
+        }
+
+        if(user==null){
+            return  "{\"status\":0,\"data\":\"登录超时，请重新登录!\"}";
+        }
+
+        user.setUserName(username);
+        userService.update(user);
+        session.setAttribute("user",userService.queryByuserName(user.getUserName()));
+        Cookie cookie = new Cookie("username",user.getUserName());
+        cookie.setMaxAge(100);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "{\"status\":true,\"data\":\"修改成功，点击刷新页面\"}";
+    }
+
+    /***
+     * 注销用户
+     * @param request
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/toLogin/logoutUser",produces = "text/html; charset=utf-8")
+    public String logoutUser(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        System.out.println(user.getUserName()+user.getUserId());
+        if(user!=null){
+            /*userService.deleteById(user.getUserId());*/
+
+            session.removeAttribute("user");
+        }
+        Cookie []cookies = request.getCookies();
+        for(Cookie cookie:cookies){
+            if("username".equals(cookie.getName())){
+                cookie.setMaxAge(-1);
+            }
+        }
+        System.out.println(user.getUserName()+user.getUserId()+"TEST");
+        return "{\"status\":true,\"data\":\"/toLogin\"}";
+    }
+
 }

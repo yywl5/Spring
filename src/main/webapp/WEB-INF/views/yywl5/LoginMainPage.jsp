@@ -4,7 +4,7 @@
 <head>
     <title>星星图书主页</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/yywl5/css/LoginMainPage.css"/>
-    <script src="<c:url value="/static/potatob6/js/jquery-3.6.0.min.js"/>"></script>
+    <script src="<c:url value="/static/yywl5/js/jquery-3.6.0.min.js"/>"></script>
 </head>
 <body>
 
