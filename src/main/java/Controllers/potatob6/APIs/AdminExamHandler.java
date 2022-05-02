@@ -199,4 +199,21 @@ public class AdminExamHandler {
         return "1";
     }
 
+    @RequestMapping("/pageExams")
+    @ResponseBody
+    public String pageExams(@RequestBody Map map) {
+        try {
+            Integer page = (Integer) map.get("page");
+            org.json.JSONObject jsonObject = new org.json.JSONObject();
+            if(page == null) {
+                throw new Exception("错误的格式");
+            }
+
+            jsonObject.put("status", "success");
+            jsonObject.put("list", examService.getAllPageExam(page));
+            return jsonObject.toString();
+        } catch (Exception e) {
+            return "{\"status\":\"error\"}";
+        }
+    }
 }

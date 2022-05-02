@@ -55,7 +55,9 @@ public class Admin {
      * @return
      */
     @GetMapping("/Exams")
-    public String adminExams() {
+    public String adminExams(Model model) {
+        model.addAttribute("list", examService.getAllPageExam(1));
+        model.addAttribute("page", 1);
         return "potatob6/AdminExams";
     }
 }
