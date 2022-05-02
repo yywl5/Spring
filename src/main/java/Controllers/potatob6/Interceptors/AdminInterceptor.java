@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AdminInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if(request.getRequestURI().equals("/Admin/Login")) {
+        if(request.getRequestURI().equals("/Admin/Login") || request.getRequestURI().equals("/admin/login")) {
             return true;
         }
         Administrator administrator = (Administrator) request.getSession().getAttribute("admin");
