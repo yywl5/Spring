@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -31,10 +32,15 @@ public class IUserController {
         model.addAttribute("roleList", roleList);
         // 获取用户列表
         List<IUser> userList=userService.findUserList(keywords,userListRoleId);
+        System.out.println("12342");
         model.addAttribute("userList", userList);
+        System.out.println(userList);
+
         model.addAttribute("keywords", keywords);
+        System.out.println(keywords);
         model.addAttribute("userListRoleId", userListRoleId);
-        return "user/user_list";
+        System.out.println(userListRoleId);
+        return "czx/Iuser_list";
     }
     //转向添加用户
     @RequestMapping(value="/toAddUser.action")
@@ -42,7 +48,7 @@ public class IUserController {
         //获取角色列表，用于添加用户页面中的用户角色下拉列表
         List<IRole> roleList=roleService.findRoleList();
         model.addAttribute("roleList", roleList);
-        return "user/add_user";
+        return "czx/Iadd_user";
     }
     //判断登录账号是否已存在
     @RequestMapping(value = "/checkLoginName.action")
@@ -70,7 +76,7 @@ public class IUserController {
         if (checkUser!=null) {
             // 登录账号已存在，重新转回添加用户页面
             model.addAttribute("checkUserLoginNameMsg", "登录账号已存在，请重新输入");
-            return "user/add_user";
+            return "czx/Iadd_user";
         }else{
             // 登录账号可用
             Date date = new Date();
@@ -84,7 +90,7 @@ public class IUserController {
                 return "redirect:findUserList.action";
             } else {
                 // 添加失败，重新转回添加用户页面
-                return "user/add_user";
+                return "czx/Iadd_user";
             }
         }
     }
@@ -98,7 +104,7 @@ public class IUserController {
             // 获取角色列表
             List<IRole> roleList = roleService.findRoleList();
             model.addAttribute("roleList", roleList);
-            return "user/edit_user";
+            return "czx/Iedit_user";
         }else{
             return "redirect:findUserList.action";
         }
@@ -120,7 +126,7 @@ public class IUserController {
             model.addAttribute("roleList", roleList);
             model.addAttribute("user", user);
             // 修改失败，转回修改用户页面
-            return "user/edit_user";
+            return "czx/Iedit_user";
         }
     }
     //删除用户（前台页面中通过ajax方式调用此方法）
@@ -162,8 +168,18 @@ public class IUserController {
             return user;
         }
     }
+    //登录页跳转
+    @RequestMapping(value="/loginpage.action")
+    public String loginPage(HttpServletRequest request){
+        return "czx/Ilogin";
+    }
+    //主页面跳转
+    @RequestMapping(value="/mainpage.action")
+    public String mainPage(HttpServletRequest request){
+        return "czx/Ifirst";
+    }
     //用户登录
-    @RequestMapping(value="/login.action",method=RequestMethod.POST)
+    @RequestMapping(value="/login.action")
     public String login(String loginName, String password, Model model, HttpSession session){
         //通过用户名和密码查询用户
         IUser user=userService.findUser(loginName, password);
@@ -171,22 +187,22 @@ public class IUserController {
             if (user.getStatus().equals("2")) {
                 //用户被启用时，允许登录到后台
                 session.setAttribute("login_user", user);
-                return "main";
+                return "czx/Imain";
             } else {
                 //账号未启用或被禁用时，不允许登录到后台
                 model.addAttribute("msg", "账号未启用或被禁用，请联系管理员！");
-                return "../../login";
+                return "czx/Ilogin";
             }
         }
         //账号或密码错误时，不允许登录到后台
         model.addAttribute("msg","账号或密码错误，请重新登录！");
-        return "../../login";
+        return "czx/Ilogin";
     }
     //退出登录
     @RequestMapping(value="/logout.action")
     public String logout(HttpSession session){
         //清空session
         session.invalidate();
-        return "../../login";
+        return "czx/Ilogin";
     }
 }

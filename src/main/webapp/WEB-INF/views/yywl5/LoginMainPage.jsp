@@ -4,7 +4,7 @@
 <head>
     <title>星星图书主页</title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/yywl5/css/LoginMainPage.css"/>
-    <script src="<c:url value="/static/potatob6/js/jquery-3.6.0.min.js"/>"></script>
+    <script src="<c:url value="/static/yywl5/js/jquery-3.6.0.min.js"/>"></script>
 </head>
 <body>
 
@@ -70,6 +70,7 @@
     <li><a href="${pageContext.request.contextPath}/toBorrows">借阅信息</a></li>
     <li><a href="${pageContext.request.contextPath}/toBooks">图书信息</a></li>
     <li><a href="${pageContext.request.contextPath}/toAdminNews">新闻后台</a></li>
+    <li><a href="#" id="updateuserPassword" onclick="updatePassword()">更改密码</a></li>
 </ul>
 </body>
 <script src="${pageContext.request.contextPath}/static/yywl5/js/LoginMainPage.js"></script>

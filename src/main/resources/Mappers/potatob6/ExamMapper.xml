@@ -4,6 +4,18 @@
 
 <mapper namespace="Mappers.potatob6.ExamMapper">
 
+    <update id="setAccept" parameterType="Integer">
+        update Exams set examHandleTime=CURRENT_TIMESTAMP, examHandleStatus='已同意', examHandleAdminId=#{adminId} where examId=#{examId}
+    </update>
+
+    <update id="setReject" parameterType="Integer">
+        update Exams set examHandleTime=CURRENT_TIMESTAMP, examHandleStatus='已拒绝', examHandleAdminId=#{adminId} where examId=#{examId}
+    </update>
+
+    <select id="getExamById" resultMap="ExamResMap" parameterType="Integer">
+        select * from Exams where examId=#{examId}
+    </select>
+
     <select id="getNumberOfAllNotHandledExams" resultType="Integer">
         select count(*) from Exams where examHandleStatus='未处理'
     </select>
@@ -28,6 +40,11 @@
         select * from Exams limit ${startIndex},${pageCount}
     </select>
 
+    <select id="getBookInBorrow" parameterType="Integer" resultType="BorrowWithBook">
+        select borrow.borrowId as borrowId, borrow.bookId as bookId, borrow.userId as userId, borrow.borrowDate as borrowDate, borrow.timeLimit as timeLimit, borrow.returnDate as returnDate, Books.bookName as bookName
+        from borrow, Books where borrow.bookId=Books.bookId and borrow.bookId=#{bookId}
+    </select>
+
     <resultMap id="queryUserById" type="User">
         <id property="userId" column="userId" />
         <result property="userLogin" column="userLogin" />
@@ -47,6 +64,7 @@
         <result property="examComment" column="examComment" />
         <association property="examUser" column="examUserId" select="Mappers.potatob6.UserMapper.getUserById" />
         <association property="examAdmin" column="examHandleAdminId" select="Mappers.potatob6.AdminMapper.getAdminById" />
-        <association property="examBook" column="examExtra1" select="Mappers.potatob6.BookMapper.getBookById" />
+        <association property="examBook" column="examExtra" select="Mappers.potatob6.BookMapper.getBookById" />
+        <association property="examBorrowWithBook" column="examExtra" select="getBookInBorrow" />
     </resultMap>
 </mapper>

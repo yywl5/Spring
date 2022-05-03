@@ -2,6 +2,7 @@ package Services.potatob6;
 
 import Beans.potatob6.Exam;
 import Mappers.potatob6.ExamMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,21 @@ public class ExamService {
 
     // 一页的条目数量
     public static Integer numberOfPages = 10;
+
+    // 处理同意
+    public Integer setAccept(Integer examId, Integer adminId) {
+        return examDAO.setAccept(examId, adminId);
+    }
+
+    // 处理拒绝
+    public Integer setReject(Integer examId, Integer adminId) {
+        return examDAO.setReject(examId, adminId);
+    }
+
+    // 通过Id获取Exam
+    public Exam getExamById(Integer examId) {
+        return examDAO.getExamById(examId);
+    }
 
     // 获取待处理清单的数量
     public Integer getNumberOfAllNotHandledExams() {

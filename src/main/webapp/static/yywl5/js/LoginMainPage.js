@@ -20,3 +20,20 @@ function updateUserName(){
         })
     }
 }
+function logoutUser(){
+    if(window.confirm("是否注销用户?")){
+        if(window.confirm("请再次确认删除")){
+            if(window.confirm("请确认删除")){
+                $.ajax({
+                    type:"post",
+                    url:baseUrl+"/toLogin/logoutUser",
+                    success:function (res) {
+                        let req = JSON.parse(res);
+                        alert("用户注销成功!");
+                        window.location.href = baseUrl + req.data;
+                    }
+                })
+            }
+        }
+    }
+}

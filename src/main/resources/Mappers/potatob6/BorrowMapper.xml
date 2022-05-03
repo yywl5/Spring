@@ -1,0 +1,25 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Mappers.potatob6.BorrowMapper">
+    <update id="updateTimelimits" parameterType="Integer">
+        update borrow set timeLimit=timeLimit+${newAddTimelimits} where borrowId=#{borrowId}
+    </update>
+
+    <insert id="addNewBorrow" parameterType="Borrow" useGeneratedKeys="true" keyProperty="borrowId" keyColumn="borrowId">
+        insert into borrow(bookId,userId,borrowDate,timeLimit) values (#{bookId}, #{userId}, #{borrowDate}, #{timeLimit})
+    </insert>
+
+    <delete id="removeBorrow" parameterType="Integer">
+        delete from borrow where borrowId=#{borrowId}
+    </delete>
+
+    <select id="getAllBorrow" resultType="BorrowWithBook">
+        select * from borrow;
+    </select>
+
+    <select id="getBorrow" parameterType="Integer" resultType="Borrow">
+        select * from borrow where borrowId=#{id}
+    </select>
+</mapper>

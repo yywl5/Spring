@@ -30,4 +30,8 @@
     <select id="searchBook" parameterType="String" resultType="Book">
         select * from Books where bookName like '%${words}%' or publisher like '%${words}%' or author like '%${words}%'
     </select>
+
+    <update id="addBookNumber" parameterType="Integer">
+        update Books set storageCount=storageCount+${num} where bookId=${bookId}
+    </update>
 </mapper>

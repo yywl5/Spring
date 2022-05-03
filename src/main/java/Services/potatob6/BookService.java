@@ -52,4 +52,9 @@ public class BookService {
     public List<Book> searchBook(String words) {
         return bookMapper.searchBook(words);
     }
+
+    // 添加图书数量
+    public Integer addBookNumber(Integer bookId, Integer num) {
+        return bookMapper.addBookNumber(bookId, num);
+    }
 }

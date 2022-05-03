@@ -24,4 +24,7 @@ public interface BookMapper {
 
     // 查询图书
     List<Book> searchBook(@Param("words") String words);
+
+    // 添加图书数量
+    Integer addBookNumber(@Param("bookId") Integer bookId,@Param("num") Integer num);
 }

@@ -1,5 +1,6 @@
 package Mappers.potatob6;
 
+import Beans.czt.BorrowWithBook;
 import Beans.potatob6.Administrator;
 import Beans.potatob6.Exam;
 import org.apache.ibatis.annotations.Param;
@@ -7,6 +8,15 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface ExamMapper {
+
+    // 处理同意
+    Integer setAccept(@Param("examId") Integer examId, @Param("adminId") Integer adminId);
+
+    // 处理拒绝
+    Integer setReject(@Param("examId") Integer examId, @Param("adminId") Integer adminId);
+
+    // 通过Id获取Exam
+    Exam getExamById(@Param("examId") Integer examId);
 
     // 获取待处理清单的数量
     Integer    getNumberOfAllNotHandledExams();
@@ -28,4 +38,7 @@ public interface ExamMapper {
 
     //从特定Id获取管理员
     Administrator getAdminById(@Param("adminId") Integer adminId);
+
+    // 获取borrow的book
+    BorrowWithBook getBookInBorrow(@Param("bookId") Integer bookId);
 }

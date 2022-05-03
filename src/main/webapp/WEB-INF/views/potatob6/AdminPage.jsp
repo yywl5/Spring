@@ -181,7 +181,7 @@
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage5.svg" />
                 <p>查看所有管理员</p>
             </div>
-            <div class="item">
+            <div class="item" onclick="window.location.href='${pageContext.request.contextPath}/Admin/Borrow'">
                 <img src="${pageContext.request.contextPath}/static/potatob6/svg/AdminPage2.svg" />
                 <p>管理用户借阅</p>
             </div>

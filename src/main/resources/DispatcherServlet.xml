@@ -94,4 +94,13 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+<!--    阻拦其他/Admin /admin-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**"/>
+            <mvc:mapping path="/Admin/**"/>
+            <bean class="Controllers.potatob6.Interceptors.AdminInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 </beans>

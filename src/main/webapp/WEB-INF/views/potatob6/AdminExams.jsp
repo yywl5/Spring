@@ -5,157 +5,403 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-        <title>审核</title>
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-                font-size: 1.1rem;
-            }
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <script src="${pageContext.request.contextPath}/static/potatob6/js/axios.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/potatob6/js/jquery-3.6.0.min.js"></script>
+    <title>所有审核</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 1.1rem;
+        }
 
-            body {
-                position: relative;
-                width: 100vw;
-                height: 100vh;
-                background: url("${pageContext.request.contextPath}/static/potatob6/svg/AdminPage_bg.svg") center center no-repeat;
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-content: center;
-            }
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: url("${pageContext.request.contextPath}/static/potatob6/svg/AdminPage_bg.svg") center center no-repeat;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+        }
 
-            #selfCenter {
-                margin: 50px;
-                left: 50px;
-                top: 50px;
-                width: 400px;
-                bottom: 50px;
-                backdrop-filter: blur(2rem);
-                -webkit-backdrop-filter: blur(2rem);
-                box-shadow: 0 0 18px rgba(70,70,70,0.2);
-                border: 1px solid #dbe2ef;
-                border-radius: 10px;
-                flex-shrink: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                flex-direction: column;
-            }
+        #selfCenter {
+            margin: 50px;
+            left: 50px;
+            top: 50px;
+            width: 400px;
+            bottom: 50px;
+            backdrop-filter: blur(2rem);
+            -webkit-backdrop-filter: blur(2rem);
+            box-shadow: 0 0 18px rgba(70,70,70,0.2);
+            border: 1px solid #dbe2ef;
+            flex-shrink: 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
 
-            #items {
-                width: 100%;
-                margin: 50px;
-                margin-left: 0;
-                min-width: 700px;
-                flex-shrink: 1;
-                backdrop-filter: blur(1.5rem);
-                -webkit-backdrop-filter: blur(1.5rem);
-                border: 1px solid #dbe2ef;
-                border-radius: 10px;
-                box-shadow: 0 0 18px rgba(70,70,70,0.2);
-            }
+        #items {
+            width: 100%;
+            margin: 50px;
+            margin-left: 0;
+            min-width: 700px;
+            flex-shrink: 1;
+            backdrop-filter: blur(1.5rem);
+            -webkit-backdrop-filter: blur(1.5rem);
+            border: 1px solid #dbe2ef;
+            border-radius: 10px;
+            box-shadow: 0 0 18px rgba(70,70,70,0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-            .item {
-                width: 100%;
-                height: 200px;
-                backdrop-filter: blur(2rem);
-                -webkit-backdrop-filter: blur(2rem);
-                border: 1px solid #dbe2ef;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                position: relative;
-                box-shadow: 0 0 30px rgba(70,70,70,0.2);
-                border-radius: 10px;
-                transition: all 0.3s;
-                flex-shrink: 0;
-            }
+        .item {
+            width: 100%;
+            height: 200px;
+            backdrop-filter: blur(2rem);
+            -webkit-backdrop-filter: blur(2rem);
+            border: 1px solid #dbe2ef;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 0 30px rgba(70,70,70,0.2);
+            border-radius: 10px;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
 
-            .item:hover {
-                box-shadow: 0 0 10px rgba(70,70,70,0.2);
-                backdrop-filter: blur(0.3rem);
-                -webkit-backdrop-filter: blur(0.3rem);
-                cursor: pointer;
-                transform: scale(1.03);
-            }
+        .item:hover {
+            box-shadow: 0 0 10px rgba(70,70,70,0.2);
+            backdrop-filter: blur(0.3rem);
+            -webkit-backdrop-filter: blur(0.3rem);
+            cursor: pointer;
+            transform: scale(1.03);
+        }
 
-            img {
-                width: auto;
-                height: 50%;
-            }
+        img {
+            width: auto;
+            height: 50%;
+        }
 
-            p {
-                flex-shrink: 0;
-            }
+        p {
+            flex-shrink: 0;
+        }
 
-            .corner {
-                border-radius: 30px;
-                height: 30px;
-                width: 30px;
-                background-color: #f73859;
-                position: absolute;
-                right: 0;
-                top: 0;
-                transform: translate(15px, -15px);
-                color: white;
-                text-align: center;
-                line-height: 30px;
-                justify-content: center;
-                align-items: center;
-            }
+        .corner {
+            border-radius: 30px;
+            height: 30px;
+            width: 30px;
+            background-color: #f73859;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform: translate(15px, -15px);
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            justify-content: center;
+            align-items: center;
+        }
 
-            #avatar {
-                width: 100px;
-                height: 100px;
-                border-radius: 50px;
-            }
+        #avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+        }
 
-            hr {
-                width: 60%;
-                height: 4px;
-                background-color: rgba(70,70,70,0.3);
-                border-radius: 2px;
-                border: none;
-                margin: 40px 0;
-            }
+        hr {
+            width: 60%;
+            height: 4px;
+            background-color: rgba(70,70,70,0.3);
+            border-radius: 2px;
+            border: none;
+            margin: 40px 0;
+        }
 
-            p {
-                margin: 20px 0;
-            }
-            
-            img:hover {
-                cursor: pointer;
-            }
+        p {
+            margin: 20px 0;
+        }
 
-            #items_top {
-                margin: 20px 0;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: flex-start;
-            }
-        </style>
-    </head>
+        img:hover {
+            cursor: pointer;
+        }
 
-    <body>
-        <div id="selfCenter">
-            <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
-            <hr>
-            <p>欢迎，${admin.adminName}</p>
-            <p>管理员编号:${admin.adminId}</p>
-            <p>图书管理后台系统</p>
-            <hr>
-        </div>
-        <div id="items">
-            <div id="items_top">
-                <div style="width: 20px; flex-shrink: 0"></div>
-                <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
-                <p style="flex-shrink: 1; margin: 0;margin-left: 20px;width: 100%;text-align: center">所有审核</p>
-                <div style="width: 20px; flex-shrink: 0"></div>
-            </div>
-        </div>
-    </body>
+        #items_top {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-shrink: 0;
+            background-color: #005691;
+            border-radius: 10px 10px 0 0;
+        }
+
+        #items_top > * {
+            margin: 16px 0;
+            color: white;
+        }
+
+        tr, tbody {
+            width: 100%;
+        }
+
+        td, th {
+            text-align: center;
+            margin: 10px 0;
+            word-break: keep-all;
+        }
+
+        table {
+            width: 100%;
+            padding: 20px;
+        }
+
+        button {
+            width: 80px;
+            height: 40px;
+            border-radius: 7px;
+            background-color: #17b978;
+            outline: none;
+            border: none;
+            transition: all 0.3s;
+            color: white;
+            font-size: small;
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+
+        .accept:hover {
+            background-color: #086972;
+        }
+
+        .reject {
+            background-color: #fa4659;
+        }
+
+        .reject:hover {
+            background-color: #b80d57;
+        }
+
+        #page_bar {
+            width: 100%;
+            height: 50px;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .opera {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .opera > button {
+            margin: 0 2px;
+        }
+
+        .lists {
+            flex-shrink: 1;
+            overflow-y: scroll;
+        }
+
+        #fold {
+            position: absolute;
+            width: 100%;
+            height: 54px;
+            background-color: #005691;
+            top: 0; left: 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            border-radius: 10px 10px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+<div id="selfCenter">
+    <div id="fold">
+        <img src="${pageContext.request.contextPath}/static/potatob6/svg/fold.svg" onclick="fold()" style="margin: 12px 20px; width: 30px; height: 30px" />
+    </div>
+    <c:if test="${admin.avatarPath == null || admin.avatarPath.equals(\"\")}">
+        <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/static/avatars/default.svg" />
+    </c:if>
+
+    <c:if test="${!(admin.avatarPath == null || admin.avatarPath.equals(\"\"))}">
+        <img width="100" id="avatar" height="100" src="${pageContext.request.contextPath}/${admin.avatarPath}" />
+    </c:if>
+    <hr>
+    <p>欢迎，${admin.adminName}</p>
+    <p>管理员编号:${admin.adminId}</p>
+    <p>图书管理后台系统</p>
+    <hr>
+</div>
+<div id="items">
+    <div id="items_top">
+        <div style="width: 20px; flex-shrink: 0"></div>
+        <img onclick="window.location.href=${pageContext.request.contextPath}/Admin/" style="width: 22px; height: 22px; flex-shrink: 0" src="${pageContext.request.contextPath}/static/potatob6/svg/return.svg" />
+        <p style="flex-shrink: 1; margin: 0;margin-left: 20px;margin-top: 16px;width: 100%;text-align: center">待处理审核</p>
+        <div style="width: 20px; flex-shrink: 0"></div>
+    </div>
+
+    <div class="lists" style="width: 100%;">
+        <table>
+            <tbody id="tbody1">
+            <tr>
+                <th>审核序号</th>
+                <th>类型</th>
+                <th>申请的用户</th>
+                <th>创建时间</th>
+                <th>延期时间</th>
+                <th>书名</th>
+                <th>处理状态</th>
+                <th>处理管理员</th>
+                <th>处理时间</th>
+                <th>附加信息</th>
+            </tr>
+
+            <c:forEach var="item" items="${list}">
+                <tr id="trexam${item.examId}">
+                    <td>${item.examId} </td>
+                    <td>${item.examType} </td>
+                    <td>${item.examUser.userName} </td>
+                    <td>${item.examCreateTime} </td>
+                    <c:if test="${item.examType.equals(\"申请延期\")}">
+                        <td>${item.examExtra1} 天</td>
+                    </c:if>
+                    <c:if test="${!item.examType.equals(\"申请延期\")}">
+                        <td></td>
+                    </c:if>
+
+                    <c:if test="${item.examType.equals(\"申请借书\")}">
+                        <td>${item.examBook.bookName} </td>
+                    </c:if>
+                    <c:if test="${item.examType.equals(\"申请还书\") || item.examType.equals(\"申请延期\")}">
+                        <td>${item.examBorrowWithBook.bookName} </td>
+                    </c:if>
+
+                    <td>${item.examHandleStatus} </td>
+                    <td>${item.examAdmin.adminName}</td>
+                    <td>${item.examHandleTime}</td>
+                    <td>${item.examComment} </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="page_bar">
+        <img src="${pageContext.request.contextPath}/static/potatob6/svg/loadmore.svg" onclick="loadPage()" style="width: 30px; height: 30px" />
+    </div>
+</div>
+
+<script lang="JavaScript">
+    var folded = false;
+    function fold() {
+        if(folded) {
+            $("#selfCenter").css("width", "400px")
+            let chs = document.getElementById("selfCenter").children
+            for (var i = 1; i < chs.length; i++) {
+                chs[i].style.opacity = "1";
+            }
+        } else {
+            $("#selfCenter").css("width", "70px")
+            let chs = document.getElementById("selfCenter").children
+            for (var i = 1; i < chs.length; i++) {
+                chs[i].style.opacity = "0";
+            }
+        }
+        folded = !folded
+    }
+</script>
+
+<script lang="JavaScript">
+    var page = ${page};
+    function loadPage() {
+        console.log(page)
+        axios({
+            url: '${pageContext.request.contextPath}/admin/exams/pageExams',
+            method: 'POST',
+            data: {
+                page: page + 1
+            }
+        }).then(response=>{
+            const json = JSON.parse(response.data)
+            if(json.status === 'success') {
+                console.log(json)
+                if(json.list.length !== 0) {
+                    for(let i = 0; i < json.list.length; i++) {
+                        let l = json.list[i]
+                        let varNew = $("<tr></tr>")
+                        varNew.append($("<td>"+l.examId+"</td>"))
+                        varNew.append($("<td>"+l.examType+"</td>"))
+                        varNew.append($("<td>"+l.examUser.userName+"</td>"))
+                        varNew.append($("<td>"+l.examCreateTime+"</td>"))
+                        if (l.examType === '申请延期') {
+                            varNew.append($("<td>" + l.examExtra1 + " 天</td>"))
+                        } else {
+                            varNew.append($("<td></td>"))
+                        }
+
+                        if (l.examBook !== undefined && l.examBook.bookName !== undefined ) {
+                            if(l.examType === '申请延期' || l.examType === '申请还书') {
+                                varNew.append($("<td>"+l.examBorrowWithBook.bookName+"</td>"))
+                            } else {
+                                varNew.append($("<td>"+l.examBook.bookName+"</td>"))
+                            }
+                        } else {
+                            if(l.examType === '申请延期' || l.examType === '申请还书') {
+                                varNew.append($("<td>"+l.examBorrowWithBook.bookName+"</td>"))
+                            } else {
+                                varNew.append($("<td>"+l.examBook.bookName+"</td>"))
+                            }
+                        }
+
+                        varNew.append($("<td>"+l.examHandleStatus+"</td>"))
+
+                        if(l.examAdmin !== undefined) {
+                            varNew.append($("<td>" + l.examAdmin.adminName + "</td>"));
+                            varNew.append($("<td>" + l.examHandleTime + "</td>"));
+                        } else {
+                            varNew.append($("<td></td>"));
+                            varNew.append($("<td></td>"));
+                        }
+
+                        if (l.examComment !== undefined) {
+                            varNew.append($("<td>"+l.examComment+"</td>"))
+                        } else {
+                            varNew.append($("<td></td>"))
+                        }
+                        $("#tbody1").append(varNew)
+                    }
+
+                    page ++;
+                }
+                else {
+                    alert("没有更多内容了")
+                }
+            }
+        })
+    }
+</script>
+</body>
 </html>
