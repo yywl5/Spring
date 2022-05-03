@@ -43,15 +43,23 @@ public class LoginController {
         }
         return "yywl5/login";
     }
-
-    //更新验证码
+    /***
+     *  更新验证码
+     */
+    @RequestMapping("/toLogining")
+    public String toLogining(HttpServletRequest request){
+        return "yywl5/login";
+    }
     @ResponseBody
     @RequestMapping("/toLogin/updateCheck")
     public String updateCheck(HttpServletRequest request){
         return this.createCheck();
     }
 
-    //处理登录功能
+    /***
+     * 处理登录功能
+     */
+
     @RequestMapping("/login")
     public String login(HttpServletRequest request, HttpServletResponse response){
         String userName = request.getParameter("userName");
@@ -90,7 +98,10 @@ public class LoginController {
         return "yywl5/login";
     }
 
-
+    @RequestMapping("/toRegister")
+    public String toRegister(HttpServletRequest request){
+        return "yywl5/register";
+    }
     @RequestMapping("/freeLogin")
     public String main(HttpServletRequest request){
         Cookie []cookies = request.getCookies();
@@ -114,6 +125,7 @@ public class LoginController {
         User user = (User)session.getAttribute("user");
 
         String username = request.getParameter("username");
+        System.out.println(username);
         if(username==null){
             request.setAttribute("check",this.createCheck());
             return "yywl5/login";
@@ -123,8 +135,9 @@ public class LoginController {
             return  "{\"status\":0,\"data\":\"登录超时，请重新登录!\"}";
         }
 
-        user.setUserName(username);
+        user.setUserLogin(username);
         userService.update(user);
+        System.out.println("用户更改:"+user.getUserLogin());
         session.setAttribute("user",userService.queryByuserName(user.getUserName()));
         Cookie cookie = new Cookie("username",user.getUserName());
         cookie.setMaxAge(100);
@@ -160,4 +173,44 @@ public class LoginController {
         return "{\"status\":true,\"data\":\"/toLogin\"}";
     }
 
+    /****
+     * 注册用户
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/toLogin/register",produces = "text/html; charset=utf-8")
+    public String register(HttpServletRequest request, HttpServletResponse response){
+        String userName = request.getParameter("userName");
+        String pw = request.getParameter("userPassword");
+        String userLogin = request.getParameter("userLogin");
+        String check = request.getParameter("check");
+        if(check==null){
+            request.setAttribute("check",this.createCheck());
+            return "yywl5/register";
+        }
+        if(!check.equals(this.check)){
+            return "{\"status\":0,\"data\":\"验证码错误!\"}";
+        }
+        User user = userService.queryByuserName(userName);
+
+        if(user!=null){
+            return "{\"status\":1,\"data\":\"该用户已存在，去登录!\"}";
+        }
+        User newUser = new User();
+        newUser.setUserName(userName);
+        newUser.setUserPassword(pw);
+        newUser.setUserLogin(userLogin);
+
+        userService.insert(newUser);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user",userService.queryByuserName(userName));
+        Cookie cookie = new Cookie("username",newUser.getUserName());
+        cookie.setMaxAge(100);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "yywl5/login";
+    }
 }

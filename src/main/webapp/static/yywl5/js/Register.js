@@ -2,6 +2,7 @@ let baseUrl = "http://localhost:8080";
 
 let checkInput = $("#checkInput")[0];  //验证码输入
 let userInput = $("#userInput")[0];    //用户名输入
+let nickInput = $("#nicknameInput")[0];//昵称输入
 let pwInput = $("#pwInput")[0];        //密码输入
 let form = $("form")[0];           //form表单
 let check = $(".test_er")[0];      //验证码
@@ -44,6 +45,10 @@ function checkInputs () {
         test_err.innerText = "请输入验证码";
         return false;
     }
+    if(nickInput.value === undefined||checkInput.value === ""){
+        test_err.innerText = "请输入昵称";
+        return false;
+    }
     if(userInput.value === undefined||userInput.value === ""){
         user_err.innerText = "用户名不能为空!";
     }
@@ -65,44 +70,7 @@ form.onsubmit=function(){
         event.target.submit();
     }
 }
-//免密登录
-function freeLogin(){
-    $.ajax({
-        type:"post",
-        url:baseUrl+"/toLogin/freeLogin",
-        success:function (data) {
-            if(data==="0"){
-                alert("登录超时!请重新登录。");
-                window.location.href = baseUrl+"/toLogin";
-            }else{
-                window.location.href = baseUrl+"/freeLogin";
-            }
-        },
-        error:function(res){
-            console.log(res);
-            alert("请求超时!");
-        }
-    });
-}
-//获取数据
-function getData(){
-    return {
-        phone:userInput.value,
-        password:pwInput.value,
-        check:checkInput.value
-    };
-}
-//请求回调函数
-function success(res){
-    let req = JSON.parse(res)
-    if(req.status===0){
-        test_err.innerText = req.data;
-    }else if(req.status===1){
-        alert(req.data);
-    }else{
-        window.location.href = baseUrl+"/freeLogin";
-    }
-}
+
 // 快速注册
 function fastRegister(){
     let bl = checkInputs();
@@ -111,20 +79,6 @@ function fastRegister(){
             $.ajax({
                 type:"post",
                 url:baseUrl+"/toLogin/register",
-                data:getData(),
-                success:function(res){success(res)}
-            })
-        }
-    }
-}
-//修改密码
-function updatePassword(){
-    let bl = checkInputs();
-    if(bl){
-        if(window.confirm("是否修改密码?")){
-            $.ajax({
-                type:"post",
-                url:baseUrl+"/toLogin/updatePw",
                 data:getData(),
                 success:function(res){success(res)}
             })

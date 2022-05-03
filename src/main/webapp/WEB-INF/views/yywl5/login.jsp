@@ -47,6 +47,7 @@
         <div class="err_box test_err">${msg}</div>
         <%--提交按钮--%>
         <input type="submit" value="登录" class="submit"/>
+        <span>没有账号?<a href="${pageContext.request.contextPath}/toRegister">去注册</a></span>
         <%--其他部分--%>
     </form>
 </div>

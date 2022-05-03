@@ -9,7 +9,7 @@
 <body>
 
 <header>
-    <a href="#" class="logo"> <h2>欢迎 <span>${user.getUserName()}</span> 来到星星图书主页</h2></a>
+    <a href="#" class="logo"> <h2>欢迎 <span>${user.getUserLogin()}</span> 来到星星图书主页</h2></a>
     <div class="rightSide">
         <div class="btns dayNight">
             <ion-icon name="moon-outline"></ion-icon>
