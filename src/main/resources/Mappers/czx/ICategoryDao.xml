@@ -10,4 +10,8 @@
     <select id="getCategoryById" parameterType="Integer" resultType="ICategory">
         select * from I_category where categoryId=#{categoryId}
     </select>
+    <select id="getCategoryByname" parameterType="Beans.czx.ICategory">
+        select * from ICategory where categoryName=#{categoryName}
+    </select>
+
 </mapper>

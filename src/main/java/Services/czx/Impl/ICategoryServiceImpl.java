@@ -23,4 +23,25 @@ public class ICategoryServiceImpl implements ICategoryService {
     public ICategory findCategoryById(Integer categoryId) {
         return this.categoryDao.getCategoryById(categoryId);
     }
+
+    @Override
+    public ICategory getCategoryByname(String categoryName){
+        return this.getCategoryByname(categoryName);
+    }
+    @Override
+    public int addIcategory(ICategory category){
+        return this.addIcategory(category);
+    }
+        @Override
+    public int updateIcategory(ICategory category){
+        return this.updateIcategory(category);
+    }
+    @Override
+    public int delIcategory(Integer categoryId){
+        return this.delIcategory(categoryId);
+    }
+    @Override
+    public int setIcategory(ICategory category){
+        return this.setIcategory(category);
+    }
 }

@@ -50,8 +50,11 @@ $(function(){
 						<span><img src="${pageContext.request.contextPath}/static/czx/img/leftico02.png" /></span>文章类别管理
 					</div>
 					<ul class="menuson">
-						<li><cite></cite><a href="${pageContext.request.contextPath}/findCategoryList.action"
+						<li><cite></cite><a href="${pageContext.request.contextPath}/findIcategorylist.action"
 							target="rightFrame">图书类别列表</a><i></i></li>
+						<li><cite></cite><a href="${pageContext.request.contextPath}/findIcategorylist.action"
+											target="rightFrame">添加图书类别</a><i></i></li>
+						`
 					</ul>
 				</dd>
 			</dl>
