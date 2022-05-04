@@ -141,8 +141,7 @@
     <li><a href="#" id="setHeadImg" onclick="showDialog()">上传头像</a></li>
     <dialog>
         <button id="close" ONCLICK="hideDialog()">&Chi;</button>
-        <form action="<c:url value='/fileUpload'/>"
-              method="post" enctype="multipart/form-data" onsubmit="return check()">
+        <form action="${pageContext.request.contextPath}/fileUpload" method="post" enctype="multipart/form-data" onsubmit="return check()">
             上传人：<input id="usernames" type="text" name="usernames" value="${user.getUserName()}"readonly=“readonly”/><br />
             请选择文件：<input id="file" type="file" name="uploadfile" multiple="multiple" /><br />
             <input type="submit" value="上传" />
@@ -185,13 +184,16 @@
     }
     //dialog 居中显示
 
-
 </script>
 <script>
     // 判断是否填写上传人并已选择上传文件
     function check() {
         var name = document.getElementById("usernames").value;
         var file = document.getElementById("file").value;
+            if(!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(file)) {
+                alert("图片类型必须是.gif,jpeg,jpg,png中的一种")
+                return false;
+            }
         if (name == "") {
             alert("填写上传人");
             return false;

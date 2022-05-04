@@ -11,4 +11,15 @@
     <insert id="save" parameterType="Beans.wyl.HeadImg">
         insert into HeadImg values(#{userName},#{imgPath})
     </insert>
+    <select id="checkexist" resultType="Beans.wyl.HeadImg">
+        select * from HeadImg where userName = #{userName}
+    </select>
+
+    <update id="updateheadimg" parameterType="Beans.wyl.HeadImg">
+        update HeadImg set imgPath=#{imgPath} where userName=#{userName}
+    </update>
+
+    <select id="queryimgByuserName" resultType="Beans.wyl.HeadImg">
+        select userName,imgPath from HeadImg where userName=#{userName}
+    </select>
 </mapper>

@@ -1,9 +1,12 @@
 package Controllers.wyl.APIs;
 
 import Beans.potatob6.User;
+import Beans.wyl.HeadImg;
+import Services.yywl5.HeadImgService;
 import Services.yywl5.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -11,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author 星包客
@@ -19,6 +23,8 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private HeadImgService headimgService;
     private String check;
     //生成验证码
     private String createCheck(){
@@ -61,10 +67,19 @@ public class LoginController {
      */
 
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, HttpServletResponse response){
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model){
         String userName = request.getParameter("userName");
         String userPassword = request.getParameter("userPassword");
         String check = request.getParameter("check");
+        System.out.println("登录的userName为:"+userName);
+        HeadImg headimg = headimgService.queryimgByuserName(userName);
+
+        if(headimg!=null){
+            model.addAttribute("filesFileName", headimg.getImgPath());
+            System.out.println("从数据库获取到的图片:"+headimg.getImgPath());
+        }else{
+            model.addAttribute("filesFileName","headimg.png");
+        }
         if(check==null){
             request.setAttribute("check",this.createCheck());
             return "yywl5/login";

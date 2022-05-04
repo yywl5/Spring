@@ -16,7 +16,7 @@ function updateTest() {
         success:function(data){
             check.innerText = data;
         }
-    });
+    },1000);
 }
 // 获取输入信息
 function handleInputChange() {
@@ -82,7 +82,7 @@ function freeLogin(){
             console.log(res);
             alert("请求超时!");
         }
-    });
+    },1000);
 }
 //获取数据
 function getData(){
@@ -113,7 +113,7 @@ function fastRegister(){
                 url:baseUrl+"/toLogin/register",
                 data:getData(),
                 success:function(res){success(res)}
-            })
+            },1000)
         }
     }
 }

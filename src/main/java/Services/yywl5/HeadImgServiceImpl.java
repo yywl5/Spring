@@ -28,6 +28,19 @@ public class HeadImgServiceImpl implements HeadImgService{
         return headimgMapper.save(headimg);
     }
     @Override
+    public HeadImg checkexist(String userName){
+        return headimgMapper.checkexist(userName);
+    }
+
+    @Override
+    public HeadImg queryimgByuserName(String userName){
+        return headimgMapper.queryimgByuserName(userName);
+    }
+    @Override
+    public int updateheadimg(HeadImg headimg){
+        return headimgMapper.updateheadimg(headimg);
+    }
+    @Override
     public String save(MultipartFile file, HeadImg headimg, ModelMap map)throws IOException{
         /**
          * 保存图片的路径,图书上传成功后,将路径保存到数据库

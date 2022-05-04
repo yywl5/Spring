@@ -16,6 +16,7 @@
         <typeAlias type="Beans.czx.INews"     alias="INews"/>
         <typeAlias type="Beans.czt.BorrowWithBook" alias="BorrowWithBook" />
         <typeAlias type="Beans.czt.Borrow"    alias="Borrow" />
+        <typeAlias type="Beans.wyl.HeadImg"   alias="HeadImg"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">

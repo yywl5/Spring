@@ -17,7 +17,7 @@ function updateTest() {
         success:function(data){
             check.innerText = data;
         }
-    });
+    },1000);
 }
 // 获取输入信息
 function handleInputChange() {
@@ -81,7 +81,7 @@ function fastRegister(){
                 url:baseUrl+"/toLogin/register",
                 data:getData(),
                 success:function(res){success(res)}
-            })
+            },1000)
         }
     }
 }

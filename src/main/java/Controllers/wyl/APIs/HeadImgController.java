@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
+ * 本代码为废弃代码,存在调试问题
  * @author 星包客
  */
 @Controller
@@ -26,7 +27,7 @@ public class HeadImgController {
         List<HeadImg>lists = headimgservice.list();
         model.addAttribute("lists",lists);
         System.out.println("请求lists of img");
-        return "forward:/listImages.jsp";
+        return "yywl5/loginMainPage";
     }
     @RequestMapping("saveImage")
     public String saveImage(MultipartFile file, HttpServletRequest request)throws IOException{
@@ -49,7 +50,7 @@ public class HeadImgController {
         HeadImg headimg = new HeadImg();
         headimg.setImgPath(newFileName);
         headimgservice.save(headimg);
-        return "redirect:yywl5/listImages";
+        return "yywl5/loginMainPage";
     }
 
 }

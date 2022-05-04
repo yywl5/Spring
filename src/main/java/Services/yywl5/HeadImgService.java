@@ -33,4 +33,21 @@ public interface HeadImgService {
      * @throws IOException
      */
     String save(MultipartFile file, HeadImg headImg, ModelMap map) throws IOException;
+
+    /***
+     *
+     * @param userName
+     * @return
+     */
+    HeadImg checkexist(String userName);
+
+    /***
+     *更改用户头像
+     */
+    int updateheadimg(HeadImg headimg);
+
+    /***
+     * @return
+     */
+    HeadImg queryimgByuserName(String userName) ;
 }

@@ -17,4 +17,21 @@ public interface HeadImgMapper {
      * @return
      */
     int save(HeadImg headimg);
+    /****
+     * 检测是否存在重复
+     * @return
+     */
+    HeadImg checkexist(String username);
+
+    /***
+     * 如果有重复,则更改
+     */
+    int updateheadimg(HeadImg headimg);
+
+    /**
+     * 返回头像
+     * @param username
+     * @return
+     */
+    HeadImg queryimgByuserName(String username);
 }
