@@ -1,0 +1,14 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.apache.org//DTD Mapper 3.0//EN"
+        "http://mybatis.apache.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Mappers.wyl.HeadImgMapper">
+  <!--查询所有的图片-->
+    <select id="list" resultType="Beans.wyl.HeadImg">
+        select userName,imgPath from HeadImg
+    </select>
+
+    <insert id="save" parameterType="Beans.wyl.HeadImg">
+        insert into HeadImg values(#{userName},#{imgPath})
+    </insert>
+</mapper>

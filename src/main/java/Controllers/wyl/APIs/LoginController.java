@@ -234,4 +234,11 @@ public class LoginController {
 
         return "{\"status\":true,\"data\":\"修改成功，点击前往主页面\"}";
     }
+
+
+    @RequestMapping("/test")
+    public String test(HttpServletRequest request){
+        return "yywl5/test";
+    }
+
 }
