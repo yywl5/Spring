@@ -117,17 +117,3 @@ function fastRegister(){
         }
     }
 }
-//修改密码
-function updatePassword(){
-    let bl = checkInputs();
-    if(bl){
-        if(window.confirm("是否修改密码?")){
-            $.ajax({
-                type:"post",
-                url:baseUrl+"/toLogin/updatePw",
-                data:getData(),
-                success:function(res){success(res)}
-            })
-        }
-    }
-}

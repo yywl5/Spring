@@ -213,4 +213,25 @@ public class LoginController {
 
         return "yywl5/login";
     }
+
+    /***
+     * 修改密码
+     */
+
+    @ResponseBody
+    @RequestMapping(value = "/toLogin/updatePw",produces = "text/html; charset=utf-8")
+    public String updatePw(HttpServletRequest request,HttpServletResponse response){
+        String pw = request.getParameter("userPassword");
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        user.setUserPassword(pw);
+        userService.update(user);
+        session.setAttribute("user",userService.queryByuserName(user.getUserName()));
+        Cookie cookie = new Cookie("username",user.getUserName());
+        cookie.setMaxAge(100);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "{\"status\":true,\"data\":\"修改成功，点击前往主页面\"}";
+    }
 }
