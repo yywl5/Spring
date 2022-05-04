@@ -1,9 +1,12 @@
 package Controllers.wyl.APIs;
 
 import Beans.potatob6.User;
+import Beans.wyl.HeadImg;
+import Services.yywl5.HeadImgService;
 import Services.yywl5.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -11,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 /**
  * @author 星包客
@@ -19,6 +23,8 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private HeadImgService headimgService;
     private String check;
     //生成验证码
     private String createCheck(){
@@ -43,20 +49,37 @@ public class LoginController {
         }
         return "yywl5/login";
     }
-
-    //更新验证码
+    /***
+     *  更新验证码
+     */
+    @RequestMapping("/toLogining")
+    public String toLogining(HttpServletRequest request){
+        return "yywl5/login";
+    }
     @ResponseBody
     @RequestMapping("/toLogin/updateCheck")
     public String updateCheck(HttpServletRequest request){
         return this.createCheck();
     }
 
-    //处理登录功能
+    /***
+     * 处理登录功能
+     */
+
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, HttpServletResponse response){
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model){
         String userName = request.getParameter("userName");
         String userPassword = request.getParameter("userPassword");
         String check = request.getParameter("check");
+        System.out.println("登录的userName为:"+userName);
+        HeadImg headimg = headimgService.queryimgByuserName(userName);
+
+        if(headimg!=null){
+            model.addAttribute("filesFileName", headimg.getImgPath());
+            System.out.println("从数据库获取到的图片:"+headimg.getImgPath());
+        }else{
+            model.addAttribute("filesFileName","headimg.png");
+        }
         if(check==null){
             request.setAttribute("check",this.createCheck());
             return "yywl5/login";
@@ -90,7 +113,10 @@ public class LoginController {
         return "yywl5/login";
     }
 
-
+    @RequestMapping("/toRegister")
+    public String toRegister(HttpServletRequest request){
+        return "yywl5/register";
+    }
     @RequestMapping("/freeLogin")
     public String main(HttpServletRequest request){
         Cookie []cookies = request.getCookies();
@@ -114,6 +140,7 @@ public class LoginController {
         User user = (User)session.getAttribute("user");
 
         String username = request.getParameter("username");
+        System.out.println(username);
         if(username==null){
             request.setAttribute("check",this.createCheck());
             return "yywl5/login";
@@ -123,8 +150,9 @@ public class LoginController {
             return  "{\"status\":0,\"data\":\"登录超时，请重新登录!\"}";
         }
 
-        user.setUserName(username);
+        user.setUserLogin(username);
         userService.update(user);
+        System.out.println("用户更改:"+user.getUserLogin());
         session.setAttribute("user",userService.queryByuserName(user.getUserName()));
         Cookie cookie = new Cookie("username",user.getUserName());
         cookie.setMaxAge(100);
@@ -158,6 +186,74 @@ public class LoginController {
         }
         System.out.println(user.getUserName()+user.getUserId()+"TEST");
         return "{\"status\":true,\"data\":\"/toLogin\"}";
+    }
+
+    /****
+     * 注册用户
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/toLogin/register",produces = "text/html; charset=utf-8")
+    public String register(HttpServletRequest request, HttpServletResponse response){
+        String userName = request.getParameter("userName");
+        String pw = request.getParameter("userPassword");
+        String userLogin = request.getParameter("userLogin");
+        String check = request.getParameter("check");
+        if(check==null){
+            request.setAttribute("check",this.createCheck());
+            return "yywl5/register";
+        }
+        if(!check.equals(this.check)){
+            return "{\"status\":0,\"data\":\"验证码错误!\"}";
+        }
+        User user = userService.queryByuserName(userName);
+
+        if(user!=null){
+            return "{\"status\":1,\"data\":\"该用户已存在，去登录!\"}";
+        }
+        User newUser = new User();
+        newUser.setUserName(userName);
+        newUser.setUserPassword(pw);
+        newUser.setUserLogin(userLogin);
+
+        userService.insert(newUser);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("user",userService.queryByuserName(userName));
+        Cookie cookie = new Cookie("username",newUser.getUserName());
+        cookie.setMaxAge(100);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "yywl5/login";
+    }
+
+    /***
+     * 修改密码
+     */
+
+    @ResponseBody
+    @RequestMapping(value = "/toLogin/updatePw",produces = "text/html; charset=utf-8")
+    public String updatePw(HttpServletRequest request,HttpServletResponse response){
+        String pw = request.getParameter("userPassword");
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        user.setUserPassword(pw);
+        userService.update(user);
+        session.setAttribute("user",userService.queryByuserName(user.getUserName()));
+        Cookie cookie = new Cookie("username",user.getUserName());
+        cookie.setMaxAge(100);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+        return "{\"status\":true,\"data\":\"修改成功，点击前往主页面\"}";
+    }
+
+
+    @RequestMapping("/test")
+    public String test(HttpServletRequest request){
+        return "yywl5/test";
     }
 
 }

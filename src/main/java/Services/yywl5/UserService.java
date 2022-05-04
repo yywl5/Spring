@@ -46,4 +46,12 @@ public interface UserService {
      * @return 是否成功
      */
     void deleteById(Integer userId);
+
+    /**
+     * 新增数据
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    User insert(User user);
 }
