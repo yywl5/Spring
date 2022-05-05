@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
  */
 @Service("IcategoryService")
 public class ICategoryServiceImpl implements ICategoryService {
-    //注入RoleDao
     @Autowired
     private ICategoryDao categoryDao;
     @Override
@@ -26,22 +25,22 @@ public class ICategoryServiceImpl implements ICategoryService {
 
     @Override
     public ICategory getCategoryByname(String categoryName){
-        return this.getCategoryByname(categoryName);
+        return this.categoryDao.getCategoryByname(categoryName);
     }
     @Override
     public int addIcategory(ICategory category){
-        return this.addIcategory(category);
+        return this.categoryDao.addIcategory(category);
     }
         @Override
     public int updateIcategory(ICategory category){
-        return this.updateIcategory(category);
+        return this.categoryDao.updateIcategory(category);
     }
     @Override
     public int delIcategory(Integer categoryId){
-        return this.delIcategory(categoryId);
+        return this.categoryDao.delIcategory(categoryId);
     }
     @Override
     public int setIcategory(ICategory category){
-        return this.setIcategory(category);
+        return this.categoryDao.setIcategory(category);
     }
 }

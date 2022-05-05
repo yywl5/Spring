@@ -3,15 +3,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Mappers.czx.ICategoryDao">
     <!--查询新闻类别集合列表 -->
-    <select id="selectCategoryList" resultType="ICategory">
+    <select id="selectCategoryList" resultType="Beans.czx.ICategory">
         select * from I_category
     </select>
     <!--通过categoryId查询新闻类别 -->
-    <select id="getCategoryById" parameterType="Integer" resultType="ICategory">
+    <select id="getCategoryById" parameterType="Integer" resultType="Beans.czx.ICategory">
         select * from I_category where categoryId=#{categoryId}
     </select>
-    <select id="getCategoryByname" parameterType="Beans.czx.ICategory">
-        select * from ICategory where categoryName=#{categoryName}
+    <!--通过categoryName查询新闻类别 -->
+    <select id="getCategoryByname" parameterType="String" resultType="Beans.czx.ICategory">
+        select * from I_category where categoryName=#{categoryName}
     </select>
-
+    <insert id="addIcategory" parameterType="Beans.czx.ICategory">
+        insert into I_category values(#{categoryId},#{categoryName})
+    </insert>
 </mapper>
