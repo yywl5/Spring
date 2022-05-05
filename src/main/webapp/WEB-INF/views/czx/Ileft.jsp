@@ -52,7 +52,7 @@ $(function(){
 					<ul class="menuson">
 						<li><cite></cite><a href="${pageContext.request.contextPath}/findIcategorylist.action"
 							target="rightFrame">图书类别列表</a><i></i></li>
-						<li><cite></cite><a href="${pageContext.request.contextPath}/findIcategorylist.action"
+						<li><cite></cite><a href="${pageContext.request.contextPath}/toAddcategory.action"
 											target="rightFrame">添加图书类别</a><i></i></li>
 						`
 					</ul>

@@ -41,8 +41,8 @@
                     <td align="center">${Icategory.categoryId}</td>
                     <td align="center">${Icategory.categoryName}</td>
                     <td align="center">
-                        <a href="${pageContext.request.contextPath}/toEditUser.action?userId=${Icategory.categoryId}">修改</a>
-                            &nbsp;|&nbsp;<a href='#' onclick="del(${Icategory.categoryId})">删除</a>
+                        <a href="${pageContext.request.contextPath}/toEditCategory.action?categoryId=${Icategory.categoryId}">修改</a>
+                            &nbsp;|&nbsp;<a href='#' onclick="delICategory(${Icategory.categoryId})">删除</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -52,7 +52,7 @@
     <script type="text/javascript">
         function disableICategory(categoryId){
             $.ajax({
-                url:"${pageContext.request.contextPath }/disableUser.action",
+                url:"${pageContext.request.contextPath}/disableUser.action",
                 type:"post",
                 //data表示发送的数据
                 data:JSON.stringify({categoryId:categoryId}),
@@ -72,11 +72,11 @@
                         }
                     }
                 }
-            });
+            },1000);
         }
         function enableICategory(categoryId){
             $.ajax({
-                url:"${pageContext.request.contextPath }/enableUser.action",
+                url:"${pageContext.request.contextPath}/enableUser.action",
                 type:"post",
                 //data表示发送的数据
                 data:JSON.stringify({categoryId:categoryId}),
@@ -96,13 +96,13 @@
                         }
                     }
                 }
-            });
+            },1000);
         }
         function delICategory(categoryId){
             if(window.confirm("您确定要删除吗？"))
             {
                 $.ajax({
-                    url:"${pageContext.request.contextPath }/delUser.action",
+                    url:"${pageContext.request.contextPath}/delCategory.action",
                     type:"post",
                     //data表示发送的数据
                     data:JSON.stringify({categoryId:categoryId}),
@@ -122,7 +122,7 @@
                             }
                         }
                     }
-                });
+                },1000);
             }
         }
     </script>

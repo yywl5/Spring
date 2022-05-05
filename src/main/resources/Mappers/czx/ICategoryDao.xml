@@ -17,4 +17,18 @@
     <insert id="addIcategory" parameterType="Beans.czx.ICategory">
         insert into I_category values(#{categoryId},#{categoryName})
     </insert>
+    <delete id="delIcategory" parameterType="Integer">
+        delete  from I_category where categoryId = #{categoryId}
+    </delete>
+    <update id="updateIcategory" parameterType="Beans.czx.ICategory">
+        update I_category
+        <set>
+            categoryId=#{categoryId},
+            categoryName=#{categoryName},
+            <if test="categoryName!=null and categoryName!=''">
+                categoryName=#{categoryName},
+            </if>
+        </set>
+        where categoryId=#{categoryId}
+    </update>
 </mapper>

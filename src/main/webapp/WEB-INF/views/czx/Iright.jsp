@@ -39,7 +39,7 @@ request.setCharacterEncoding("UTF-8");
 					<li><img src="${pageContext.request.contextPath}/static/czx/img//ico03.png"
 						style="width: 50px; height: 50px;" />
 					<p>
-							<a href="${pageContext.request.contextPath}/findCategoryList.action">信息类别管理</a>
+							<a href="${pageContext.request.contextPath}/findIcategorylist.action">信息类别管理</a>
 						</p></li>
 				</c:when>
 				<c:when test="${sessionScope.login_user.roleId==2}">

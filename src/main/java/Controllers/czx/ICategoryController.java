@@ -1,13 +1,18 @@
 package Controllers.czx;
 
 import Beans.czx.ICategory;
+import Beans.czx.IRole;
+import Beans.czx.IUser;
 import Services.czx.ICategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -67,6 +72,59 @@ public class ICategoryController {
                 System.out.println("在addCategory（2）处进入到错误页");
                 return "czx/Iadd_category";
             }
+        }
+    }
+
+    //删除用户（前台页面中通过ajax方式调用此方法）
+    @RequestMapping(value = "delCategory.action")
+    @ResponseBody
+    public ICategory delCategory(@RequestBody ICategory category, Model model) {
+        System.out.println("ajax转发调用已接收");
+        int rows = icategoryService.delIcategory(category.getCategoryId());
+        if (rows>0) {
+            return category;
+        }else{
+            //此处设置为0，只是作为操作失败的标记用
+            category.setCategoryId(0);
+            return category;
+        }
+    }
+
+    /**
+     * 修改用户
+     * @param category
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/EditCategory.action", method = RequestMethod.POST)
+    public String editCategory(ICategory category, Model model) {
+        System.out.println("category处所获取的category值为:"+category);
+        int rows = icategoryService.updateIcategory(category);
+        if (rows > 0) {
+            // 添加成功，转向用户列表页面
+            return "redirect:findIcategorylist.action";
+        } else {
+            model.addAttribute("category", category);
+            // 修改失败，转回修改用户页面
+            return "czx/Iedit_category";
+        }
+    }
+
+    /***
+     * 修改页面跳转
+     * @param categoryId
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/toEditCategory.action")
+    public String toEditCategory(Integer categoryId, Model model) {
+        //通过userId获取用户
+        ICategory category = icategoryService.findCategoryById(categoryId);
+        if (category != null) {
+            model.addAttribute("category", category);
+            return "czx/Iedit_category";
+        }else{
+            return "redirect:findIcategorylist.action";
         }
     }
 }
