@@ -40,10 +40,23 @@
         select * from Exams limit ${startIndex},${pageCount}
     </select>
 
-    <select id="getBookInBorrow" parameterType="Integer" resultType="BorrowWithBook">
-        select borrow.borrowId as borrowId, borrow.bookId as bookId, borrow.userId as userId, borrow.borrowDate as borrowDate, borrow.timeLimit as timeLimit, borrow.returnDate as returnDate, Books.bookName as bookName
-        from borrow, Books where borrow.bookId=Books.bookId and borrow.bookId=#{bookId}
+    <select id="getBookInBorrow" parameterType="Integer" resultMap="PBBorrowWithBookResMap">
+        select borrow.borrowId as borrowId, borrow.bookId as bookId,
+        borrow.userId as userId, borrow.borrowDate as borrowDate,
+        borrow.timeLimit as timeLimit, borrow.returnDate as returnDate,
+        Books.bookName as bookName
+        from borrow, Books where borrow.bookId=Books.bookId and borrow.borrowId=#{examExtra}
     </select>
+
+    <resultMap id="PBBorrowWithBookResMap" type="PBBorrowWithBook">
+        <id property="borrowId" column="borrowId" />
+        <result property="bookId" column="bookId" />
+        <result property="userId" column="userId" />
+        <result property="borrowDate" column="borrowDate" />
+        <result property="timeLimit" column="timeLimit" />
+        <result property="returnDate" column="returnDate" />
+        <result property="bookName" column="bookName" />
+    </resultMap>
 
     <resultMap id="queryUserById" type="User">
         <id property="userId" column="userId" />

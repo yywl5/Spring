@@ -4,9 +4,11 @@ import Beans.czt.BorrowWithBook;
 import Beans.potatob6.Administrator;
 import Beans.potatob6.Exam;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository("PBAdminExamDAO")
 public interface ExamMapper {
 
     // 处理同意

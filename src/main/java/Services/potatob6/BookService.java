@@ -3,16 +3,18 @@ package Services.potatob6;
 import Beans.potatob6.Book;
 import Mappers.potatob6.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.List;
 
-@Service
+@Service("PBAdminBookService")
 public class BookService {
 
     @Autowired
+    @Qualifier("PBAdminBookDAO1")
     private BookMapper bookMapper;
 
     private static Integer numberOfPages = 20;

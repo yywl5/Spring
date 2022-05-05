@@ -1,9 +1,10 @@
 package Beans.potatob6;
 
-import Beans.czt.BorrowWithBook;
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 
+@Component("PBAdminExam")
 public class Exam {
     public Integer getExamId() {
         return examId;
@@ -43,6 +44,14 @@ public class Exam {
 
     public void setExamExtra(String examExtra) {
         this.examExtra = examExtra;
+    }
+
+    public String getExamExtra1() {
+        return examExtra1;
+    }
+
+    public void setExamExtra1(String examExtra1) {
+        this.examExtra1 = examExtra1;
     }
 
     public String getExamHandleTime() {
@@ -91,14 +100,6 @@ public class Exam {
 
     public void setExamAdmin(Administrator examAdmin) {
         this.examAdmin = examAdmin;
-    }
-
-    public String getExamExtra1() {
-        return examExtra1;
-    }
-
-    public void setExamExtra1(String examExtra1) {
-        this.examExtra1 = examExtra1;
     }
 
     public Book getExamBook() {

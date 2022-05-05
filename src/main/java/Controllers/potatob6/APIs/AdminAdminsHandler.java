@@ -4,6 +4,7 @@ import Beans.potatob6.Administrator;
 import Services.potatob6.AdminsService;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import java.util.Map;
 public class AdminAdminsHandler {
 
     @Autowired
+    @Qualifier("PBAdminsService")
     private AdminsService adminsService;
 
     /**

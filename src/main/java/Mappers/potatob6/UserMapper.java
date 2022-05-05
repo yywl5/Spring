@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("PBAdminUserDAO")
 public interface UserMapper {
 
     // 从特定Id查用户

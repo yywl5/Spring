@@ -3,13 +3,15 @@ package Services.potatob6;
 import Beans.potatob6.Administrator;
 import Mappers.potatob6.AdminAdminsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
+@Service("PBAdminsService")
 public class AdminsService {
 
     @Autowired
+    @Qualifier("PBAdminAdminsDAO")
     private AdminAdminsMapper adminAdminsMapper;
 
     private static Integer numberOfPages = 20;

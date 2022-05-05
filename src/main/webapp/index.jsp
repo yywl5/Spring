@@ -218,7 +218,7 @@
         <div class="nagivator_item"><a href="${pageContext.request.contextPath}/loginpage.action">留言</a></div>
         <div class="nagivator_item"><a href="${pageContext.request.contextPath}/toNews">查看新闻</a></div>
         <div class="nagivator_item" onclick="aboutDis()">关于</div>
-        <div class="nagivator_item"><a href="./AdminMainPage.jsp">管理员入口</a></div>
+        <div class="nagivator_item"><a href="${pageContext.request.contextPath}/Admin">管理员入口</a></div>
         <div class="nagivator_item"><a href="./index2.jsp">星星云</a></div>
 
     </div>

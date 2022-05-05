@@ -2,9 +2,12 @@ package Mappers.potatob6;
 
 import Beans.potatob6.Administrator;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
+@Repository("PBAdminDAO")
 public interface AdminMapper {
 
     //获取所有的管理员
