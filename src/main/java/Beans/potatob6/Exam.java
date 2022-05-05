@@ -1,6 +1,6 @@
 package Beans.potatob6;
 
-import Beans.czt.BorrowWithBook;
+import Beans.potatob6.BorrowWithBook;
 
 import java.sql.Timestamp;
 
@@ -133,7 +133,7 @@ public class Exam {
                 ", examUser=" + examUser +
                 ", examAdmin=" + examAdmin +
                 ", examBook=" + examBook +
-                ", examBorrowWithBook=" + examBorrowWithBook +
+//                ", examBorrowWithBook=" + examBorrowWithBook +
                 '}';
     }
 
