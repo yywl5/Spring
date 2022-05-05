@@ -3,6 +3,7 @@ package Controllers.potatob6.Pages;
 import Beans.potatob6.Administrator;
 import Services.potatob6.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 public class Admin {
 
     @Autowired
+    @Qualifier("PBAdminExamService")
     private ExamService examService;
 
     /**

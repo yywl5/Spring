@@ -346,18 +346,19 @@
                     page: page + 1
                 }
             }).then(response=>{
-                const json = JSON.parse(response.data)
+                let json = JSON.parse(response.data)
                 if(json.status === 'success') {
-                    console.log(json)
                     if(json.list.length !== 0) {
                         for(let i = 0; i < json.list.length; i++) {
                             let l = json.list[i]
-                            console.log(l.examComment)
+                            console.log(l)
                             let varNew = $("<tr></tr>")
+                            varNew.id = "trexam"+l.examId;
                             varNew.append($("<td>"+l.examId+"</td>"))
                             varNew.append($("<td>"+l.examType+"</td>"))
                             varNew.append($("<td>"+l.examUser.userName+"</td>"))
                             varNew.append($("<td>"+l.examCreateTime+"</td>"))
+                            console.log(l.examType)
                             if (l.examType === '申请延期') {
                                 varNew.append($("<td>" + l.examExtra1 + " 天</td>"))
                             } else {

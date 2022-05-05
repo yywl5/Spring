@@ -33,7 +33,7 @@ public interface UserDao {
      * @param user
      */
 
-    @Update("update Users set userName = #{userName}, userPassword = #{userPassword} where userId = #{userId}")
+    @Update("update Users set userName = #{userName}, userPassword = #{userPassword},userLogin = #{userLogin} where userId = #{userId}")
     void update(User user);
 
     /****
@@ -49,4 +49,23 @@ public interface UserDao {
      */
     @Delete("delete from Users where userId = #{userId}")
     void deleteById(Integer userId);
+
+    /**
+     *
+     *使用userId查询用户信息
+     * @param userLogin
+     * @return
+     *
+     */
+    @Select("select * from Users where userLogin = #{userLogin}")
+    User queryByuserLogin(String userLogin);
+
+    /***
+     * 添加用户
+     * @param user
+     */
+    @Insert("insert into Users values(null,#{userLogin},#{userName},#{userPassword})")
+    @Options(useGeneratedKeys=true,keyProperty="userId", keyColumn="userId")
+
+    void insert(User user);
 }

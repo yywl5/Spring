@@ -62,4 +62,16 @@ public class UserServiceImpl implements UserService{
     public void deleteById(Integer userId) {
         this.userDao.deleteById(userId);
     }
+
+    /**
+     * 新增数据
+     *
+     * @param user 实例对象
+     * @return 实例对象
+     */
+    @Override
+    public User insert(User user) {
+        this.userDao.insert(user);
+        return user;
+    }
 }

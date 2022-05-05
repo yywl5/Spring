@@ -24,6 +24,10 @@
             flex-direction: column;
         }
 
+        body > * {
+            margin: 20px 0;
+        }
+
         h2, h3 {
             letter-spacing: 0.5rem;
         }
@@ -39,8 +43,7 @@
 </head>
 
 <body>
-    <h2>错误</h2>
-    <h3>代码:${code}</h3>
-    <h3>${message}</h3>
+    <h2>出现严重错误</h2>
+    <p style="text-align: center">${message}</p>
 </body>
 </html>

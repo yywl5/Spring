@@ -19,6 +19,7 @@ import java.util.Map;
 public class AdminExamHandler {
 
     @Autowired
+    @Qualifier("PBAdminExamService")
     private ExamService examService;
 
     @Autowired

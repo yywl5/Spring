@@ -37,3 +37,28 @@ function logoutUser(){
         }
     }
 }
+//修改密码
+function updatePassword(){
+    if(window.confirm("确认修改密码？")) {
+        let password = window.prompt("请输入新密码:");
+        let newpassword = window.prompt("请再次输入新密码:")
+        if (password.trim() === newpassword.trim()) {
+            if (window.confirm("是否修改为改密码?")) {
+                $.ajax({
+                    type: "post",
+                    url: baseUrl + "/toLogin/updatePw",
+                    data: {userPassword:password},
+                    success:function (res) {
+                        let req = JSON.parse(res);
+                        alert(req.data);
+                        if(req.status===0){
+                            window.location.href = baseUrl+"/toLogin";
+                        }else{
+                            window.location.href = baseUrl+"/freeLogin";
+                        }
+                    }
+                })
+            }
+        }
+    }
+}

@@ -2,9 +2,11 @@ package Mappers.potatob6;
 
 import Beans.potatob6.Book;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository("PBAdminBookDAO")
 public interface AdminBookMapper {
 
     //管理员获取所有的书籍

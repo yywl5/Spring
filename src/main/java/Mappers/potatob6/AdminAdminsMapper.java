@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+@Repository("PBAdminAdminsDAO")
 public interface AdminAdminsMapper {
 
     // 查询指定页数的管理员列表

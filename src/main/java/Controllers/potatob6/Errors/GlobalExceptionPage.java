@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 public class GlobalExceptionPage implements HandlerExceptionResolver {
     @Override
     public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
-        request.setAttribute("code", response.getStatus());
         ModelAndView modelAndView = new ModelAndView("potatob6/Errors/error");
         request.setAttribute("message", ex.getMessage());
         return modelAndView;
