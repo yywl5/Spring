@@ -2,7 +2,6 @@ package Services.potatob6;
 
 import Beans.potatob6.Exam;
 import Mappers.potatob6.ExamMapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
