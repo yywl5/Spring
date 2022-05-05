@@ -9,11 +9,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("PBAdminExamService")
 public class ExamService {
 
     // Exam DAO
     @Autowired
+    @Qualifier("PBAdminExamDAO")
     private ExamMapper examDAO;
 
     // 一页的条目数量

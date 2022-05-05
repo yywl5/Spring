@@ -2,9 +2,11 @@ package Mappers.potatob6;
 
 import Beans.potatob6.Book;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository("PBAdminBookDAO1")
 public interface BookMapper {
 
     // 根据Id获取图书

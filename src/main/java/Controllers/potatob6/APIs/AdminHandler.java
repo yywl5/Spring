@@ -5,6 +5,7 @@ import Mappers.potatob6.AdminMapper;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.Map;
 public class AdminHandler {
 
     @Autowired
+    @Qualifier("PBAdminDAO")
     private AdminMapper administratorDAO;
 
     /**
