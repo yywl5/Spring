@@ -38,8 +38,8 @@ public class AdminOptionsHandler {
         JSONObject jsonObject = new JSONObject();
         if(!(multipartFile.isEmpty() && multipartFile.getSize() == 0)) {
             String newName = ((Administrator)(httpServletRequest.getSession().getAttribute("admin"))).getAdminId()+"_"+
-                    UUID.randomUUID().toString().replace("-", "")+"_"+
-                    multipartFile.getOriginalFilename();
+                    UUID.randomUUID().toString().replace("-", "")+
+                    multipartFile.getOriginalFilename().lastIndexOf(".");
             File dir = new File(httpServletRequest.getServletContext().getRealPath("/static/avatars"));
             if(!dir.exists()) {
                 dir.mkdir();
